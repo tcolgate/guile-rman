@@ -1,0 +1,12 @@
+2009-04-25  Tristan Colgate <tcolgate@gmail.com>
+
+	* Add support for strings in named param lists
+
+2009-04-21  Tristan Colgate  <tcolgate@gmail.com>
+
+	* Added Copyright attributions
+	* Tidied up examples
+
+2009-04-20  Tristan Colgate <tcolgate@gmail.com>
+
+	* Tidied up some of the build infrastructure,

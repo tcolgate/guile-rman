@@ -1,0 +1,14 @@
+
+Guile-RMan
+==========
+
+  Guile-RMan is a Guile Scheme wrapper around the RenderMan
+interface provided by the Aqsis RednerMan implementation.
+
+  In addition to providing a wrapper around the basic API,
+Guile-RMan aims to provide a set of Scheme exetensions to
+simplify the creation of RenderMan applications.
+
+  The Renderman Interface is Copyright (c) 1988 Pixar.
+All Rights reserved.
+

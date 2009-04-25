@@ -1,0 +1,304 @@
+CreateDisplayDriverManager()
+Reading system config "/usr/local/etc/aqsis/aqsisrc"
+Old searchpath = 
+New searchpath = /usr/local/share/aqsis/shaders:.:
+Old searchpath = 
+New searchpath = /usr/local:.:
+Old searchpath = 
+New searchpath = /usr/local:.:
+Old searchpath = 
+New searchpath = /usr/local/lib/aqsis:.:
+Old searchpath = 
+New searchpath = /usr/local/lib:.:/procedurals:/bin:/procedurals:/bin:
+Old searchpath = 
+New searchpath = /usr/local:.:
+Could not open user config (/home/tristan/.aqsisrc)
+Could not open project config (.aqsisrc)
+AQSIS_SHADER_PATH not set
+AQSIS_ARCHIVE_PATH not set
+AQSIS_TEXTURE_PATH not set
+AQSIS_DISPLAY_PATH not set
+AQSIS_PROCEDURAL_PATH not set
+Setting up default display: Display "ri.pic" "file" "rgba"
+DSO lib path set to "/usr/local/share/aqsis/shaders:.:"
+Loading shader "ambientlight" from file "/usr/local/share/aqsis/shaders/ambientlight.slx"
+Storing argument on shader @0x82b74d8 : intensity : on : ambientlight
+DSO lib path set to "/usr/local/share/aqsis/shaders:.:"
+Loading shader "distantlight" from file "/usr/local/share/aqsis/shaders/distantlight.slx"
+Storing argument on shader @0x82b5e48 : intensity : on : distantlight
+Storing argument on shader @0x82b5e48 : from : on : distantlight
+Storing argument on shader @0x82b5e48 : to : on : distantlight
+DSO lib path set to "/usr/local/share/aqsis/shaders:.:"
+Loading shader "plastic" from file "plastic.slx"
+Image settings:
+	Resolution: 320 240
+	PixelAspectRatio: 1
+	Exposure:
+		Gain: 1
+		Gamma: 1
+Shading:
+	Bucket size: [ 16 16]
+	Gridsize: 256
+Anti-aliasing settings: 
+	PixelSamples: 2 2
+	PixelFilter: "user-defined" 1 1
+surface shader null
+Preparing shader @0x82b74d8 : ambientlight [1 args]
+Setting argument : intensity : on shader : ambientlight
+lightsource shader ambientlight
+Preparing shader @0x82b5e48 : distantlight [3 args]
+Setting argument : intensity : on shader : distantlight
+Setting argument : from : on shader : distantlight
+Setting argument : to : on shader : distantlight
+lightsource shader distantlight
+Preparing shader @0x82ba668 : plastic [0 args]
+surface shader plastic
+Preparing shader @0x82b83a0 : plastic [0 args]
+surface shader plastic
+Attempting to load "libdisplay.so" for display type "file"
+Loading plugin "/usr/local/lib/aqsis/libdisplay.so"
+GPrim: "unnamed" occluded in bucket: 3, 4 shifted into bucket: 4, 4
+GPrim: "unnamed" occluded in bucket: 3, 4 shifted into bucket: 4, 4
+GPrim: "unnamed" occluded in bucket: 4, 4 shifted into bucket: 5, 4
+GPrim: "unnamed" occluded in bucket: 4, 4 shifted into bucket: 5, 4
+GPrim: "unnamed" occluded in bucket: 4, 4 shifted into bucket: 3, 5
+GPrim: "unnamed" occluded in bucket: 15, 4 shifted into bucket: 16, 4
+GPrim: "unnamed" occluded in bucket: 16, 4 shifted into bucket: 17, 4
+GPrim: "unnamed" occluded in bucket: 16, 4 shifted into bucket: 15, 5
+GPrim: "unnamed" occluded in bucket: 17, 4 shifted into bucket: 18, 4
+GPrim: "unnamed" occluded in bucket: 1, 5 shifted into bucket: 2, 5
+GPrim: "unnamed" occluded in bucket: 1, 5 shifted into bucket: 2, 5
+GPrim: "unnamed" occluded in bucket: 2, 5 shifted into bucket: 1, 6
+GPrim: "unnamed" occluded in bucket: 2, 5 shifted into bucket: 3, 5
+GPrim: "unnamed" occluded in bucket: 2, 5 shifted into bucket: 3, 5
+GPrim: "unnamed" occluded in bucket: 3, 5 shifted into bucket: 4, 5
+GPrim: "unnamed" occluded in bucket: 3, 5 shifted into bucket: 2, 6
+GPrim: "unnamed" occluded in bucket: 3, 5 shifted into bucket: 1, 6
+GPrim: "unnamed" occluded in bucket: 3, 5 shifted into bucket: 4, 5
+GPrim: "unnamed" occluded in bucket: 3, 5 shifted into bucket: 4, 5
+GPrim: "unnamed" occluded in bucket: 4, 5 shifted into bucket: 5, 5
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 4, 5 shifted into bucket: 5, 5
+GPrim: "unnamed" occluded in bucket: 4, 5 shifted into bucket: 3, 6
+GPrim: "unnamed" occluded in bucket: 5, 5 shifted into bucket: 6, 5
+GPrim: "unnamed" occluded in bucket: 5, 5 shifted into bucket: 6, 5
+GPrim: "unnamed" occluded in bucket: 6, 5 shifted into bucket: 4, 6
+GPrim: "unnamed" occluded in bucket: 13, 5 shifted into bucket: 14, 5
+GPrim: "unnamed" occluded in bucket: 14, 5 shifted into bucket: 15, 5
+GPrim: "unnamed" occluded in bucket: 15, 5 shifted into bucket: 16, 5
+GPrim: "unnamed" occluded in bucket: 15, 5 shifted into bucket: 16, 5
+GPrim: "unnamed" occluded in bucket: 15, 5 shifted into bucket: 13, 6
+GPrim: "unnamed" occluded in bucket: 15, 5 shifted into bucket: 16, 5
+GPrim: "unnamed" occluded in bucket: 16, 5 shifted into bucket: 17, 5
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 16, 5 shifted into bucket: 17, 5
+GPrim: "unnamed" occluded in bucket: 16, 5 shifted into bucket: 15, 6
+GPrim: "unnamed" occluded in bucket: 17, 5 shifted into bucket: 18, 5
+GPrim: "unnamed" occluded in bucket: 17, 5 shifted into bucket: 18, 5
+GPrim: "unnamed" occluded in bucket: 17, 5 shifted into bucket: 18, 5
+GPrim: "unnamed" occluded in bucket: 17, 5 shifted into bucket: 16, 6
+GPrim: "unnamed" occluded in bucket: 18, 5 shifted into bucket: 17, 6
+GPrim: "unnamed" occluded in bucket: 18, 5 shifted into bucket: 16, 6
+GPrim: "unnamed" occluded in bucket: 0, 6 shifted into bucket: 1, 6
+GPrim: "unnamed" occluded in bucket: 1, 6 shifted into bucket: 2, 6
+GPrim: "unnamed" occluded in bucket: 1, 6 shifted into bucket: 2, 6
+GPrim: "unnamed" occluded in bucket: 1, 6 shifted into bucket: 2, 6
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 2, 6 shifted into bucket: 3, 6
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 2, 6 shifted into bucket: 1, 7
+GPrim: "unnamed" occluded in bucket: 2, 6 shifted into bucket: 3, 6
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 3, 6 shifted into bucket: 4, 6
+GPrim: "unnamed" occluded in bucket: 3, 6 shifted into bucket: 4, 6
+GPrim: "unnamed" occluded in bucket: 4, 6 shifted into bucket: 2, 7
+GPrim: "unnamed" occluded in bucket: 4, 6 shifted into bucket: 5, 6
+GPrim: "unnamed" occluded in bucket: 4, 6 shifted into bucket: 5, 6
+GPrim: "unnamed" occluded in bucket: 4, 6 shifted into bucket: 3, 7
+GPrim: "unnamed" occluded in bucket: 5, 6 shifted into bucket: 6, 6
+GPrim: "unnamed" occluded in bucket: 5, 6 shifted into bucket: 6, 6
+GPrim: "unnamed" occluded in bucket: 5, 6 shifted into bucket: 4, 7
+GPrim: "unnamed" occluded in bucket: 6, 6 shifted into bucket: 5, 7
+GPrim: "unnamed" occluded in bucket: 14, 6 shifted into bucket: 15, 6
+GPrim: "unnamed" occluded in bucket: 14, 6 shifted into bucket: 15, 6
+GPrim: "unnamed" occluded in bucket: 14, 6 shifted into bucket: 15, 6
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 15, 6 shifted into bucket: 16, 6
+GPrim: "unnamed" occluded in bucket: 15, 6 shifted into bucket: 16, 6
+GPrim: "unnamed" occluded in bucket: 15, 6 shifted into bucket: 14, 7
+GPrim: "unnamed" occluded in bucket: 15, 6 shifted into bucket: 14, 7
+GPrim: "unnamed" occluded in bucket: 15, 6 shifted into bucket: 15, 7
+GPrim: "unnamed" occluded in bucket: 16, 6 shifted into bucket: 17, 6
+GPrim: "unnamed" occluded in bucket: 16, 6 shifted into bucket: 17, 6
+GPrim: "unnamed" occluded in bucket: 16, 6 shifted into bucket: 17, 6
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 17, 6 shifted into bucket: 18, 6
+GPrim: "unnamed" occluded in bucket: 17, 6 shifted into bucket: 18, 6
+GPrim: "unnamed" occluded in bucket: 17, 6 shifted into bucket: 18, 6
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 17, 6 shifted into bucket: 18, 6
+GPrim: "unnamed" occluded in bucket: 17, 6 shifted into bucket: 15, 7
+GPrim: "unnamed" occluded in bucket: 18, 6 shifted into bucket: 19, 6
+GPrim: "unnamed" occluded in bucket: 18, 6 shifted into bucket: 19, 6
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 18, 6 shifted into bucket: 19, 6
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 19, 6 shifted into bucket: 17, 7
+GPrim: "unnamed" occluded in bucket: 0, 7 shifted into bucket: 1, 7
+GPrim: "unnamed" occluded in bucket: 0, 7 shifted into bucket: 1, 7
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 1, 7 shifted into bucket: 2, 7
+GPrim: "unnamed" occluded in bucket: 1, 7 shifted into bucket: 2, 7
+GPrim: "unnamed" occluded in bucket: 2, 7 shifted into bucket: 3, 7
+GPrim: "unnamed" occluded in bucket: 2, 7 shifted into bucket: 3, 7
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 2, 7 shifted into bucket: 3, 7
+GPrim: "unnamed" occluded in bucket: 3, 7 shifted into bucket: 4, 7
+GPrim: "unnamed" occluded in bucket: 3, 7 shifted into bucket: 4, 7
+GPrim: "unnamed" occluded in bucket: 3, 7 shifted into bucket: 4, 7
+GPrim: "unnamed" occluded in bucket: 3, 7 shifted into bucket: 4, 7
+GPrim: "unnamed" occluded in bucket: 3, 7 shifted into bucket: 4, 7
+GPrim: "unnamed" occluded in bucket: 4, 7 shifted into bucket: 5, 7
+GPrim: "unnamed" occluded in bucket: 4, 7 shifted into bucket: 5, 7
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 4, 7 shifted into bucket: 5, 7
+GPrim: "unnamed" occluded in bucket: 4, 7 shifted into bucket: 5, 7
+GPrim: "unnamed" occluded in bucket: 5, 7 shifted into bucket: 6, 7
+GPrim: "unnamed" occluded in bucket: 5, 7 shifted into bucket: 6, 7
+GPrim: "unnamed" occluded in bucket: 5, 7 shifted into bucket: 6, 7
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 6, 7 shifted into bucket: 3, 8
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 6, 7 shifted into bucket: 4, 8
+GPrim: "unnamed" occluded in bucket: 13, 7 shifted into bucket: 14, 7
+GPrim: "unnamed" occluded in bucket: 13, 7 shifted into bucket: 14, 7
+GPrim: "unnamed" occluded in bucket: 14, 7 shifted into bucket: 15, 7
+GPrim: "unnamed" occluded in bucket: 14, 7 shifted into bucket: 15, 7
+GPrim: "unnamed" occluded in bucket: 14, 7 shifted into bucket: 15, 7
+GPrim: "unnamed" occluded in bucket: 14, 7 shifted into bucket: 15, 7
+GPrim: "unnamed" occluded in bucket: 15, 7 shifted into bucket: 16, 7
+GPrim: "unnamed" occluded in bucket: 15, 7 shifted into bucket: 16, 7
+GPrim: "unnamed" occluded in bucket: 15, 7 shifted into bucket: 16, 7
+GPrim: "unnamed" occluded in bucket: 15, 7 shifted into bucket: 13, 8
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 16, 7 shifted into bucket: 17, 7
+GPrim: "unnamed" occluded in bucket: 16, 7 shifted into bucket: 17, 7
+GPrim: "unnamed" occluded in bucket: 16, 7 shifted into bucket: 13, 8
+GPrim: "unnamed" occluded in bucket: 16, 7 shifted into bucket: 17, 7
+GPrim: "unnamed" occluded in bucket: 17, 7 shifted into bucket: 18, 7
+GPrim: "unnamed" occluded in bucket: 17, 7 shifted into bucket: 18, 7
+GPrim: "unnamed" occluded in bucket: 17, 7 shifted into bucket: 18, 7
+GPrim: "unnamed" occluded in bucket: 17, 7 shifted into bucket: 18, 7
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 18, 7 shifted into bucket: 19, 7
+GPrim: "unnamed" occluded in bucket: 18, 7 shifted into bucket: 19, 7
+GPrim: "unnamed" occluded in bucket: 18, 7 shifted into bucket: 19, 7
+GPrim: "unnamed" occluded in bucket: 19, 7 shifted into bucket: 15, 8
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 0, 8 shifted into bucket: 1, 8
+GPrim: "unnamed" occluded in bucket: 1, 8 shifted into bucket: 2, 8
+GPrim: "unnamed" occluded in bucket: 1, 8 shifted into bucket: 2, 8
+GPrim: "unnamed" occluded in bucket: 1, 8 shifted into bucket: 2, 8
+GPrim: "unnamed" occluded in bucket: 2, 8 shifted into bucket: 3, 8
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 2, 8 shifted into bucket: 3, 8
+GPrim: "unnamed" occluded in bucket: 2, 8 shifted into bucket: 3, 8
+GPrim: "unnamed" occluded in bucket: 3, 8 shifted into bucket: 4, 8
+GPrim: "unnamed" occluded in bucket: 3, 8 shifted into bucket: 4, 8
+GPrim: "unnamed" occluded in bucket: 3, 8 shifted into bucket: 4, 8
+GPrim: "unnamed" occluded in bucket: 3, 8 shifted into bucket: 4, 8
+GPrim: "unnamed" occluded in bucket: 3, 8 shifted into bucket: 1, 9
+GPrim: "unnamed" occluded in bucket: 3, 8 shifted into bucket: 4, 8
+GPrim: "unnamed" occluded in bucket: 4, 8 shifted into bucket: 5, 8
+GPrim: "unnamed" occluded in bucket: 4, 8 shifted into bucket: 5, 8
+GPrim: "unnamed" occluded in bucket: 4, 8 shifted into bucket: 5, 8
+GPrim: "unnamed" occluded in bucket: 4, 8 shifted into bucket: 1, 9
+GPrim: "unnamed" occluded in bucket: 4, 8 shifted into bucket: 5, 8
+GPrim: "unnamed" occluded in bucket: 4, 8 shifted into bucket: 5, 8
+GPrim: "unnamed" occluded in bucket: 4, 8 shifted into bucket: 3, 9
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 5, 8 shifted into bucket: 6, 8
+GPrim: "unnamed" occluded in bucket: 5, 8 shifted into bucket: 6, 8
+GPrim: "unnamed" occluded in bucket: 5, 8 shifted into bucket: 6, 8
+GPrim: "unnamed" occluded in bucket: 5, 8 shifted into bucket: 6, 8
+GPrim: "unnamed" occluded in bucket: 5, 8 shifted into bucket: 6, 8
+GPrim: "unnamed" occluded in bucket: 6, 8 shifted into bucket: 3, 9
+GPrim: "unnamed" occluded in bucket: 13, 8 shifted into bucket: 14, 8
+GPrim: "unnamed" occluded in bucket: 13, 8 shifted into bucket: 14, 8
+GPrim: "unnamed" occluded in bucket: 13, 8 shifted into bucket: 14, 8
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 14, 8 shifted into bucket: 15, 8
+GPrim: "unnamed" occluded in bucket: 14, 8 shifted into bucket: 15, 8
+GPrim: "unnamed" occluded in bucket: 15, 8 shifted into bucket: 16, 8
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 16, 8 shifted into bucket: 17, 8
+GPrim: "unnamed" occluded in bucket: 16, 8 shifted into bucket: 17, 8
+GPrim: "unnamed" occluded in bucket: 17, 8 shifted into bucket: 18, 8
+GPrim: "unnamed" occluded in bucket: 17, 8 shifted into bucket: 18, 8
+GPrim: "unnamed" occluded in bucket: 17, 8 shifted into bucket: 18, 8
+GPrim: "unnamed" occluded in bucket: 17, 8 shifted into bucket: 18, 8
+GPrim: "unnamed" occluded in bucket: 17, 8 shifted into bucket: 18, 8
+GPrim: "unnamed" occluded in bucket: 17, 8 shifted into bucket: 18, 8
+GPrim: "unnamed" occluded in bucket: 17, 8 shifted into bucket: 18, 8
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 18, 8 shifted into bucket: 19, 8
+GPrim: "unnamed" occluded in bucket: 18, 8 shifted into bucket: 19, 8
+GPrim: "unnamed" occluded in bucket: 18, 8 shifted into bucket: 19, 8
+GPrim: "unnamed" occluded in bucket: 18, 8 shifted into bucket: 15, 9
+GPrim: "unnamed" occluded in bucket: 18, 8 shifted into bucket: 17, 9
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 18, 8 shifted into bucket: 17, 9
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 1, 9 shifted into bucket: 2, 9
+GPrim: "unnamed" occluded in bucket: 1, 9 shifted into bucket: 2, 9
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 2, 9 shifted into bucket: 3, 9
+GPrim: "unnamed" occluded in bucket: 2, 9 shifted into bucket: 3, 9
+GPrim: "unnamed" occluded in bucket: 2, 9 shifted into bucket: 3, 9
+GPrim: "unnamed" occluded in bucket: 2, 9 shifted into bucket: 3, 9
+GPrim: "unnamed" occluded in bucket: 3, 9 shifted into bucket: 4, 9
+GPrim: "unnamed" occluded in bucket: 3, 9 shifted into bucket: 4, 9
+GPrim: "unnamed" occluded in bucket: 3, 9 shifted into bucket: 2, 10
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 3, 9 shifted into bucket: 4, 9
+GPrim: "unnamed" occluded in bucket: 4, 9 shifted into bucket: 5, 9
+GPrim: "unnamed" occluded in bucket: 4, 9 shifted into bucket: 2, 10
+GPrim: "unnamed" occluded in bucket: 4, 9 shifted into bucket: 5, 9
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 4, 9 shifted into bucket: 5, 9
+GPrim: "unnamed" occluded in bucket: 5, 9 shifted into bucket: 3, 10
+GPrim: "unnamed" occluded in bucket: 5, 9 shifted into bucket: 4, 10
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 14, 9 shifted into bucket: 15, 9
+GPrim: "unnamed" occluded in bucket: 15, 9 shifted into bucket: 16, 9
+GPrim: "unnamed" occluded in bucket: 15, 9 shifted into bucket: 16, 9
+GPrim: "unnamed" occluded in bucket: 15, 9 shifted into bucket: 16, 9
+GPrim: "unnamed" occluded in bucket: 16, 9 shifted into bucket: 14, 10
+GPrim: "unnamed" occluded in bucket: 16, 9 shifted into bucket: 17, 9
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 17, 9 shifted into bucket: 18, 9
+GPrim: "unnamed" occluded in bucket: 17, 9 shifted into bucket: 18, 9
+GPrim: "unnamed" occluded in bucket: 17, 9 shifted into bucket: 18, 9
+GPrim: "unnamed" occluded in bucket: 17, 9 shifted into bucket: 18, 9
+GPrim: "unnamed" occluded in bucket: 17, 9 shifted into bucket: 18, 9
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 3, 10 shifted into bucket: 4, 10
+GPrim: "unnamed" occluded in bucket: 4, 10 shifted into bucket: 5, 10
+GPrim: "unnamed" occlusion culled
+GPrim: "unnamed" occluded in bucket: 15, 10 shifted into bucket: 16, 10
+GPrim: "unnamed" occluded in bucket: 16, 10 shifted into bucket: 17, 10
+GPrim: "unnamed" occlusion culled
+
+Some deprecated features have been used.  Set the environment
+variable GUILE_WARN_DEPRECATED to "detailed" and rerun the
+program to get more information.  Set it to "no" to suppress
+this message.
