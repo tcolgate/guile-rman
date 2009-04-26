@@ -200,15 +200,12 @@ RtProcFreeFunc MakeSCMCallbackRtProcFreeFunc(SCM p)
 /*typedef RtFloat ( *RtFilterFunc ) ( RtFloat, RtFloat, RtFloat, RtFloat );*/
 RtFloat TrampolineRtFilterFunc (SCM P, RtFloat arg1, RtFloat arg2, RtFloat arg3, RtFloat arg4)
 {
-    printf ("GOt HERE! with %p \n",P);
-    scm_display(P,SCM_BOOL_F);
-
   if (!scm_is_eq (scm_procedure_p (P), SCM_BOOL_T)){
     printf ("Wont call, not a Void (RtFloat,RtFloat,RtFloat,RtFloat) procedure %p\n",P);
     return 0;
   };
 
-  RtFloat res =  (RtFloat) scm_to_double(scm_call_4(P,scm_double2num(arg1),scm_double2num(arg2),scm_double2num(arg3),scm_double2num(arg4)));
+  RtFloat res = (RtFloat) scm_to_double(scm_call_4(P,scm_double2num(arg1),scm_double2num(arg2),scm_double2num(arg3),scm_double2num(arg4)));
   return res;
 };
 
@@ -231,17 +228,18 @@ RtFilterFunc MakeSCMCallbackRtFilterFunc(SCM p)
   arg3 = jit_arg_f();
   arg4 = jit_arg_f();
 
-  jit_prepare(5);
-  jit_movi_p(JIT_V0, p);
+  jit_movi_p(JIT_R0, p);
   jit_getarg_f(JIT_FPR0, arg1);
   jit_getarg_f(JIT_FPR1, arg2);
   jit_getarg_f(JIT_FPR2, arg3);
   jit_getarg_f(JIT_FPR3, arg4);
+  jit_prepare(1);
+  jit_prepare_f(4);
     jit_pusharg_f(JIT_FPR3);
     jit_pusharg_f(JIT_FPR2);
     jit_pusharg_f(JIT_FPR1);
     jit_pusharg_f(JIT_FPR0);
-    jit_pusharg_p(JIT_V0);
+    jit_pusharg_p(JIT_R0);
   jit_finish(TrampolineRtFilterFunc);
   jit_retval_f(JIT_FPRET);
   jit_ret();
@@ -254,7 +252,14 @@ RtFilterFunc MakeSCMCallbackRtFilterFunc(SCM p)
 %}
 
 %typemap(in)(RtFilterFunc) {
+  scm_display($input,scm_current_output_port());
+  if (scm_is_true (scm_equal_p(scm_procedure_name($input),(scm_string_to_symbol(scm_from_locale_string("RiGaussianFilter")))))){
+     $1 = RiGaussianFilter;
+  } else if (scm_is_true (scm_equal_p(scm_procedure_name($input),(scm_string_to_symbol(scm_from_locale_string("RiBoxFilter")))))){
+     $1 = RiBoxFilter;
+  } else {
   $1 = MakeSCMCallbackRtFilterFunc($input);
+  };
 }
 
 /*

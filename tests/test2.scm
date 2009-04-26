@@ -60,7 +60,8 @@
   (RiProjection "perspective" '("fov" 45.0))
   (RiTranslate 0 0 6)
   (RiProgressHandler progress)
-  (RiPixelFilter myfilter 2 2)
+;  (RiPixelFilter myfilter 2 2)
+  (RiPixelFilter RiGaussianFilter 2 2)
  
  (World
     (let ((o1 (Object (RiSphere 1 -1 1 360))))
@@ -79,6 +80,5 @@
       (RiProcedural data bound subdiv free)
 )))
 (display count)
-(myfilter)
 
 

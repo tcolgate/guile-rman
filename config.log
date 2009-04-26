@@ -65,7 +65,7 @@ configure:2387: gcc -V >&5
 gcc: '-V' option must have argument
 configure:2391: $? = 1
 configure:2414: checking for C compiler default output file name
-configure:2436: gcc    conftest.c  >&5
+configure:2436: gcc -O0   conftest.c  >&5
 configure:2440: $? = 0
 configure:2478: result: a.out
 configure:2497: checking whether the C compiler works
@@ -75,15 +75,15 @@ configure:2530: result: yes
 configure:2537: checking whether we are cross compiling
 configure:2539: result: no
 configure:2542: checking for suffix of executables
-configure:2549: gcc -o conftest    conftest.c  >&5
+configure:2549: gcc -o conftest -O0   conftest.c  >&5
 configure:2553: $? = 0
 configure:2579: result: 
 configure:2585: checking for suffix of object files
-configure:2611: gcc -c   conftest.c >&5
+configure:2611: gcc -c -O0  conftest.c >&5
 configure:2615: $? = 0
 configure:2640: result: o
 configure:2644: checking whether we are using the GNU C compiler
-configure:2673: gcc -c   conftest.c >&5
+configure:2673: gcc -c -O0  conftest.c >&5
 configure:2680: $? = 0
 configure:2697: result: yes
 configure:2706: checking whether gcc accepts -g
@@ -91,7 +91,7 @@ configure:2736: gcc -c -g  conftest.c >&5
 configure:2743: $? = 0
 configure:2844: result: yes
 configure:2861: checking for gcc option to accept ISO C89
-configure:2935: gcc  -c -g -O2  conftest.c >&5
+configure:2935: gcc  -c -O0  conftest.c >&5
 configure:2942: $? = 0
 configure:2965: result: none needed
 configure:3041: checking for g++
@@ -116,7 +116,7 @@ configure:3125: g++ -V >&5
 g++: '-V' option must have argument
 configure:3129: $? = 1
 configure:3132: checking whether we are using the GNU C++ compiler
-configure:3161: g++ -c -O0  conftest.cpp >&5
+configure:3161: g++ -c   conftest.cpp >&5
 configure:3168: $? = 0
 configure:3185: result: yes
 configure:3194: checking whether g++ accepts -g
@@ -176,51 +176,51 @@ configure: failed program was:
 | /* end confdefs.h.  */
 | #include <ac_nonexistent.h>
 configure:4598: checking for ANSI C header files
-configure:4628: gcc -c -g -O2  conftest.c >&5
+configure:4628: gcc -c -O0  conftest.c >&5
 configure:4635: $? = 0
-configure:4734: gcc -o conftest -g -O2   conftest.c  >&5
+configure:4734: gcc -o conftest -O0   conftest.c  >&5
 configure:4738: $? = 0
 configure:4744: ./conftest
 configure:4748: $? = 0
 configure:4766: result: yes
 configure:4790: checking for sys/types.h
-configure:4811: gcc -c -g -O2  conftest.c >&5
+configure:4811: gcc -c -O0  conftest.c >&5
 configure:4818: $? = 0
 configure:4835: result: yes
 configure:4790: checking for sys/stat.h
-configure:4811: gcc -c -g -O2  conftest.c >&5
+configure:4811: gcc -c -O0  conftest.c >&5
 configure:4818: $? = 0
 configure:4835: result: yes
 configure:4790: checking for stdlib.h
-configure:4811: gcc -c -g -O2  conftest.c >&5
+configure:4811: gcc -c -O0  conftest.c >&5
 configure:4818: $? = 0
 configure:4835: result: yes
 configure:4790: checking for string.h
-configure:4811: gcc -c -g -O2  conftest.c >&5
+configure:4811: gcc -c -O0  conftest.c >&5
 configure:4818: $? = 0
 configure:4835: result: yes
 configure:4790: checking for memory.h
-configure:4811: gcc -c -g -O2  conftest.c >&5
+configure:4811: gcc -c -O0  conftest.c >&5
 configure:4818: $? = 0
 configure:4835: result: yes
 configure:4790: checking for strings.h
-configure:4811: gcc -c -g -O2  conftest.c >&5
+configure:4811: gcc -c -O0  conftest.c >&5
 configure:4818: $? = 0
 configure:4835: result: yes
 configure:4790: checking for inttypes.h
-configure:4811: gcc -c -g -O2  conftest.c >&5
+configure:4811: gcc -c -O0  conftest.c >&5
 configure:4818: $? = 0
 configure:4835: result: yes
 configure:4790: checking for stdint.h
-configure:4811: gcc -c -g -O2  conftest.c >&5
+configure:4811: gcc -c -O0  conftest.c >&5
 configure:4818: $? = 0
 configure:4835: result: yes
 configure:4790: checking for unistd.h
-configure:4811: gcc -c -g -O2  conftest.c >&5
+configure:4811: gcc -c -O0  conftest.c >&5
 configure:4818: $? = 0
 configure:4835: result: yes
 configure:4865: checking dlfcn.h usability
-configure:4882: gcc -c -g -O2  conftest.c >&5
+configure:4882: gcc -c -O0  conftest.c >&5
 configure:4889: $? = 0
 configure:4903: result: yes
 configure:4907: checking dlfcn.h presence
@@ -344,11 +344,11 @@ configure:5477: result: yes
 configure:5510: checking the maximum length of command line arguments
 configure:5622: result: 1966080
 configure:5634: checking command to parse /usr/bin/nm -B output from gcc object
-configure:5739: gcc -c -g -O2  conftest.c >&5
+configure:5739: gcc -c -O0  conftest.c >&5
 configure:5742: $? = 0
 configure:5746: /usr/bin/nm -B conftest.o \| sed -n -e 's/^.*[ 	]\([ABCDGIRSTW][ABCDGIRSTW]*\)[ 	][ 	]*\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2 \2/p' \> conftest.nm
 configure:5749: $? = 0
-configure:5801: gcc -o conftest -g -O2   conftest.c conftstm.o >&5
+configure:5801: gcc -o conftest -O0   conftest.c conftstm.o >&5
 configure:5804: $? = 0
 configure:5842: result: ok
 configure:5846: checking for objdir
@@ -363,26 +363,26 @@ configure:6137: checking for strip
 configure:6153: found /usr/bin/strip
 configure:6164: result: strip
 configure:6754: checking if gcc supports -fno-rtti -fno-exceptions
-configure:6772: gcc -c -g -O2  -fno-rtti -fno-exceptions conftest.c >&5
+configure:6772: gcc -c -O0  -fno-rtti -fno-exceptions conftest.c >&5
 cc1: warning: command line option "-fno-rtti" is valid for C++/ObjC++ but not for C
 configure:6776: $? = 0
 configure:6789: result: no
 configure:6804: checking for gcc option to produce PIC
 configure:7036: result: -fPIC
 configure:7044: checking if gcc PIC flag -fPIC works
-configure:7062: gcc -c -g -O2  -fPIC -DPIC conftest.c >&5
+configure:7062: gcc -c -O0  -fPIC -DPIC conftest.c >&5
 configure:7066: $? = 0
 configure:7079: result: yes
 configure:7107: checking if gcc static flag -static works
 configure:7135: result: yes
 configure:7145: checking if gcc supports -c -o file.o
-configure:7166: gcc -c -g -O2  -o out/conftest2.o conftest.c >&5
+configure:7166: gcc -c -O0  -o out/conftest2.o conftest.c >&5
 configure:7170: $? = 0
 configure:7192: result: yes
 configure:7218: checking whether the gcc linker (/usr/bin/ld) supports shared libraries
 configure:8206: result: yes
 configure:8227: checking whether -lc should be explicitly linked in
-configure:8232: gcc -c -g -O2  conftest.c >&5
+configure:8232: gcc -c -O0  conftest.c >&5
 configure:8235: $? = 0
 configure:8250: gcc -shared conftest.o  -v -Wl,-soname -Wl,conftest -o conftest 2\>\&1 \| grep  -lc  \>/dev/null 2\>\&1
 configure:8253: $? = 0
@@ -406,18 +406,18 @@ configure:10571: checking if the linker (/usr/bin/ld) is GNU ld
 configure:10586: result: yes
 configure:10637: checking whether the g++ linker (/usr/bin/ld) supports shared libraries
 configure:11591: result: yes
-configure:11608: g++ -c -O0  conftest.cpp >&5
+configure:11608: g++ -c -g -O2  conftest.cpp >&5
 configure:11611: $? = 0
 configure:11767: checking for g++ option to produce PIC
 configure:12051: result: -fPIC
 configure:12059: checking if g++ PIC flag -fPIC works
-configure:12077: g++ -c -O0  -fPIC -DPIC conftest.cpp >&5
+configure:12077: g++ -c -g -O2  -fPIC -DPIC conftest.cpp >&5
 configure:12081: $? = 0
 configure:12094: result: yes
 configure:12122: checking if g++ static flag -static works
 configure:12150: result: yes
 configure:12160: checking if g++ supports -c -o file.o
-configure:12181: g++ -c -O0  -o out/conftest2.o conftest.cpp >&5
+configure:12181: g++ -c -g -O2  -o out/conftest2.o conftest.cpp >&5
 configure:12185: $? = 0
 configure:12207: result: yes
 configure:12233: checking whether the g++ linker (/usr/bin/ld) supports shared libraries
@@ -471,7 +471,7 @@ configure:19886: result: gcc3
 configure:19903: checking dependency style of g++
 configure:19994: result: gcc3
 configure:20021: checking lightning.h usability
-configure:20038: gcc -c -g -O2  conftest.c >&5
+configure:20038: gcc -c -O0  conftest.c >&5
 configure:20045: $? = 0
 configure:20059: result: yes
 configure:20063: checking lightning.h presence
@@ -496,11 +496,11 @@ configure:20367: result:  -pthread -lguile
 configure:20372: checking for Guile site directory
 configure:20375: result: /usr/share/guile/site
 configure:20390: checking for RiBegin in -laqsis
-configure:20425: gcc -o conftest -g -O2   conftest.c -laqsis   >&5
+configure:20425: gcc -o conftest -O0   conftest.c -laqsis   >&5
 configure:20432: $? = 0
 configure:20453: result: yes
 configure:20482: checking ri.h usability
-configure:20499: gcc -c -g -O2  conftest.c >&5
+configure:20499: gcc -c -O0  conftest.c >&5
 conftest.c:56:16: error: ri.h: No such file or directory
 configure:20506: $? = 1
 configure: failed program was:
@@ -628,16 +628,16 @@ ac_cv_env_CCC_set=
 ac_cv_env_CCC_value=
 ac_cv_env_CC_set=
 ac_cv_env_CC_value=
-ac_cv_env_CFLAGS_set=
-ac_cv_env_CFLAGS_value=
+ac_cv_env_CFLAGS_set=set
+ac_cv_env_CFLAGS_value=-O0
 ac_cv_env_CPPFLAGS_set=
 ac_cv_env_CPPFLAGS_value=
 ac_cv_env_CPP_set=
 ac_cv_env_CPP_value=
 ac_cv_env_CXXCPP_set=
 ac_cv_env_CXXCPP_value=
-ac_cv_env_CXXFLAGS_set=set
-ac_cv_env_CXXFLAGS_value=-O0
+ac_cv_env_CXXFLAGS_set=
+ac_cv_env_CXXFLAGS_value=
 ac_cv_env_CXX_set=
 ac_cv_env_CXX_value=
 ac_cv_env_F77_set=
@@ -745,13 +745,13 @@ AUTOMAKE='${SHELL} /home/tristan/src/guile-rman/missing --run automake-1.10'
 AWK='gawk'
 CC='gcc'
 CCDEPMODE='depmode=gcc3'
-CFLAGS='-g -O2'
+CFLAGS='-O0'
 CPP='gcc -E'
 CPPFLAGS=''
 CXX='g++'
 CXXCPP='g++ -E'
 CXXDEPMODE='depmode=gcc3'
-CXXFLAGS='-O0'
+CXXFLAGS='-g -O2'
 CYGPATH_W='echo'
 DEFS='-DHAVE_CONFIG_H'
 DEPDIR='.deps'
@@ -885,3 +885,21 @@ lightning_frag=''
 #define HAVE_LIBAQSIS 1
 
 configure: exit 0
+
+## ---------------------- ##
+## Running config.status. ##
+## ---------------------- ##
+
+This file was extended by guile-rman config.status 0.1.1, which was
+generated by GNU Autoconf 2.63.  Invocation command line was
+
+  CONFIG_FILES    = 
+  CONFIG_HEADERS  = 
+  CONFIG_LINKS    = 
+  CONFIG_COMMANDS = 
+  $ ./config.status src/Makefile depfiles
+
+on merlot
+
+config.status:852: creating src/Makefile
+config.status:1166: executing depfiles commands

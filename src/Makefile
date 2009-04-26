@@ -58,21 +58,21 @@ am_libguile_rman_rispec_la_OBJECTS =  \
 	libguile_rman_rispec_la-rispec_wrap.lo
 libguile_rman_rispec_la_OBJECTS =  \
 	$(am_libguile_rman_rispec_la_OBJECTS)
-libguile_rman_rispec_la_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) \
-	$(libguile_rman_rispec_la_CXXFLAGS) $(CXXFLAGS) \
+libguile_rman_rispec_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) \
+	$(libguile_rman_rispec_la_CFLAGS) $(CFLAGS) \
 	$(libguile_rman_rispec_la_LDFLAGS) $(LDFLAGS) -o $@
 DEFAULT_INCLUDES = -I. -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
-CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
-	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
-LTCXXCOMPILE = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
-	--mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
-	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
-CXXLD = $(CXX)
-CXXLINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
-	--mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+LTCOMPILE = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
 SOURCES = $(libguile_rman_rispec_la_SOURCES)
 DIST_SOURCES = $(libguile_rman_rispec_la_SOURCES)
@@ -91,13 +91,13 @@ AUTOMAKE = ${SHELL} /home/tristan/src/guile-rman/missing --run automake-1.10
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2
+CFLAGS = -O0
 CPP = gcc -E
 CPPFLAGS = 
 CXX = g++
 CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -O0
+CXXFLAGS = -g -O2
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -200,9 +200,9 @@ top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
 lib_LTLIBRARIES = libguile_rman_rispec.la 
-SWIG_FLAGS = -guile -c++ -Linkage module -package rman -scm -proxy -emit-setters -I/usr/local/include/aqsis
-libguile_rman_rispec_la_CXXFLAGS = -I../lightning -I/usr/local/include/aqsis
-libguile_rman_rispec_la_SOURCES = rispec_wrap.cpp
+SWIG_FLAGS = -guile -Linkage module -package rman -scm -proxy -emit-setters -I/usr/local/include/aqsis
+libguile_rman_rispec_la_CFLAGS = -I../lightning -I/usr/local/include/aqsis
+libguile_rman_rispec_la_SOURCES = rispec_wrap.c
 libguile_rman_rispec_la_LDFLAGS = -module -L/usr/local/include -laqsis
 EXTRA_DIST = rman rman/rispec.scm rman/utilities.scm Swig Swig/common.scm rispec.i ignores.i help.i
 guilermandir = /usr/share/guile/site/rman
@@ -212,7 +212,7 @@ guileswig_DATA = Swig/common.scm
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .cpp .lo .o .obj
+.SUFFIXES: .c .lo .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -280,33 +280,33 @@ distclean-compile:
 
 include ./$(DEPDIR)/libguile_rman_rispec_la-rispec_wrap.Plo
 
-.cpp.o:
-	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+.c.o:
+	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
 	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
 #	source='$<' object='$@' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXXCOMPILE) -c -o $@ $<
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(COMPILE) -c $<
 
-.cpp.obj:
-	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
+.c.obj:
+	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
 	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
 #	source='$<' object='$@' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(COMPILE) -c `$(CYGPATH_W) '$<'`
 
-.cpp.lo:
-	$(LTCXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+.c.lo:
+	$(LTCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
 	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
 #	source='$<' object='$@' libtool=yes \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(LTCXXCOMPILE) -c -o $@ $<
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(LTCOMPILE) -c -o $@ $<
 
-libguile_rman_rispec_la-rispec_wrap.lo: rispec_wrap.cpp
-	$(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libguile_rman_rispec_la_CXXFLAGS) $(CXXFLAGS) -MT libguile_rman_rispec_la-rispec_wrap.lo -MD -MP -MF $(DEPDIR)/libguile_rman_rispec_la-rispec_wrap.Tpo -c -o libguile_rman_rispec_la-rispec_wrap.lo `test -f 'rispec_wrap.cpp' || echo '$(srcdir)/'`rispec_wrap.cpp
+libguile_rman_rispec_la-rispec_wrap.lo: rispec_wrap.c
+	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libguile_rman_rispec_la_CFLAGS) $(CFLAGS) -MT libguile_rman_rispec_la-rispec_wrap.lo -MD -MP -MF $(DEPDIR)/libguile_rman_rispec_la-rispec_wrap.Tpo -c -o libguile_rman_rispec_la-rispec_wrap.lo `test -f 'rispec_wrap.c' || echo '$(srcdir)/'`rispec_wrap.c
 	mv -f $(DEPDIR)/libguile_rman_rispec_la-rispec_wrap.Tpo $(DEPDIR)/libguile_rman_rispec_la-rispec_wrap.Plo
-#	source='rispec_wrap.cpp' object='libguile_rman_rispec_la-rispec_wrap.lo' libtool=yes \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libguile_rman_rispec_la_CXXFLAGS) $(CXXFLAGS) -c -o libguile_rman_rispec_la-rispec_wrap.lo `test -f 'rispec_wrap.cpp' || echo '$(srcdir)/'`rispec_wrap.cpp
+#	source='rispec_wrap.c' object='libguile_rman_rispec_la-rispec_wrap.lo' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libguile_rman_rispec_la_CFLAGS) $(CFLAGS) -c -o libguile_rman_rispec_la-rispec_wrap.lo `test -f 'rispec_wrap.c' || echo '$(srcdir)/'`rispec_wrap.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -531,7 +531,7 @@ uninstall-am: uninstall-guilermanDATA uninstall-guileswigDATA \
 	uninstall-guileswigDATA uninstall-libLTLIBRARIES
 
 
-rispec_wrap.cpp: rispec.i ignores.i help.i
+rispec_wrap.c: rispec.i ignores.i help.i
 	$(SWIG) $(SWIG_FLAGS) -module rispec -o $@ $<
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
