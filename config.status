@@ -536,8 +536,6 @@ echo 'BEGIN {' >"$tmp/subs1.awk" &&
 cat >>"$tmp/subs1.awk" <<\_ACAWK &&
 S["LTLIBOBJS"]=""
 S["LIBOBJS"]=""
-S["LIGHTNING_MAIN_FALSE"]=""
-S["LIGHTNING_MAIN_TRUE"]="#"
 S["GUILE_SITE"]="/usr/share/guile/site"
 S["GUILE_LDFLAGS"]=" -pthread -lguile  "
 S["GUILE_CFLAGS"]="  -pthread"

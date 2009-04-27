@@ -55,7 +55,7 @@
     1))
 
 (RIB "test"
-  (RiDisplay "sphere1.tif" "file" "rgb")
+  (RiDisplay "sphere1.tif" "framebuffer" "rgb")
   (RiFormat 320 240 1)
   (RiProjection "perspective" '("fov" 45.0))
   (RiTranslate 0 0 6)

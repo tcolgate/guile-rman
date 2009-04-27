@@ -8,9 +8,9 @@ SWIG_FLAGS = -guile -Linkage module -package rman -scm -proxy -emit-setters -I/u
 rispec_wrap.c: rispec.i ignores.i help.i
 	$(SWIG) $(SWIG_FLAGS) -module rispec -o $@ $<
 
-libguile_rman_rispec_la_CFLAGS=-I../lightning -I/usr/local/include/aqsis @FFI_CFLAGS@
+libguile_rman_rispec_la_CFLAGS=-I/usr/local/include/aqsis @FFI_CFLAGS@
 libguile_rman_rispec_la_SOURCES=rispec_wrap.c
-libguile_rman_rispec_la_LDFLAGS=-module -L/usr/local/include -laqsis @FFI_LIBS@
+libguile_rman_rispec_la_LDFLAGS=-module -L/usr/local/lib -laqsis @FFI_LIBS@
 
 EXTRA_DIST = rman rman/rispec.scm rman/utilities.scm Swig Swig/common.scm rispec.i ignores.i help.i
 guilermandir =  @GUILE_SITE@/rman

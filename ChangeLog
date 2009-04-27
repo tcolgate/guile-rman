@@ -1,3 +1,7 @@
+2009-04-27  Tristan Colgate <tcolgate@gmail.com>
+
+	* Migrated to libffi for callback generation.
+
 2009-04-25  Tristan Colgate <tcolgate@gmail.com>
 
 	* Add support for strings in named param lists

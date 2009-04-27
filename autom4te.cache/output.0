@@ -792,8 +792,6 @@ ac_includes_default="\
 
 ac_subst_vars='LTLIBOBJS
 LIB@&t@OBJS
-LIGHTNING_MAIN_FALSE
-LIGHTNING_MAIN_TRUE
 GUILE_SITE
 GUILE_LDFLAGS
 GUILE_CFLAGS
@@ -20399,14 +20397,6 @@ $as_echo "$GUILE_SITE" >&6; }
  
 
 # Checks for libraries.
- if (exit 1); then
-  LIGHTNING_MAIN_TRUE=
-  LIGHTNING_MAIN_FALSE='#'
-else
-  LIGHTNING_MAIN_TRUE='#'
-  LIGHTNING_MAIN_FALSE=
-fi
-
 
 { $as_echo "$as_me:$LINENO: checking for RiBegin in -laqsis" >&5
 $as_echo_n "checking for RiBegin in -laqsis... " >&6; }
@@ -20759,13 +20749,6 @@ if test -z "${am__fastdepCXX_TRUE}" && test -z "${am__fastdepCXX_FALSE}"; then
   { { $as_echo "$as_me:$LINENO: error: conditional \"am__fastdepCXX\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
 $as_echo "$as_me: error: conditional \"am__fastdepCXX\" was never defined.
-Usually this means the macro was only invoked conditionally." >&2;}
-   { (exit 1); exit 1; }; }
-fi
-if test -z "${LIGHTNING_MAIN_TRUE}" && test -z "${LIGHTNING_MAIN_FALSE}"; then
-  { { $as_echo "$as_me:$LINENO: error: conditional \"LIGHTNING_MAIN\" was never defined.
-Usually this means the macro was only invoked conditionally." >&5
-$as_echo "$as_me: error: conditional \"LIGHTNING_MAIN\" was never defined.
 Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi

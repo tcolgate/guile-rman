@@ -19,7 +19,6 @@ GUILE_FLAGS
 GUILE_SITE_DIR
 
 # Checks for libraries.
-AM_CONDITIONAL(LIGHTNING_MAIN, (exit 1))
 AC_CHECK_LIB([aqsis], [RiBegin])
 
 # Checks for header files.
