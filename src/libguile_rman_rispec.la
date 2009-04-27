@@ -14,7 +14,7 @@ library_names='libguile_rman_rispec.so.0.0.0 libguile_rman_rispec.so.0 libguile_
 old_library='libguile_rman_rispec.a'
 
 # Libraries that this one depends upon.
-dependency_libs=' -L/usr/local/include -laqsis'
+dependency_libs=' -L/usr/local/include /usr/lib/libffi.la -laqsis'
 
 # Version information for libguile_rman_rispec.
 current=0

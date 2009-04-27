@@ -10,7 +10,9 @@ AC_PROG_CXX
 AC_PROG_LIBTOOL
 AC_PROG_SWIG
 AM_INIT_AUTOMAKE
-LIGHTNING_CONFIGURE_IF_NOT_FOUND
+PKG_CHECK_MODULES(FFI,libffi)
+AC_SUBST(FFI_CFLAGS)
+AC_SUBST(FFI_LIBS)
 AC_CONFIG_HEADER(config.h)
 GUILE_PROGS
 GUILE_FLAGS
@@ -28,5 +30,5 @@ AC_CHECK_HEADERS([ri.h])
 # Checks for library functions.
 
 AC_CONFIG_FILES([Makefile])
-AC_OUTPUT(src/Makefile lightning/Makefile tests/Makefile)
+AC_OUTPUT(src/Makefile tests/Makefile)
 

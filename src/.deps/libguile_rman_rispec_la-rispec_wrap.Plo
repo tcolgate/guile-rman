@@ -3,6 +3,10 @@ libguile_rman_rispec_la-rispec_wrap.lo: rispec_wrap.c \
   /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
   /usr/include/gnu/stubs-32.h \
   /usr/lib/gcc/i386-redhat-linux/4.3.2/include/stddef.h \
+  /usr/include/bits/string.h /usr/include/bits/string2.h \
+  /usr/include/endian.h /usr/include/bits/endian.h \
+  /usr/include/bits/byteswap.h /usr/include/bits/types.h \
+  /usr/include/bits/typesizes.h /usr/include/stdlib.h \
   /usr/include/libguile.h /usr/include/gmp.h /usr/include/gmp-i386.h \
   /usr/include/libguile/__scm.h /usr/include/libguile/scmconfig.h \
   /usr/include/libguile/scmconfig-32.h /usr/include/stdint.h \
@@ -12,21 +16,18 @@ libguile_rman_rispec_la-rispec_wrap.lo: rispec_wrap.c \
   /usr/include/limits.h /usr/include/bits/posix1_lim.h \
   /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
   /usr/include/bits/posix2_lim.h /usr/include/sys/time.h \
-  /usr/include/bits/types.h /usr/include/bits/typesizes.h \
   /usr/include/time.h /usr/include/bits/time.h /usr/include/sys/select.h \
   /usr/include/bits/select.h /usr/include/bits/sigset.h \
-  /usr/include/stdlib.h /usr/include/sys/types.h /usr/include/endian.h \
-  /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
-  /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
-  /usr/include/alloca.h /usr/include/libguile/tags.h \
-  /usr/include/libguile/__scm.h /usr/include/setjmp.h \
-  /usr/include/bits/setjmp.h /usr/include/libguile/alist.h \
-  /usr/include/libguile/arbiters.h /usr/include/libguile/async.h \
-  /usr/include/libguile/root.h /usr/include/libguile/debug.h \
-  /usr/include/libguile/options.h /usr/include/libguile/throw.h \
-  /usr/include/libguile/threads.h /usr/include/libguile/procs.h \
-  /usr/include/libguile/iselect.h /usr/include/libguile/dynwind.h \
-  /usr/include/libguile/continuations.h \
+  /usr/include/sys/types.h /usr/include/sys/sysmacros.h \
+  /usr/include/bits/pthreadtypes.h /usr/include/alloca.h \
+  /usr/include/libguile/tags.h /usr/include/libguile/__scm.h \
+  /usr/include/setjmp.h /usr/include/bits/setjmp.h \
+  /usr/include/libguile/alist.h /usr/include/libguile/arbiters.h \
+  /usr/include/libguile/async.h /usr/include/libguile/root.h \
+  /usr/include/libguile/debug.h /usr/include/libguile/options.h \
+  /usr/include/libguile/throw.h /usr/include/libguile/threads.h \
+  /usr/include/libguile/procs.h /usr/include/libguile/iselect.h \
+  /usr/include/libguile/dynwind.h /usr/include/libguile/continuations.h \
   /usr/include/libguile/pthread-threads.h /usr/include/pthread.h \
   /usr/include/sched.h /usr/include/bits/sched.h /usr/include/signal.h \
   /usr/include/libguile/boolean.h /usr/include/libguile/chars.h \
@@ -81,22 +82,17 @@ libguile_rman_rispec_la-rispec_wrap.lo: rispec_wrap.c \
   /usr/include/wchar.h \
   /usr/lib/gcc/i386-redhat-linux/4.3.2/include/stdarg.h \
   /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
-  /usr/include/libguile/pairs.h /usr/include/libguile/gc.h \
-  /usr/include/libguile/error.h /usr/include/libguile/discouraged.h \
-  /usr/include/libguile/deprecated.h /usr/include/libguile/strings.h \
-  /usr/include/assert.h /usr/local/include/aqsis/ri.h \
-  /usr/local/include/aqsis/aqsis_compiler.h \
+  /usr/include/bits/stdio.h /usr/include/libguile/pairs.h \
+  /usr/include/libguile/gc.h /usr/include/libguile/error.h \
+  /usr/include/libguile/discouraged.h /usr/include/libguile/deprecated.h \
+  /usr/include/libguile/strings.h /usr/include/assert.h \
+  /usr/local/include/aqsis/ri.h /usr/local/include/aqsis/aqsis_compiler.h \
   /usr/local/include/aqsis/ri_types.h /usr/local/include/aqsis/ri.inl \
   /usr/include/errno.h /usr/include/bits/errno.h \
   /usr/include/linux/errno.h /usr/include/asm/errno.h \
   /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
-  ../lightning/lightning.h ../lightning/asm-common.h \
-  /usr/include/lightning/asm.h /usr/include/lightning/asm-i386.h \
-  /usr/include/lightning/core.h /usr/include/lightning/core-i386.h \
-  ../lightning/core-common.h ../lightning/funcs-common.h \
-  /usr/include/lightning/funcs.h /usr/include/sys/mman.h \
-  /usr/include/bits/mman.h /usr/include/lightning/fp.h \
-  ../lightning/fp-common.h
+  /usr/lib/libffi-3.0.5/include/ffi.h \
+  /usr/lib/libffi-3.0.5/include/ffitarget.h
 
 /usr/include/string.h:
 
@@ -111,6 +107,22 @@ libguile_rman_rispec_la-rispec_wrap.lo: rispec_wrap.c \
 /usr/include/gnu/stubs-32.h:
 
 /usr/lib/gcc/i386-redhat-linux/4.3.2/include/stddef.h:
+
+/usr/include/bits/string.h:
+
+/usr/include/bits/string2.h:
+
+/usr/include/endian.h:
+
+/usr/include/bits/endian.h:
+
+/usr/include/bits/byteswap.h:
+
+/usr/include/bits/types.h:
+
+/usr/include/bits/typesizes.h:
+
+/usr/include/stdlib.h:
 
 /usr/include/libguile.h:
 
@@ -144,10 +156,6 @@ libguile_rman_rispec_la-rispec_wrap.lo: rispec_wrap.c \
 
 /usr/include/sys/time.h:
 
-/usr/include/bits/types.h:
-
-/usr/include/bits/typesizes.h:
-
 /usr/include/time.h:
 
 /usr/include/bits/time.h:
@@ -158,15 +166,7 @@ libguile_rman_rispec_la-rispec_wrap.lo: rispec_wrap.c \
 
 /usr/include/bits/sigset.h:
 
-/usr/include/stdlib.h:
-
 /usr/include/sys/types.h:
-
-/usr/include/endian.h:
-
-/usr/include/bits/endian.h:
-
-/usr/include/bits/byteswap.h:
 
 /usr/include/sys/sysmacros.h:
 
@@ -420,6 +420,8 @@ libguile_rman_rispec_la-rispec_wrap.lo: rispec_wrap.c \
 
 /usr/include/bits/sys_errlist.h:
 
+/usr/include/bits/stdio.h:
+
 /usr/include/libguile/pairs.h:
 
 /usr/include/libguile/gc.h:
@@ -454,28 +456,6 @@ libguile_rman_rispec_la-rispec_wrap.lo: rispec_wrap.c \
 
 /usr/include/asm-generic/errno-base.h:
 
-../lightning/lightning.h:
+/usr/lib/libffi-3.0.5/include/ffi.h:
 
-../lightning/asm-common.h:
-
-/usr/include/lightning/asm.h:
-
-/usr/include/lightning/asm-i386.h:
-
-/usr/include/lightning/core.h:
-
-/usr/include/lightning/core-i386.h:
-
-../lightning/core-common.h:
-
-../lightning/funcs-common.h:
-
-/usr/include/lightning/funcs.h:
-
-/usr/include/sys/mman.h:
-
-/usr/include/bits/mman.h:
-
-/usr/include/lightning/fp.h:
-
-../lightning/fp-common.h:
+/usr/lib/libffi-3.0.5/include/ffitarget.h:

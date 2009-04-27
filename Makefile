@@ -38,7 +38,7 @@ DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	config.guess config.sub depcomp install-sh ltmain.sh missing
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ac_pkg_swig.m4 \
-	$(top_srcdir)/m4/lightning.m4 $(top_srcdir)/configure.ac
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
@@ -80,7 +80,7 @@ AUTOMAKE = ${SHELL} /home/tristan/src/guile-rman/missing --run automake-1.10
 AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -O0
+CFLAGS = -g -O2
 CPP = gcc -E
 CPPFLAGS = 
 CXX = g++
@@ -98,6 +98,8 @@ ECHO_T =
 EGREP = /bin/grep -E
 EXEEXT = 
 F77 = gfortran
+FFI_CFLAGS = -I/usr/lib/libffi-3.0.5/include  
+FFI_LIBS = -lffi  
 FFLAGS = -g -O2
 GREP = /bin/grep
 GUILE = /usr/bin/guile
@@ -128,6 +130,7 @@ PACKAGE_STRING = guile-rman 0.1.1
 PACKAGE_TARNAME = guile-rman
 PACKAGE_VERSION = 0.1.1
 PATH_SEPARATOR = :
+PKG_CONFIG = /usr/bin/pkg-config
 RANLIB = ranlib
 SED = /bin/sed
 SET_MAKE = 
@@ -189,7 +192,7 @@ top_build_prefix =
 top_builddir = .
 top_srcdir = .
 ACLOCAL_AMFLAGS = -I m4
-SUBDIRS = src lightning tests
+SUBDIRS = src tests
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
 

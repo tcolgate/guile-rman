@@ -1359,223 +1359,210 @@ convert_param_list(SCM input, RtInt* count, RtToken *tokens[], RtPointer *values
 }
 
 
-#include "lightning.h"
+#include <ffi.h>
 #include "libguile.h"
 
-/*typedef RtVoid  ( *RtFunc ) ();*/
-RtVoid TrampolineRtFunc (SCM P)
-{
 
-  if (!scm_is_eq (scm_thunk_p (P), SCM_BOOL_T)){
-    printf ("Wont call non procedure %p\n",P);
+
+/*typedef RtVoid  ( *RtFunc ) ();*/
+void
+TrampolineRtFunc (ffi_cif *CIF, void *RET, void **args, void *SCM_HANDLER)
+{
+  if (!scm_is_eq (scm_thunk_p (SCM_HANDLER), SCM_BOOL_T)){
+    printf ("Wont call non procedure %p\n",SCM_HANDLER);
     return;
   }
-
-  scm_call_0(P);
-  return;
+  scm_call0 ((SCM)SCM_HANDLER);
+  return ;
 };
 
 RtFunc MakeSCMCallbackRtFunc(SCM p)
 {
-  RtFunc    callback;             /* ptr to generated code */
-  char          *start, *end;           /* a couple of labels */
+  ffi_cif *cif = (ffi_cif*) malloc (sizeof(ffi_cif));
+  RtFunc callback;             /* ptr to generated code */
+  void *cb_closure = ffi_closure_alloc (sizeof(ffi_closure), (void*) &callback);
 
-  jit_insn *codegen = (jit_insn*) malloc (1024);
-  callback = (RtFunc) (jit_set_ip(codegen).vptr);
-  start = jit_get_ip().ptr;
-  jit_prolog(0);
-  jit_movi_p(JIT_R0, p);
-  jit_prepare(1);
-    jit_pusharg_p(JIT_R0);
-  jit_finish(TrampolineRtFunc);
-  jit_ret();
-  end = jit_get_ip().ptr;
+  /* Initialize the cif */
+  if (ffi_prep_cif(cif, FFI_DEFAULT_ABI, 0, &ffi_type_void, NULL) 
+          != FFI_OK) {
+       printf("Failed to intialize cif for callback\n");
+  }
 
-  jit_flush_code(start, end);
-
+  ffi_prep_closure_loc (cb_closure, cif, TrampolineRtFunc, (void *)p, (void*) callback);
   return callback;
 };
 
 
 /* typedef RtVoid  ( *RtProgressFunc ) ( RtFloat PercentComplete, RtInt FrameNo );*/
-RtVoid TrampolineRtProgressFunc (SCM P, RtFloat arg1, RtInt arg2)
+void
+TrampolineRtProgressFunc (ffi_cif *CIF, void *RET, void **args, void *SCM_HANDLER)
 {
+  void* parg1 = args[0];
+  void* parg2 = args[1];
+  float arg1;
+  int arg2;
+  arg1 = *(float*)parg1;
+  arg2 = *(int*)parg2;
 
-  if (!scm_is_eq (scm_procedure_p (P), SCM_BOOL_T)){
-    printf ("Wont call, not a Void (RtFloat,RtInt) procedure %p\n",P);
+  if (!scm_is_eq (scm_procedure_p (SCM_HANDLER), SCM_BOOL_T)){
+    printf ("Wont call, not a Void (RtFloat,RtInt) procedure %p\n",SCM_HANDLER);
     return;
   }
 
-  scm_call_2(P,scm_double2num((double)arg1),scm_int2num((int) arg2));
+  scm_call_2((SCM)SCM_HANDLER,scm_double2num((double)arg1),scm_int2num((int) arg2));
   return;
 };
 
 RtProgressFunc MakeSCMCallbackRtProgressFunc(SCM p)
 {
+  ffi_cif *cif = (ffi_cif*) malloc (sizeof(ffi_cif));
+  ffi_type **args = (ffi_type**) malloc (sizeof(ffi_type*) * 2);
   RtProgressFunc callback;             /* ptr to generated code */
-  char          *start, *end;           /* a couple of labels */
-  float arg1;
-  int arg2;
+  void *cb_closure = ffi_closure_alloc (sizeof(ffi_closure), (void*) &callback);
 
-  jit_insn *codegen = (jit_insn*) malloc (1024);
-  callback = (RtProgressFunc) (jit_set_ip(codegen).vptr);
-  start = jit_get_ip().ptr;
-  jit_prolog(2);
-  arg1 = jit_arg_f();
-  arg2 = jit_arg_i();
-  jit_movi_p(JIT_R0, p);
-  jit_getarg_f(JIT_FPR1, arg1);
-  jit_getarg_i(JIT_R2, arg2);
-  jit_prepare(3);
-    jit_pusharg_i(JIT_R2);
-    jit_pusharg_f(JIT_FPR1);
-    jit_pusharg_p(JIT_R0);
-  jit_finish(TrampolineRtProgressFunc);
-  jit_ret();
-  end = jit_get_ip().ptr;
+  /* Describe the arguments */
+  args[0] = &ffi_type_float;
+  args[1] = &ffi_type_sint;
 
-  jit_flush_code(start, end);
+  /* Initialize the cif */
+  if (ffi_prep_cif(cif, FFI_DEFAULT_ABI, 2, &ffi_type_void, args) 
+          != FFI_OK) {
+       printf("Failed to intialize cif for callback\n");
+  }
 
+  ffi_prep_closure_loc (cb_closure, cif, TrampolineRtProgressFunc, (void *)p, (void*) callback);
   return callback;
 };
 
 
 /* typedef RtVoid  ( *RtProcSubdivFunc ) ( RtPointer, RtFloat ); */
-RtVoid TrampolineRtProcSubdivFunc (SCM P, RtPointer arg1, RtFloat arg2)
+void
+TrampolineRtProcSubdivFunc (ffi_cif *CIF, void *RET, void **args, void *SCM_HANDLER)
 {
+  void* parg1 = args[0];
+  void* parg2 = args[1];
+  void* arg1 = *(void**)parg1;
+  int arg2 = *(int*)parg2;
 
-  if (!scm_is_eq (scm_procedure_p (P), SCM_BOOL_T)){
-    printf ("Wont call, not a Void (RtPointer,,RtFloat) procedure %p\n",P);
+  if (!scm_is_eq (scm_procedure_p (SCM_HANDLER), SCM_BOOL_T)){
+    printf ("Wont call, not a Void (RtPointer,,RtFloat) procedure %p\n",SCM_HANDLER);
     return;
   }
 
-/*  scm_call_2(P,SWIG_NewPointerObj (arg1, SWIGTYPE_p_void, 0),scm_double2num((int) arg2)); */
-  scm_call_2(P,(SCM) arg1,scm_double2num((int) arg2));
+  scm_call_2((SCM) SCM_HANDLER,(SCM) arg1, scm_double2num((double)arg2));
   return;
 };
 
 RtProcSubdivFunc MakeSCMCallbackRtProcSubdivFunc(SCM p)
 {
+  ffi_cif *cif = (ffi_cif*) malloc (sizeof(ffi_cif));
+  ffi_type **args = (ffi_type**) malloc (sizeof(ffi_type*) * 2);
   RtProcSubdivFunc callback;             /* ptr to generated code */
-  char          *start, *end;           /* a couple of labels */
-  int arg1;
-  int arg2;
+  void *cb_closure = ffi_closure_alloc (sizeof(ffi_closure), (void*) &callback);
 
-  jit_insn *codegen = (jit_insn*) malloc (1024);
-  callback = (RtProcSubdivFunc) (jit_set_ip(codegen).vptr);
-  start = jit_get_ip().ptr;
-  jit_prolog(2);
-  arg1 = jit_arg_p();
-  arg2 = jit_arg_f();
-  jit_movi_p(JIT_R0, p);
-  jit_getarg_p(JIT_R1, arg1);
-  jit_getarg_f(JIT_FPR2, arg2);
-  jit_prepare(3);
-    jit_pusharg_f(JIT_FPR2);
-    jit_pusharg_p(JIT_R1);
-    jit_pusharg_p(JIT_R0);
-  jit_finish(TrampolineRtProcSubdivFunc);
-  jit_ret();
-  end = jit_get_ip().ptr;
+  /* Describe the arguments */
+  args[0] = &ffi_type_pointer;
+  args[1] = &ffi_type_float;
 
-  jit_flush_code(start, end);
+  /* Initialize the cif */
+  if (ffi_prep_cif(cif, FFI_DEFAULT_ABI, 2, &ffi_type_void, args) 
+          != FFI_OK) {
+       printf("Failed to intialize cif for callback\n");
+  }
 
+  ffi_prep_closure_loc (cb_closure, cif, TrampolineRtProcSubdivFunc, (void *)p, (void*) callback);
   return callback;
 };
 
 
 /* typedef RtVoid  ( *RtProcFreeFunc ) ( RtPointer ); */
-RtVoid TrampolineRtProcFreeFunc (SCM P, RtPointer arg1)
+void 
+TrampolineRtProcFreeFunc (ffi_cif *CIF, void *RET, void **args, void *SCM_HANDLER)
 {
+  void* parg1 = args[0];
+  void* arg1 = *(void**)parg1;
 
-  if (!scm_is_eq (scm_procedure_p (P), SCM_BOOL_T)){
-    printf ("Wont call, not a Void (RtPointer) procedure %p\n",P);
+  if (!scm_is_eq (scm_procedure_p (SCM_HANDLER), SCM_BOOL_T)){
+    printf ("Wont call, not a Void (RtPointer) procedure %p\n",SCM_HANDLER);
     return;
   }
 
 /*  scm_call_1(P,SWIG_NewPointerObj (arg1, SWIGTYPE_p_void, 0)); */
-  scm_call_1(P,(SCM) arg1);
+  scm_call_1(SCM_HANDLER,(SCM) arg1);
   return;
 };
 
 RtProcFreeFunc MakeSCMCallbackRtProcFreeFunc(SCM p)
 {
+  ffi_cif *cif = (ffi_cif*) malloc (sizeof(ffi_cif));
+  ffi_type **args = (ffi_type**) malloc (sizeof(ffi_type*) * 1);
   RtProcFreeFunc callback;             /* ptr to generated code */
-  char          *start, *end;           /* a couple of labels */
-  int arg1;
+  void *cb_closure = ffi_closure_alloc (sizeof(ffi_closure), (void*) &callback);
 
-  jit_insn *codegen = (jit_insn*) malloc (1024);
-  callback = (RtProcFreeFunc) (jit_set_ip(codegen).vptr);
-  start = jit_get_ip().ptr;
-  jit_prolog(1);
-  arg1 = jit_arg_p();
-  jit_movi_p(JIT_R0, p);
-  jit_getarg_p(JIT_R1, arg1);
-  jit_prepare(2);
-    jit_pusharg_p(JIT_R1);
-    jit_pusharg_p(JIT_R0);
-  jit_finish(TrampolineRtProcFreeFunc);
-  jit_ret();
-  end = jit_get_ip().ptr;
+  /* Describe the arguments */
+  args[0] = &ffi_type_pointer;
 
-  jit_flush_code(start, end);
+  /* Initialize the cif */
+  if (ffi_prep_cif(cif, FFI_DEFAULT_ABI, 1, &ffi_type_void, args) 
+          != FFI_OK) {
+       printf("Failed to intialize cif for callback\n");
+  }
 
+  ffi_prep_closure_loc (cb_closure, cif, TrampolineRtProcFreeFunc, (void *)p, (void*) callback);
   return callback;
 };
 
 
-/*typedef RtFloat ( *RtFilterFunc ) ( RtFloat, RtFloat, RtFloat, RtFloat );*/
-RtFloat TrampolineRtFilterFunc (SCM P, RtFloat arg1, RtFloat arg2, RtFloat arg3, RtFloat arg4)
+/* typedef RtFloat ( *RtFilterFunc ) ( RtFloat, RtFloat, RtFloat, RtFloat ); */
+void 
+TrampolineRtFilterFunc (ffi_cif *CIF, void *RET, void **args, void *SCM_HANDLER)
 {
-  if (!scm_is_eq (scm_procedure_p (P), SCM_BOOL_T)){
-    printf ("Wont call, not a Void (RtFloat,RtFloat,RtFloat,RtFloat) procedure %p\n",P);
-    return 0;
-  };
+  void* parg1 = args[0];
+  void* parg2 = args[1];
+  void* parg3 = args[2];
+  void* parg4 = args[3];
+  float arg1 = *(float*)parg1;
+  float arg2 = *(float*)parg2;
+  float arg3 = *(float*)parg3;
+  float arg4 = *(float*)parg4;
+  
+  float result;
 
-  RtFloat res = (RtFloat) scm_to_double(scm_call_4(P,scm_double2num(arg1),scm_double2num(arg2),scm_double2num(arg3),scm_double2num(arg4)));
-  return res;
+  if (!scm_is_eq (scm_procedure_p (SCM_HANDLER), SCM_BOOL_T)){
+    printf ("Wont call, not a Void (RtPointer) procedure %p\n",SCM_HANDLER);
+    return;
+  }
+
+/*  scm_call_1(P,SWIG_NewPointerObj (arg1, SWIGTYPE_p_void, 0)); */
+  result = (float) scm_to_double (scm_call_4((SCM) SCM_HANDLER, scm_double2num((double)arg1), scm_double2num((double)arg2), scm_double2num((double)arg3), scm_double2num((double)arg4)));
+  *((float*) RET) = result;
+
+  return;
 };
 
 RtFilterFunc MakeSCMCallbackRtFilterFunc(SCM p)
 {
+  ffi_cif *cif = (ffi_cif*) malloc (sizeof(ffi_cif));
+  ffi_type **args = (ffi_type**) malloc (sizeof(ffi_type*) * 4);
   RtFilterFunc callback;             /* ptr to generated code */
-  char          *start, *end;           /* a couple of labels */
-  int arg1;
-  int arg2;
-  int arg3;
-  int arg4;
+  void *cb_closure = ffi_closure_alloc (sizeof(ffi_closure), (void*) &callback);
 
-  jit_insn *codegen = (jit_insn*) malloc (4096);
-  /*callback = (RtFilterFunc) (jit_set_ip(codegen).vptr);*/
-  jit_set_ip(codegen);
-  callback = (RtFilterFunc) jit_get_ip().iptr;
-  jit_prolog(4);
-  arg1 = jit_arg_f();
-  arg2 = jit_arg_f();
-  arg3 = jit_arg_f();
-  arg4 = jit_arg_f();
+  /* Describe the arguments */
+  args[0] = &ffi_type_float;
+  args[1] = &ffi_type_float;
+  args[2] = &ffi_type_float;
+  args[3] = &ffi_type_float;
 
-  jit_movi_p(JIT_R0, p);
-  jit_getarg_f(JIT_FPR0, arg1);
-  jit_getarg_f(JIT_FPR1, arg2);
-  jit_getarg_f(JIT_FPR2, arg3);
-  jit_getarg_f(JIT_FPR3, arg4);
-  jit_prepare(1);
-  jit_prepare_f(4);
-    jit_pusharg_f(JIT_FPR3);
-    jit_pusharg_f(JIT_FPR2);
-    jit_pusharg_f(JIT_FPR1);
-    jit_pusharg_f(JIT_FPR0);
-    jit_pusharg_p(JIT_R0);
-  jit_finish(TrampolineRtFilterFunc);
-  jit_retval_f(JIT_FPRET);
-  jit_ret();
-  end = jit_get_ip().ptr;
+  /* Initialize the cif */
+  if (ffi_prep_cif(cif, FFI_DEFAULT_ABI, 4, &ffi_type_float, args) 
+          != FFI_OK) {
+       printf("Failed to intialize cif for callback\n");
+  };
 
-  jit_flush_code((char*)callback, end);
-
+  ffi_prep_closure_loc (cb_closure, cif, TrampolineRtFilterFunc, (void *)p, (void*) callback);
   return callback;
 };
+
 
 static int gswig_const_AQSIS_COMPILER_H_INCLUDED = 1;
 static int gswig_const_AQSIS_SYSTEM_POSIX = 1;
@@ -1586,232 +1573,6 @@ static int gswig_const_RI_TRUE = 1;
 static double gswig_const_RI_PI = 3.14159265359;
 static double gswig_const_RI_PIO2 = 3.14159265359/2;
 static char *gswig_const_RI_SHADER_EXTENSION = ".slx";
-static SCM
-_wrap_TrampolineRtFunc (SCM s_0)
-{
-#define FUNC_NAME "TrampolineRtFunc"
-  SCM arg1 ;
-  SCM gswig_result;
-  SWIGUNUSED int gswig_list_p = 0;
-  
-  arg1=s_0;
-  TrampolineRtFunc(arg1);
-  gswig_result = SCM_UNSPECIFIED;
-  
-  return gswig_result;
-#undef FUNC_NAME
-}
-
-
-static SCM
-_wrap_MakeSCMCallbackRtFunc (SCM s_0)
-{
-#define FUNC_NAME "MakeSCMCallbackRtFunc"
-  SCM arg1 ;
-  RtFunc result;
-  SCM gswig_result;
-  SWIGUNUSED int gswig_list_p = 0;
-  
-  arg1=s_0;
-  result = (RtFunc)MakeSCMCallbackRtFunc(arg1);
-  {
-    gswig_result = SWIG_NewPointerObj (result, SWIGTYPE_p_f___void, 0);
-  }
-  
-  return gswig_result;
-#undef FUNC_NAME
-}
-
-
-static SCM
-_wrap_TrampolineRtProgressFunc (SCM s_0, SCM s_1, SCM s_2)
-{
-#define FUNC_NAME "TrampolineRtProgressFunc"
-  SCM arg1 ;
-  RtFloat arg2 ;
-  RtInt arg3 ;
-  SCM gswig_result;
-  SWIGUNUSED int gswig_list_p = 0;
-  
-  arg1=s_0;
-  {
-    arg2 = (RtFloat) scm_num2dbl(s_1, FUNC_NAME);
-  }
-  {
-    arg3 = (RtInt) scm_num2int(s_2, SCM_ARG1, FUNC_NAME);
-  }
-  TrampolineRtProgressFunc(arg1,arg2,arg3);
-  gswig_result = SCM_UNSPECIFIED;
-  
-  return gswig_result;
-#undef FUNC_NAME
-}
-
-
-static SCM
-_wrap_MakeSCMCallbackRtProgressFunc (SCM s_0)
-{
-#define FUNC_NAME "MakeSCMCallbackRtProgressFunc"
-  SCM arg1 ;
-  RtProgressFunc result;
-  SCM gswig_result;
-  SWIGUNUSED int gswig_list_p = 0;
-  
-  arg1=s_0;
-  result = (RtProgressFunc)MakeSCMCallbackRtProgressFunc(arg1);
-  {
-    gswig_result = SWIG_NewPointerObj (result, SWIGTYPE_p_f_float_int__void, 0);
-  }
-  
-  return gswig_result;
-#undef FUNC_NAME
-}
-
-
-static SCM
-_wrap_TrampolineRtProcSubdivFunc (SCM s_0, SCM s_1, SCM s_2)
-{
-#define FUNC_NAME "TrampolineRtProcSubdivFunc"
-  SCM arg1 ;
-  RtPointer arg2 = (RtPointer) 0 ;
-  RtFloat arg3 ;
-  SCM gswig_result;
-  SWIGUNUSED int gswig_list_p = 0;
-  
-  arg1=s_0;
-  {
-    arg2 = (RtPointer)SWIG_MustGetPtr(s_1, NULL, 2, 0);
-  }
-  {
-    arg3 = (RtFloat) scm_num2dbl(s_2, FUNC_NAME);
-  }
-  TrampolineRtProcSubdivFunc(arg1,arg2,arg3);
-  gswig_result = SCM_UNSPECIFIED;
-  
-  
-  return gswig_result;
-#undef FUNC_NAME
-}
-
-
-static SCM
-_wrap_MakeSCMCallbackRtProcSubdivFunc (SCM s_0)
-{
-#define FUNC_NAME "MakeSCMCallbackRtProcSubdivFunc"
-  SCM arg1 ;
-  RtProcSubdivFunc result;
-  SCM gswig_result;
-  SWIGUNUSED int gswig_list_p = 0;
-  
-  arg1=s_0;
-  result = (RtProcSubdivFunc)MakeSCMCallbackRtProcSubdivFunc(arg1);
-  {
-    gswig_result = SWIG_NewPointerObj (result, SWIGTYPE_p_f_p_void_float__void, 0);
-  }
-  
-  return gswig_result;
-#undef FUNC_NAME
-}
-
-
-static SCM
-_wrap_TrampolineRtProcFreeFunc (SCM s_0, SCM s_1)
-{
-#define FUNC_NAME "TrampolineRtProcFreeFunc"
-  SCM arg1 ;
-  RtPointer arg2 = (RtPointer) 0 ;
-  SCM gswig_result;
-  SWIGUNUSED int gswig_list_p = 0;
-  
-  arg1=s_0;
-  {
-    arg2 = (RtPointer)SWIG_MustGetPtr(s_1, NULL, 2, 0);
-  }
-  TrampolineRtProcFreeFunc(arg1,arg2);
-  gswig_result = SCM_UNSPECIFIED;
-  
-  
-  return gswig_result;
-#undef FUNC_NAME
-}
-
-
-static SCM
-_wrap_MakeSCMCallbackRtProcFreeFunc (SCM s_0)
-{
-#define FUNC_NAME "MakeSCMCallbackRtProcFreeFunc"
-  SCM arg1 ;
-  RtProcFreeFunc result;
-  SCM gswig_result;
-  SWIGUNUSED int gswig_list_p = 0;
-  
-  arg1=s_0;
-  result = (RtProcFreeFunc)MakeSCMCallbackRtProcFreeFunc(arg1);
-  {
-    gswig_result = SWIG_NewPointerObj (result, SWIGTYPE_p_f_p_void__void, 0);
-  }
-  
-  return gswig_result;
-#undef FUNC_NAME
-}
-
-
-static SCM
-_wrap_TrampolineRtFilterFunc (SCM s_0, SCM s_1, SCM s_2, SCM s_3, SCM s_4)
-{
-#define FUNC_NAME "TrampolineRtFilterFunc"
-  SCM arg1 ;
-  RtFloat arg2 ;
-  RtFloat arg3 ;
-  RtFloat arg4 ;
-  RtFloat arg5 ;
-  RtFloat result;
-  SCM gswig_result;
-  SWIGUNUSED int gswig_list_p = 0;
-  
-  arg1=s_0;
-  {
-    arg2 = (RtFloat) scm_num2dbl(s_1, FUNC_NAME);
-  }
-  {
-    arg3 = (RtFloat) scm_num2dbl(s_2, FUNC_NAME);
-  }
-  {
-    arg4 = (RtFloat) scm_num2dbl(s_3, FUNC_NAME);
-  }
-  {
-    arg5 = (RtFloat) scm_num2dbl(s_4, FUNC_NAME);
-  }
-  result = (RtFloat)TrampolineRtFilterFunc(arg1,arg2,arg3,arg4,arg5);
-  {
-    gswig_result = scm_make_real(result);
-  }
-  
-  return gswig_result;
-#undef FUNC_NAME
-}
-
-
-static SCM
-_wrap_MakeSCMCallbackRtFilterFunc (SCM s_0)
-{
-#define FUNC_NAME "MakeSCMCallbackRtFilterFunc"
-  SCM arg1 ;
-  RtFilterFunc result;
-  SCM gswig_result;
-  SWIGUNUSED int gswig_list_p = 0;
-  
-  arg1=s_0;
-  result = (RtFilterFunc)MakeSCMCallbackRtFilterFunc(arg1);
-  {
-    gswig_result = SWIG_NewPointerObj (result, SWIGTYPE_p_f_float_float_float_float__float, 0);
-  }
-  
-  return gswig_result;
-#undef FUNC_NAME
-}
-
-
 static SCM
 _wrap_AQSIS_COMPILER_H_INCLUDED(SCM s_0)
 {
@@ -4803,11 +4564,22 @@ _wrap_RiPixelFilter (SCM s_0, SCM s_1, SCM s_2)
   SWIGUNUSED int gswig_list_p = 0;
   
   {
-    scm_display(s_0,scm_current_output_port());
     if (scm_is_true (scm_equal_p(scm_procedure_name(s_0),(scm_string_to_symbol(scm_from_locale_string("RiGaussianFilter")))))){
       arg1 = RiGaussianFilter;
     } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_0),(scm_string_to_symbol(scm_from_locale_string("RiBoxFilter")))))){
       arg1 = RiBoxFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_0),(scm_string_to_symbol(scm_from_locale_string("RiMitchellFilter")))))){
+      arg1 = RiMitchellFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_0),(scm_string_to_symbol(scm_from_locale_string("RiTriangleFilter")))))){
+      arg1 = RiTriangleFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_0),(scm_string_to_symbol(scm_from_locale_string("RiCatmullRomFilter")))))){
+      arg1 = RiCatmullRomFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_0),(scm_string_to_symbol(scm_from_locale_string("RiSincFilter")))))){
+      arg1 = RiSincFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_0),(scm_string_to_symbol(scm_from_locale_string("RiDiskFilter")))))){
+      arg1 = RiDiskFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_0),(scm_string_to_symbol(scm_from_locale_string("RiBesselFilter")))))){
+      arg1 = RiBesselFilter;
     } else {
       arg1 = MakeSCMCallbackRtFilterFunc(s_0);
     };
@@ -7961,11 +7733,22 @@ _wrap_RiMakeTexture (SCM s_0, SCM s_1, SCM s_2, SCM s_3, SCM s_4, SCM s_5, SCM s
     must_free4 = 1;
   }
   {
-    scm_display(s_4,scm_current_output_port());
     if (scm_is_true (scm_equal_p(scm_procedure_name(s_4),(scm_string_to_symbol(scm_from_locale_string("RiGaussianFilter")))))){
       arg5 = RiGaussianFilter;
     } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_4),(scm_string_to_symbol(scm_from_locale_string("RiBoxFilter")))))){
       arg5 = RiBoxFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_4),(scm_string_to_symbol(scm_from_locale_string("RiMitchellFilter")))))){
+      arg5 = RiMitchellFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_4),(scm_string_to_symbol(scm_from_locale_string("RiTriangleFilter")))))){
+      arg5 = RiTriangleFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_4),(scm_string_to_symbol(scm_from_locale_string("RiCatmullRomFilter")))))){
+      arg5 = RiCatmullRomFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_4),(scm_string_to_symbol(scm_from_locale_string("RiSincFilter")))))){
+      arg5 = RiSincFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_4),(scm_string_to_symbol(scm_from_locale_string("RiDiskFilter")))))){
+      arg5 = RiDiskFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_4),(scm_string_to_symbol(scm_from_locale_string("RiBesselFilter")))))){
+      arg5 = RiBesselFilter;
     } else {
       arg5 = MakeSCMCallbackRtFilterFunc(s_4);
     };
@@ -8041,11 +7824,22 @@ _wrap_RiMakeBump (SCM s_0, SCM s_1, SCM s_2, SCM s_3, SCM s_4, SCM s_5, SCM s_6,
     must_free4 = 1;
   }
   {
-    scm_display(s_4,scm_current_output_port());
     if (scm_is_true (scm_equal_p(scm_procedure_name(s_4),(scm_string_to_symbol(scm_from_locale_string("RiGaussianFilter")))))){
       arg5 = RiGaussianFilter;
     } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_4),(scm_string_to_symbol(scm_from_locale_string("RiBoxFilter")))))){
       arg5 = RiBoxFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_4),(scm_string_to_symbol(scm_from_locale_string("RiMitchellFilter")))))){
+      arg5 = RiMitchellFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_4),(scm_string_to_symbol(scm_from_locale_string("RiTriangleFilter")))))){
+      arg5 = RiTriangleFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_4),(scm_string_to_symbol(scm_from_locale_string("RiCatmullRomFilter")))))){
+      arg5 = RiCatmullRomFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_4),(scm_string_to_symbol(scm_from_locale_string("RiSincFilter")))))){
+      arg5 = RiSincFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_4),(scm_string_to_symbol(scm_from_locale_string("RiDiskFilter")))))){
+      arg5 = RiDiskFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_4),(scm_string_to_symbol(scm_from_locale_string("RiBesselFilter")))))){
+      arg5 = RiBesselFilter;
     } else {
       arg5 = MakeSCMCallbackRtFilterFunc(s_4);
     };
@@ -8109,11 +7903,22 @@ _wrap_RiMakeLatLongEnvironment (SCM s_0, SCM s_1, SCM s_2, SCM s_3, SCM s_4, SCM
     must_free2 = 1;
   }
   {
-    scm_display(s_2,scm_current_output_port());
     if (scm_is_true (scm_equal_p(scm_procedure_name(s_2),(scm_string_to_symbol(scm_from_locale_string("RiGaussianFilter")))))){
       arg3 = RiGaussianFilter;
     } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_2),(scm_string_to_symbol(scm_from_locale_string("RiBoxFilter")))))){
       arg3 = RiBoxFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_2),(scm_string_to_symbol(scm_from_locale_string("RiMitchellFilter")))))){
+      arg3 = RiMitchellFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_2),(scm_string_to_symbol(scm_from_locale_string("RiTriangleFilter")))))){
+      arg3 = RiTriangleFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_2),(scm_string_to_symbol(scm_from_locale_string("RiCatmullRomFilter")))))){
+      arg3 = RiCatmullRomFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_2),(scm_string_to_symbol(scm_from_locale_string("RiSincFilter")))))){
+      arg3 = RiSincFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_2),(scm_string_to_symbol(scm_from_locale_string("RiDiskFilter")))))){
+      arg3 = RiDiskFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_2),(scm_string_to_symbol(scm_from_locale_string("RiBesselFilter")))))){
+      arg3 = RiBesselFilter;
     } else {
       arg3 = MakeSCMCallbackRtFilterFunc(s_2);
     };
@@ -8209,11 +8014,22 @@ _wrap_RiMakeCubeFaceEnvironment (SCM s_0, SCM s_1, SCM s_2, SCM s_3, SCM s_4, SC
     arg8 = (RtFloat) scm_num2dbl(s_7, FUNC_NAME);
   }
   {
-    scm_display(s_8,scm_current_output_port());
     if (scm_is_true (scm_equal_p(scm_procedure_name(s_8),(scm_string_to_symbol(scm_from_locale_string("RiGaussianFilter")))))){
       arg9 = RiGaussianFilter;
     } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_8),(scm_string_to_symbol(scm_from_locale_string("RiBoxFilter")))))){
       arg9 = RiBoxFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_8),(scm_string_to_symbol(scm_from_locale_string("RiMitchellFilter")))))){
+      arg9 = RiMitchellFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_8),(scm_string_to_symbol(scm_from_locale_string("RiTriangleFilter")))))){
+      arg9 = RiTriangleFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_8),(scm_string_to_symbol(scm_from_locale_string("RiCatmullRomFilter")))))){
+      arg9 = RiCatmullRomFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_8),(scm_string_to_symbol(scm_from_locale_string("RiSincFilter")))))){
+      arg9 = RiSincFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_8),(scm_string_to_symbol(scm_from_locale_string("RiDiskFilter")))))){
+      arg9 = RiDiskFilter;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_8),(scm_string_to_symbol(scm_from_locale_string("RiBesselFilter")))))){
+      arg9 = RiBesselFilter;
     } else {
       arg9 = MakeSCMCallbackRtFilterFunc(s_8);
     };
@@ -8840,16 +8656,6 @@ SWIG_init(void)
   SWIG_InitializeModule(0);
   SWIG_PropagateClientData();
   
-  scm_c_define_gsubr("TrampolineRtFunc", 1, 0, 0, (swig_guile_proc) _wrap_TrampolineRtFunc);
-  scm_c_define_gsubr("MakeSCMCallbackRtFunc", 1, 0, 0, (swig_guile_proc) _wrap_MakeSCMCallbackRtFunc);
-  scm_c_define_gsubr("TrampolineRtProgressFunc", 3, 0, 0, (swig_guile_proc) _wrap_TrampolineRtProgressFunc);
-  scm_c_define_gsubr("MakeSCMCallbackRtProgressFunc", 1, 0, 0, (swig_guile_proc) _wrap_MakeSCMCallbackRtProgressFunc);
-  scm_c_define_gsubr("TrampolineRtProcSubdivFunc", 3, 0, 0, (swig_guile_proc) _wrap_TrampolineRtProcSubdivFunc);
-  scm_c_define_gsubr("MakeSCMCallbackRtProcSubdivFunc", 1, 0, 0, (swig_guile_proc) _wrap_MakeSCMCallbackRtProcSubdivFunc);
-  scm_c_define_gsubr("TrampolineRtProcFreeFunc", 2, 0, 0, (swig_guile_proc) _wrap_TrampolineRtProcFreeFunc);
-  scm_c_define_gsubr("MakeSCMCallbackRtProcFreeFunc", 1, 0, 0, (swig_guile_proc) _wrap_MakeSCMCallbackRtProcFreeFunc);
-  scm_c_define_gsubr("TrampolineRtFilterFunc", 5, 0, 0, (swig_guile_proc) _wrap_TrampolineRtFilterFunc);
-  scm_c_define_gsubr("MakeSCMCallbackRtFilterFunc", 1, 0, 0, (swig_guile_proc) _wrap_MakeSCMCallbackRtFilterFunc);
   scm_c_define_gsubr("AQSIS-COMPILER-H-INCLUDED", 0, 0, 0, (swig_guile_proc) _wrap_AQSIS_COMPILER_H_INCLUDED);
   scm_c_define_gsubr("AQSIS-SYSTEM-POSIX", 0, 0, 0, (swig_guile_proc) _wrap_AQSIS_SYSTEM_POSIX);
   scm_c_define_gsubr("AQSIS-COMPILER-GCC", 0, 0, 0, (swig_guile_proc) _wrap_AQSIS_COMPILER_GCC);
@@ -9417,7 +9223,7 @@ SWIG_init(void)
 static void SWIG_init_helper(void *data)
 {
 SWIG_init();
-scm_c_export("TrampolineRtFunc", "MakeSCMCallbackRtFunc", "TrampolineRtProgressFunc", "MakeSCMCallbackRtProgressFunc", "TrampolineRtProcSubdivFunc", "MakeSCMCallbackRtProcSubdivFunc", "TrampolineRtProcFreeFunc", "MakeSCMCallbackRtProcFreeFunc", "TrampolineRtFilterFunc", "MakeSCMCallbackRtFilterFunc", "AQSIS-COMPILER-H-INCLUDED", "AQSIS-SYSTEM-POSIX", "AQSIS-COMPILER-GCC", "SHARED-LIBRARY-SUFFIX", "RI-FALSE", "RI-TRUE", "RI-PI", "RI-PIO2", "RI-SHADER-EXTENSION", "RI-FRAMEBUFFER", "RI-FILE", "RI-RGB", "RI-RGBA", "RI-RGBZ", "RI-RGBAZ", "RI-A", "RI-Z", "RI-AZ", "RI-MERGE", "RI-ORIGIN", "RI-PERSPECTIVE", "RI-ORTHOGRAPHIC", "RI-HIDDEN", "RI-PAINT", "RI-CONSTANT", "RI-SMOOTH", "RI-FLATNESS", "RI-FOV", "RI-AMBIENTLIGHT", "RI-POINTLIGHT", "RI-DISTANTLIGHT", "RI-SPOTLIGHT", "RI-INTENSITY", "RI-LIGHTCOLOR", "RI-FROM", "RI-TO", "RI-CONEANGLE", "RI-CONEDELTAANGLE", "RI-BEAMDISTRIBUTION", "RI-MATTE", "RI-METAL", "RI-PLASTIC", "RI-SHINYMETAL", "RI-PAINTEDPLASTIC", "RI-KA", "RI-KD", "RI-KS", "RI-ROUGHNESS", "RI-KR", "RI-TEXTURENAME", "RI-SPECULARCOLOR", "RI-DEPTHCUE", "RI-FOG", "RI-BUMPY", "RI-MINDISTANCE", "RI-MAXDISTANCE", "RI-BACKGROUND", "RI-DISTANCE", "RI-AMPLITUDE", "RI-RASTER", "RI-SCREEN", "RI-CAMERA", "RI-WORLD", "RI-OBJECT", "RI-INSIDE", "RI-OUTSIDE", "RI-LH", "RI-RH", "RI-P", "RI-PZ", "RI-PW", "RI-N", "RI-NP", "RI-CS", "RI-OS", "RI-S", "RI-T", "RI-ST", "RI-BILINEAR", "RI-BICUBIC", "RI-LINEAR", "RI-CUBIC", "RI-PRIMITIVE", "RI-INTERSECTION", "RI-UNION", "RI-DIFFERENCE", "RI-WRAP", "RI-NOWRAP", "RI-PERIODIC", "RI-NONPERIODIC", "RI-CLAMP", "RI-BLACK", "RI-IGNORE", "RI-PRINT", "RI-ABORT", "RI-HANDLER", "RI-IDENTIFIER", "RI-NAME", "RI-COMMENT", "RI-STRUCTURE", "RI-VERBATIM", "RI-WIDTH", "RI-CONSTANTWIDTH", "RI-CURRENT", "RI-SHADER", "RI-EYE", "RI-NDC", "RiBezierBasis", "RiBSplineBasis", "RiCatmullRomBasis", "RiHermiteBasis", "RiPowerBasis", "RiLastError", "BasisFromName", "RiProgressHandler", "RiPreRenderFunction", "RiPreWorldFunction", "RiDeclare", "RiBegin", "RiEnd", "RiGetContext", "RiContext", "RiFrameBegin", "RiFrameEnd", "RiWorldBegin", "RiWorldEnd", "RiIfBegin", "RiElseIf", "RiElse", "RiIfEnd", "RiFormat", "RiFrameAspectRatio", "RiScreenWindow", "RiCropWindow", "RiProjection", "RiClipping", "RiClippingPlane", "RiDepthOfField", "RiShutter", "RiPixelVariance", "RiPixelSamples", "RiPixelFilter", "RiExposure", "RiImager", "RiQuantize", "RiDisplay", "RiGaussianFilter", "RiBoxFilter", "RiMitchellFilter", "RiTriangleFilter", "RiCatmullRomFilter", "RiSincFilter", "RiDiskFilter", "RiBesselFilter", "RiHider", "RiColorSamples", "RiRelativeDetail", "RiOption", "RiAttributeBegin", "RiAttributeEnd", "RiColor", "RiOpacity", "RiTextureCoordinates", "RiLightSource", "RiAreaLightSource", "RiIlluminate", "RiSurface", "RiDeformation", "RiDisplacement", "RiAtmosphere", "RiInterior", "RiExterior", "RiShaderLayer", "RiConnectShaderLayers", "RiShadingRate", "RiShadingInterpolation", "RiMatte", "RiBound", "RiDetail", "RiDetailRange", "RiGeometricApproximation", "RiOrientation", "RiReverseOrientation", "RiSides", "RiIdentity", "RiTransform", "RiConcatTransform", "RiPerspective", "RiTranslate", "RiRotate", "RiScale", "RiSkew", "RiCoordinateSystem", "RiCoordSysTransform", "RiTransformPoints", "RiTransformBegin", "RiTransformEnd", "RiResource", "RiResourceBegin", "RiResourceEnd", "RiAttribute", "RiPolygon", "RiGeneralPolygon", "RiPointsPolygons", "RiPointsGeneralPolygons", "RiBasis", "RiPatch", "RiPatchMesh", "RiNuPatch", "RiTrimCurve", "RiSubdivisionMesh", "RiSphere", "RiCone", "RiCylinder", "RiHyperboloid", "RiParaboloid", "RiDisk", "RiTorus", "RiPoints", "RiCurves", "RiBlobby", "RiProcedural", "RiProcFree", "RiProcDelayedReadArchive", "RiProcRunProgram", "RiProcDynamicLoad", "RiGeometry", "RiSolidBegin", "RiSolidEnd", "RiObjectBegin", "RiObjectEnd", "RiObjectInstance", "RiMotionBegin", "RiMotionEnd", "RiMakeTexture", "RiMakeBump", "RiMakeLatLongEnvironment", "RiMakeCubeFaceEnvironment", "RiMakeShadow", "RiMakeOcclusion", "RiErrorHandler", "RiErrorIgnore", "RiErrorPrint", "RiErrorAbort", "RiReadArchive", NULL);
+scm_c_export("AQSIS-COMPILER-H-INCLUDED", "AQSIS-SYSTEM-POSIX", "AQSIS-COMPILER-GCC", "SHARED-LIBRARY-SUFFIX", "RI-FALSE", "RI-TRUE", "RI-PI", "RI-PIO2", "RI-SHADER-EXTENSION", "RI-FRAMEBUFFER", "RI-FILE", "RI-RGB", "RI-RGBA", "RI-RGBZ", "RI-RGBAZ", "RI-A", "RI-Z", "RI-AZ", "RI-MERGE", "RI-ORIGIN", "RI-PERSPECTIVE", "RI-ORTHOGRAPHIC", "RI-HIDDEN", "RI-PAINT", "RI-CONSTANT", "RI-SMOOTH", "RI-FLATNESS", "RI-FOV", "RI-AMBIENTLIGHT", "RI-POINTLIGHT", "RI-DISTANTLIGHT", "RI-SPOTLIGHT", "RI-INTENSITY", "RI-LIGHTCOLOR", "RI-FROM", "RI-TO", "RI-CONEANGLE", "RI-CONEDELTAANGLE", "RI-BEAMDISTRIBUTION", "RI-MATTE", "RI-METAL", "RI-PLASTIC", "RI-SHINYMETAL", "RI-PAINTEDPLASTIC", "RI-KA", "RI-KD", "RI-KS", "RI-ROUGHNESS", "RI-KR", "RI-TEXTURENAME", "RI-SPECULARCOLOR", "RI-DEPTHCUE", "RI-FOG", "RI-BUMPY", "RI-MINDISTANCE", "RI-MAXDISTANCE", "RI-BACKGROUND", "RI-DISTANCE", "RI-AMPLITUDE", "RI-RASTER", "RI-SCREEN", "RI-CAMERA", "RI-WORLD", "RI-OBJECT", "RI-INSIDE", "RI-OUTSIDE", "RI-LH", "RI-RH", "RI-P", "RI-PZ", "RI-PW", "RI-N", "RI-NP", "RI-CS", "RI-OS", "RI-S", "RI-T", "RI-ST", "RI-BILINEAR", "RI-BICUBIC", "RI-LINEAR", "RI-CUBIC", "RI-PRIMITIVE", "RI-INTERSECTION", "RI-UNION", "RI-DIFFERENCE", "RI-WRAP", "RI-NOWRAP", "RI-PERIODIC", "RI-NONPERIODIC", "RI-CLAMP", "RI-BLACK", "RI-IGNORE", "RI-PRINT", "RI-ABORT", "RI-HANDLER", "RI-IDENTIFIER", "RI-NAME", "RI-COMMENT", "RI-STRUCTURE", "RI-VERBATIM", "RI-WIDTH", "RI-CONSTANTWIDTH", "RI-CURRENT", "RI-SHADER", "RI-EYE", "RI-NDC", "RiBezierBasis", "RiBSplineBasis", "RiCatmullRomBasis", "RiHermiteBasis", "RiPowerBasis", "RiLastError", "BasisFromName", "RiProgressHandler", "RiPreRenderFunction", "RiPreWorldFunction", "RiDeclare", "RiBegin", "RiEnd", "RiGetContext", "RiContext", "RiFrameBegin", "RiFrameEnd", "RiWorldBegin", "RiWorldEnd", "RiIfBegin", "RiElseIf", "RiElse", "RiIfEnd", "RiFormat", "RiFrameAspectRatio", "RiScreenWindow", "RiCropWindow", "RiProjection", "RiClipping", "RiClippingPlane", "RiDepthOfField", "RiShutter", "RiPixelVariance", "RiPixelSamples", "RiPixelFilter", "RiExposure", "RiImager", "RiQuantize", "RiDisplay", "RiGaussianFilter", "RiBoxFilter", "RiMitchellFilter", "RiTriangleFilter", "RiCatmullRomFilter", "RiSincFilter", "RiDiskFilter", "RiBesselFilter", "RiHider", "RiColorSamples", "RiRelativeDetail", "RiOption", "RiAttributeBegin", "RiAttributeEnd", "RiColor", "RiOpacity", "RiTextureCoordinates", "RiLightSource", "RiAreaLightSource", "RiIlluminate", "RiSurface", "RiDeformation", "RiDisplacement", "RiAtmosphere", "RiInterior", "RiExterior", "RiShaderLayer", "RiConnectShaderLayers", "RiShadingRate", "RiShadingInterpolation", "RiMatte", "RiBound", "RiDetail", "RiDetailRange", "RiGeometricApproximation", "RiOrientation", "RiReverseOrientation", "RiSides", "RiIdentity", "RiTransform", "RiConcatTransform", "RiPerspective", "RiTranslate", "RiRotate", "RiScale", "RiSkew", "RiCoordinateSystem", "RiCoordSysTransform", "RiTransformPoints", "RiTransformBegin", "RiTransformEnd", "RiResource", "RiResourceBegin", "RiResourceEnd", "RiAttribute", "RiPolygon", "RiGeneralPolygon", "RiPointsPolygons", "RiPointsGeneralPolygons", "RiBasis", "RiPatch", "RiPatchMesh", "RiNuPatch", "RiTrimCurve", "RiSubdivisionMesh", "RiSphere", "RiCone", "RiCylinder", "RiHyperboloid", "RiParaboloid", "RiDisk", "RiTorus", "RiPoints", "RiCurves", "RiBlobby", "RiProcedural", "RiProcFree", "RiProcDelayedReadArchive", "RiProcRunProgram", "RiProcDynamicLoad", "RiGeometry", "RiSolidBegin", "RiSolidEnd", "RiObjectBegin", "RiObjectEnd", "RiObjectInstance", "RiMotionBegin", "RiMotionEnd", "RiMakeTexture", "RiMakeBump", "RiMakeLatLongEnvironment", "RiMakeCubeFaceEnvironment", "RiMakeShadow", "RiMakeOcclusion", "RiErrorHandler", "RiErrorIgnore", "RiErrorPrint", "RiErrorAbort", "RiReadArchive", NULL);
 }
 
 SCM
