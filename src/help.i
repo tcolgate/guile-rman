@@ -1,47 +1,35 @@
-/*-------------------------------------------------------------------
- * Copyright (C) 2009 Tristan Colgate 
- *
- * help.i - Support functions definning callack generation
- * functions and related typemaps.
- *
- *-------------------------------------------------------------------
- */
-
-%inline %{
-#include "lightning.h"
+%{
+#include <ffi.h>
 #include "libguile.h"
+%}
+
+%{
 
 /*typedef RtVoid  ( *RtFunc ) ();*/
-RtVoid TrampolineRtFunc (SCM P)
+void
+TrampolineRtFunc (ffi_cif *CIF, void *RET, void **args, void *SCM_HANDLER)
 {
-
-  if (!scm_is_eq (scm_thunk_p (P), SCM_BOOL_T)){
-    printf ("Wont call non procedure %p\n",P);
+  if (!scm_is_eq (scm_thunk_p (SCM_HANDLER), SCM_BOOL_T)){
+    printf ("Wont call non procedure %p\n",SCM_HANDLER);
     return;
   }
-
-  scm_call_0(P);
-  return;
+  scm_call0 ((SCM)SCM_HANDLER);
+  return ;
 };
 
 RtFunc MakeSCMCallbackRtFunc(SCM p)
 {
-  RtFunc    callback;             /* ptr to generated code */
-  char          *start, *end;           /* a couple of labels */
+  ffi_cif *cif = (ffi_cif*) malloc (sizeof(ffi_cif));
+  RtFunc callback;             /* ptr to generated code */
+  void *cb_closure = ffi_closure_alloc (sizeof(ffi_closure), (void*) &callback);
 
-  jit_insn *codegen = (jit_insn*) malloc (1024);
-  callback = (RtFunc) (jit_set_ip(codegen).vptr);
-  start = jit_get_ip().ptr;
-  jit_prolog(0);
-  jit_movi_p(JIT_R0, p);
-  jit_prepare(1);
-    jit_pusharg_p(JIT_R0);
-  jit_finish(TrampolineRtFunc);
-  jit_ret();
-  end = jit_get_ip().ptr;
+  /* Initialize the cif */
+  if (ffi_prep_cif(cif, FFI_DEFAULT_ABI, 0, &ffi_type_void, NULL) 
+          != FFI_OK) {
+       printf("Failed to intialize cif for callback\n");
+  }
 
-  jit_flush_code(start, end);
-
+  ffi_prep_closure_loc (cb_closure, cif, TrampolineRtFunc, (void *)p, (void*) callback);
   return callback;
 };
 %}
@@ -50,46 +38,46 @@ RtFunc MakeSCMCallbackRtFunc(SCM p)
   $1 = MakeSCMCallbackRtFunc($input);
 }
 
-%inline %{
-/* typedef RtVoid  ( *RtProgressFunc ) ( RtFloat PercentComplete, RtInt FrameNo );*/
-RtVoid TrampolineRtProgressFunc (SCM P, RtFloat arg1, RtInt arg2)
-{
 
-  if (!scm_is_eq (scm_procedure_p (P), SCM_BOOL_T)){
-    printf ("Wont call, not a Void (RtFloat,RtInt) procedure %p\n",P);
+%{
+/* typedef RtVoid  ( *RtProgressFunc ) ( RtFloat PercentComplete, RtInt FrameNo );*/
+void
+TrampolineRtProgressFunc (ffi_cif *CIF, void *RET, void **args, void *SCM_HANDLER)
+{
+  void* parg1 = args[0];
+  void* parg2 = args[1];
+  float arg1;
+  int arg2;
+  arg1 = *(float*)parg1;
+  arg2 = *(int*)parg2;
+
+  if (!scm_is_eq (scm_procedure_p (SCM_HANDLER), SCM_BOOL_T)){
+    printf ("Wont call, not a Void (RtFloat,RtInt) procedure %p\n",SCM_HANDLER);
     return;
   }
 
-  scm_call_2(P,scm_double2num((double)arg1),scm_int2num((int) arg2));
+  scm_call_2((SCM)SCM_HANDLER,scm_double2num((double)arg1),scm_int2num((int) arg2));
   return;
 };
 
 RtProgressFunc MakeSCMCallbackRtProgressFunc(SCM p)
 {
+  ffi_cif *cif = (ffi_cif*) malloc (sizeof(ffi_cif));
+  ffi_type **args = (ffi_type**) malloc (sizeof(ffi_type*) * 2);
   RtProgressFunc callback;             /* ptr to generated code */
-  char          *start, *end;           /* a couple of labels */
-  float arg1;
-  int arg2;
+  void *cb_closure = ffi_closure_alloc (sizeof(ffi_closure), (void*) &callback);
 
-  jit_insn *codegen = (jit_insn*) malloc (1024);
-  callback = (RtProgressFunc) (jit_set_ip(codegen).vptr);
-  start = jit_get_ip().ptr;
-  jit_prolog(2);
-  arg1 = jit_arg_f();
-  arg2 = jit_arg_i();
-  jit_movi_p(JIT_R0, p);
-  jit_getarg_f(JIT_FPR1, arg1);
-  jit_getarg_i(JIT_R2, arg2);
-  jit_prepare(3);
-    jit_pusharg_i(JIT_R2);
-    jit_pusharg_f(JIT_FPR1);
-    jit_pusharg_p(JIT_R0);
-  jit_finish(TrampolineRtProgressFunc);
-  jit_ret();
-  end = jit_get_ip().ptr;
+  /* Describe the arguments */
+  args[0] = &ffi_type_float;
+  args[1] = &ffi_type_sint;
 
-  jit_flush_code(start, end);
+  /* Initialize the cif */
+  if (ffi_prep_cif(cif, FFI_DEFAULT_ABI, 2, &ffi_type_void, args) 
+          != FFI_OK) {
+       printf("Failed to intialize cif for callback\n");
+  }
 
+  ffi_prep_closure_loc (cb_closure, cif, TrampolineRtProgressFunc, (void *)p, (void*) callback);
   return callback;
 };
 %}
@@ -98,47 +86,43 @@ RtProgressFunc MakeSCMCallbackRtProgressFunc(SCM p)
   $1 = MakeSCMCallbackRtProgressFunc($input);
 }
 
-%inline %{
+%{
 /* typedef RtVoid  ( *RtProcSubdivFunc ) ( RtPointer, RtFloat ); */
-RtVoid TrampolineRtProcSubdivFunc (SCM P, RtPointer arg1, RtFloat arg2)
+void
+TrampolineRtProcSubdivFunc (ffi_cif *CIF, void *RET, void **args, void *SCM_HANDLER)
 {
+  void* parg1 = args[0];
+  void* parg2 = args[1];
+  void* arg1 = *(void**)parg1;
+  int arg2 = *(int*)parg2;
 
-  if (!scm_is_eq (scm_procedure_p (P), SCM_BOOL_T)){
-    printf ("Wont call, not a Void (RtPointer,,RtFloat) procedure %p\n",P);
+  if (!scm_is_eq (scm_procedure_p (SCM_HANDLER), SCM_BOOL_T)){
+    printf ("Wont call, not a Void (RtPointer,,RtFloat) procedure %p\n",SCM_HANDLER);
     return;
   }
 
-/*  scm_call_2(P,SWIG_NewPointerObj (arg1, SWIGTYPE_p_void, 0),scm_double2num((int) arg2)); */
-  scm_call_2(P,(SCM) arg1,scm_double2num((int) arg2));
+  scm_call_2((SCM) SCM_HANDLER,(SCM) arg1, scm_double2num((double)arg2));
   return;
 };
 
 RtProcSubdivFunc MakeSCMCallbackRtProcSubdivFunc(SCM p)
 {
+  ffi_cif *cif = (ffi_cif*) malloc (sizeof(ffi_cif));
+  ffi_type **args = (ffi_type**) malloc (sizeof(ffi_type*) * 2);
   RtProcSubdivFunc callback;             /* ptr to generated code */
-  char          *start, *end;           /* a couple of labels */
-  int arg1;
-  int arg2;
+  void *cb_closure = ffi_closure_alloc (sizeof(ffi_closure), (void*) &callback);
 
-  jit_insn *codegen = (jit_insn*) malloc (1024);
-  callback = (RtProcSubdivFunc) (jit_set_ip(codegen).vptr);
-  start = jit_get_ip().ptr;
-  jit_prolog(2);
-  arg1 = jit_arg_p();
-  arg2 = jit_arg_f();
-  jit_movi_p(JIT_R0, p);
-  jit_getarg_p(JIT_R1, arg1);
-  jit_getarg_f(JIT_FPR2, arg2);
-  jit_prepare(3);
-    jit_pusharg_f(JIT_FPR2);
-    jit_pusharg_p(JIT_R1);
-    jit_pusharg_p(JIT_R0);
-  jit_finish(TrampolineRtProcSubdivFunc);
-  jit_ret();
-  end = jit_get_ip().ptr;
+  /* Describe the arguments */
+  args[0] = &ffi_type_pointer;
+  args[1] = &ffi_type_float;
 
-  jit_flush_code(start, end);
+  /* Initialize the cif */
+  if (ffi_prep_cif(cif, FFI_DEFAULT_ABI, 2, &ffi_type_void, args) 
+          != FFI_OK) {
+       printf("Failed to intialize cif for callback\n");
+  }
 
+  ffi_prep_closure_loc (cb_closure, cif, TrampolineRtProcSubdivFunc, (void *)p, (void*) callback);
   return callback;
 };
 %}
@@ -147,43 +131,41 @@ RtProcSubdivFunc MakeSCMCallbackRtProcSubdivFunc(SCM p)
   $1 = MakeSCMCallbackRtProcSubdivFunc($input);
 }
 
-%inline %{
+%{
 /* typedef RtVoid  ( *RtProcFreeFunc ) ( RtPointer ); */
-RtVoid TrampolineRtProcFreeFunc (SCM P, RtPointer arg1)
+void 
+TrampolineRtProcFreeFunc (ffi_cif *CIF, void *RET, void **args, void *SCM_HANDLER)
 {
+  void* parg1 = args[0];
+  void* arg1 = *(void**)parg1;
 
-  if (!scm_is_eq (scm_procedure_p (P), SCM_BOOL_T)){
-    printf ("Wont call, not a Void (RtPointer) procedure %p\n",P);
+  if (!scm_is_eq (scm_procedure_p (SCM_HANDLER), SCM_BOOL_T)){
+    printf ("Wont call, not a Void (RtPointer) procedure %p\n",SCM_HANDLER);
     return;
   }
 
 /*  scm_call_1(P,SWIG_NewPointerObj (arg1, SWIGTYPE_p_void, 0)); */
-  scm_call_1(P,(SCM) arg1);
+  scm_call_1(SCM_HANDLER,(SCM) arg1);
   return;
 };
 
 RtProcFreeFunc MakeSCMCallbackRtProcFreeFunc(SCM p)
 {
+  ffi_cif *cif = (ffi_cif*) malloc (sizeof(ffi_cif));
+  ffi_type **args = (ffi_type**) malloc (sizeof(ffi_type*) * 1);
   RtProcFreeFunc callback;             /* ptr to generated code */
-  char          *start, *end;           /* a couple of labels */
-  int arg1;
+  void *cb_closure = ffi_closure_alloc (sizeof(ffi_closure), (void*) &callback);
 
-  jit_insn *codegen = (jit_insn*) malloc (1024);
-  callback = (RtProcFreeFunc) (jit_set_ip(codegen).vptr);
-  start = jit_get_ip().ptr;
-  jit_prolog(1);
-  arg1 = jit_arg_p();
-  jit_movi_p(JIT_R0, p);
-  jit_getarg_p(JIT_R1, arg1);
-  jit_prepare(2);
-    jit_pusharg_p(JIT_R1);
-    jit_pusharg_p(JIT_R0);
-  jit_finish(TrampolineRtProcFreeFunc);
-  jit_ret();
-  end = jit_get_ip().ptr;
+  /* Describe the arguments */
+  args[0] = &ffi_type_pointer;
 
-  jit_flush_code(start, end);
+  /* Initialize the cif */
+  if (ffi_prep_cif(cif, FFI_DEFAULT_ABI, 1, &ffi_type_void, args) 
+          != FFI_OK) {
+       printf("Failed to intialize cif for callback\n");
+  }
 
+  ffi_prep_closure_loc (cb_closure, cif, TrampolineRtProcFreeFunc, (void *)p, (void*) callback);
   return callback;
 };
 %}
@@ -196,75 +178,77 @@ RtProcFreeFunc MakeSCMCallbackRtProcFreeFunc(SCM p)
   $1 = (void *) $input;
 }
 
-%inline %{
-/*typedef RtFloat ( *RtFilterFunc ) ( RtFloat, RtFloat, RtFloat, RtFloat );*/
-RtFloat TrampolineRtFilterFunc (SCM P, RtFloat arg1, RtFloat arg2, RtFloat arg3, RtFloat arg4)
+%{
+/* typedef RtFloat ( *RtFilterFunc ) ( RtFloat, RtFloat, RtFloat, RtFloat ); */
+void 
+TrampolineRtFilterFunc (ffi_cif *CIF, void *RET, void **args, void *SCM_HANDLER)
 {
-  if (!scm_is_eq (scm_procedure_p (P), SCM_BOOL_T)){
-    printf ("Wont call, not a Void (RtFloat,RtFloat,RtFloat,RtFloat) procedure %p\n",P);
-    return 0;
-  };
+  void* parg1 = args[0];
+  void* parg2 = args[1];
+  void* parg3 = args[2];
+  void* parg4 = args[3];
+  float arg1 = *(float*)parg1;
+  float arg2 = *(float*)parg2;
+  float arg3 = *(float*)parg3;
+  float arg4 = *(float*)parg4;
+  
+  float result;
 
-  RtFloat res = (RtFloat) scm_to_double(scm_call_4(P,scm_double2num(arg1),scm_double2num(arg2),scm_double2num(arg3),scm_double2num(arg4)));
-  return res;
+  if (!scm_is_eq (scm_procedure_p (SCM_HANDLER), SCM_BOOL_T)){
+    printf ("Wont call, not a Void (RtPointer) procedure %p\n",SCM_HANDLER);
+    return;
+  }
+
+/*  scm_call_1(P,SWIG_NewPointerObj (arg1, SWIGTYPE_p_void, 0)); */
+  result = (float) scm_to_double (scm_call_4((SCM) SCM_HANDLER, scm_double2num((double)arg1), scm_double2num((double)arg2), scm_double2num((double)arg3), scm_double2num((double)arg4)));
+  *((float*) RET) = result;
+
+  return;
 };
 
 RtFilterFunc MakeSCMCallbackRtFilterFunc(SCM p)
 {
+  ffi_cif *cif = (ffi_cif*) malloc (sizeof(ffi_cif));
+  ffi_type **args = (ffi_type**) malloc (sizeof(ffi_type*) * 4);
   RtFilterFunc callback;             /* ptr to generated code */
-  char          *start, *end;           /* a couple of labels */
-  int arg1;
-  int arg2;
-  int arg3;
-  int arg4;
+  void *cb_closure = ffi_closure_alloc (sizeof(ffi_closure), (void*) &callback);
 
-  jit_insn *codegen = (jit_insn*) malloc (4096);
-  /*callback = (RtFilterFunc) (jit_set_ip(codegen).vptr);*/
-  jit_set_ip(codegen);
-  callback = (RtFilterFunc) jit_get_ip().iptr;
-  jit_prolog(4);
-  arg1 = jit_arg_f();
-  arg2 = jit_arg_f();
-  arg3 = jit_arg_f();
-  arg4 = jit_arg_f();
+  /* Describe the arguments */
+  args[0] = &ffi_type_float;
+  args[1] = &ffi_type_float;
+  args[2] = &ffi_type_float;
+  args[3] = &ffi_type_float;
 
-  jit_movi_p(JIT_R0, p);
-  jit_getarg_f(JIT_FPR0, arg1);
-  jit_getarg_f(JIT_FPR1, arg2);
-  jit_getarg_f(JIT_FPR2, arg3);
-  jit_getarg_f(JIT_FPR3, arg4);
-  jit_prepare(1);
-  jit_prepare_f(4);
-    jit_pusharg_f(JIT_FPR3);
-    jit_pusharg_f(JIT_FPR2);
-    jit_pusharg_f(JIT_FPR1);
-    jit_pusharg_f(JIT_FPR0);
-    jit_pusharg_p(JIT_R0);
-  jit_finish(TrampolineRtFilterFunc);
-  jit_retval_f(JIT_FPRET);
-  jit_ret();
-  end = jit_get_ip().ptr;
+  /* Initialize the cif */
+  if (ffi_prep_cif(cif, FFI_DEFAULT_ABI, 4, &ffi_type_float, args) 
+          != FFI_OK) {
+       printf("Failed to intialize cif for callback\n");
+  };
 
-  jit_flush_code((char*)callback, end);
-
+  ffi_prep_closure_loc (cb_closure, cif, TrampolineRtFilterFunc, (void *)p, (void*) callback);
   return callback;
 };
+
 %}
 
 %typemap(in)(RtFilterFunc) {
-  scm_display($input,scm_current_output_port());
   if (scm_is_true (scm_equal_p(scm_procedure_name($input),(scm_string_to_symbol(scm_from_locale_string("RiGaussianFilter")))))){
-     $1 = RiGaussianFilter;
+    $1 = RiGaussianFilter;
   } else if (scm_is_true (scm_equal_p(scm_procedure_name($input),(scm_string_to_symbol(scm_from_locale_string("RiBoxFilter")))))){
-     $1 = RiBoxFilter;
+    $1 = RiBoxFilter;
+  } else if (scm_is_true (scm_equal_p(scm_procedure_name($input),(scm_string_to_symbol(scm_from_locale_string("RiMitchellFilter")))))){
+    $1 = RiMitchellFilter;
+  } else if (scm_is_true (scm_equal_p(scm_procedure_name($input),(scm_string_to_symbol(scm_from_locale_string("RiTriangleFilter")))))){
+    $1 = RiTriangleFilter;
+  } else if (scm_is_true (scm_equal_p(scm_procedure_name($input),(scm_string_to_symbol(scm_from_locale_string("RiCatmullRomFilter")))))){
+    $1 = RiCatmullRomFilter;
+  } else if (scm_is_true (scm_equal_p(scm_procedure_name($input),(scm_string_to_symbol(scm_from_locale_string("RiSincFilter")))))){
+    $1 = RiSincFilter;
+  } else if (scm_is_true (scm_equal_p(scm_procedure_name($input),(scm_string_to_symbol(scm_from_locale_string("RiDiskFilter")))))){
+    $1 = RiDiskFilter;
+  } else if (scm_is_true (scm_equal_p(scm_procedure_name($input),(scm_string_to_symbol(scm_from_locale_string("RiBesselFilter")))))){
+    $1 = RiBesselFilter;
   } else {
-  $1 = MakeSCMCallbackRtFilterFunc($input);
+    $1 = MakeSCMCallbackRtFilterFunc($input);
   };
 }
-
-/*
-typedef RtVoid  ( *RtErrorFunc ) ( RtInt code, RtInt severity, RtString message );
-typedef RtVoid  ( *RtArchiveCallback ) ( RtToken, char *, ... );
-*/
-
-
