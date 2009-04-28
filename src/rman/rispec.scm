@@ -3,8 +3,11 @@
 
 (define-module (rman rispec))
 
- (load-extension "libguile_rman_rispec.so" "scm_init_rman_rispec_module")
+; We will use an assoc to track data for scheme procedurals
+(define procedural-assoc (list))
+(export procedural-assoc)
 
+ (load-extension "libguile_rman_rispec.so" "scm_init_rman_rispec_module")
 
 (use-modules (oop goops) (Swig common))
 (use-modules ((rman rispec-primitive) :renamer (symbol-prefix-proc 'primitive:)))

@@ -1,11 +1,3 @@
-/*-------------------------------------------------------------------
- * Copyright (C) 2009 Tristan Colgate 
- *
- * rispec.i - The main guile-rman wrapper definition.
- *
- *-------------------------------------------------------------------
- */
-
 %module rispec
 
 %{
@@ -31,7 +23,7 @@ convert_int_array(SCM input, int size) {
   };
   result = (RtInt*) calloc(size,sizeof(RtInt));
   for (i = 0; i < size; i++) {
-      /* Since it's a uniform int vector, we know they are all ints  */
+      /* Since it's a uniform float vector, we know they are all floats */
       result[i] = (RtInt) scm_to_int(scm_u32vector_ref(input,scm_from_unsigned_integer(i)));
   };
   return result;
@@ -69,24 +61,6 @@ convert_float_matrix(SCM input, int i, int j) {
              /* Since it's a uniform float vector, we know they are all floats */
           result[ni][nj] = (RtFloat) scm_to_double(scm_f32vector_ref(scm_array_contents(input,0),scm_from_unsigned_integer(ni*(i) + nj)));
           };
-  };
-  return result;
-}
-
-static RtToken*
-convert_token_array(SCM input, int size) {
-  int i;
-  RtToken *result;
-  if (scm_is_false(scm_list_p(input))) {
-    return NULL; /* DO SOMETHING USEFUL */
-  };
-  if (scm_to_int(scm_length(input)) != size) {
-    return NULL; /* DO SOMETHING USEFUL */
-  };
-  result = (RtToken*) calloc(size,sizeof(RtToken));
-  for (i = 0; i < size; i++) {
-      /* This is just a list, need to check the types */
-      result[i] = (RtToken) scm_to_locale_string(scm_list_ref(input,scm_from_unsigned_integer(i)));
   };
   return result;
 }
@@ -168,10 +142,6 @@ convert_param_list(SCM input, RtInt* count, RtToken *tokens[], RtPointer *values
       RtFloat *val = (RtFloat*)malloc(sizeof (RtFloat));
       *val = (RtFloat)scm_to_double(value); 
       (*values)[i/2] = (RtPointer) val;
-    } else if(scm_is_string(value)){
-      RtToken *val = (RtToken*)malloc(sizeof (RtToken));
-      *val = (RtToken)scm_to_locale_string(value); 
-      (*values)[i/2] = (RtPointer) val;
     } else if(scm_is_true(scm_f32vector_p(value))){
       int size = scm_to_int(scm_f32vector_length(value));
       RtFloat* val = convert_float_array(value, size);
@@ -179,10 +149,6 @@ convert_param_list(SCM input, RtInt* count, RtToken *tokens[], RtPointer *values
     } else if(scm_is_true(scm_u32vector_p(value))){
       int size = scm_to_int(scm_u32vector_length(value));
       RtInt* val = convert_int_array(value, size);
-      (*values)[i/2] = (RtPointer) val;
-    } else if(scm_is_true(scm_list_p(value))){
-      int size = scm_to_int(scm_length(value));
-      RtToken* val = convert_token_array(value, size);
       (*values)[i/2] = (RtPointer) val;
     } else {
       scm_display(scm_from_locale_string ("Unkown value type in param list"),scm_current_error_port ());
@@ -218,8 +184,11 @@ convert_param_list(SCM input, RtInt* count, RtToken *tokens[], RtPointer *values
 %include "ignores.i"
 %include <ri.inl>
 
-%goops %{
- (load-extension "libguile_rman_rispec.so" "scm_init_rman_rispec_module")
-%}
+#ifdef RI2RIB
+%goops %{ (load-extension "libguile_rman_ri2rib.so" "scm_init_rman_ri2rib_module")%}
+#else
+%goops %{ (load-extension "libguile_rman_rispec.so" "scm_init_rman_rispec_module")%}
+#endif
+
 
 

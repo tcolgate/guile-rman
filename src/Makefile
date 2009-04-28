@@ -49,10 +49,18 @@ am__vpath_adj = case $$p in \
     *) f=$$p;; \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
-am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(guilermandir)" \
-	"$(DESTDIR)$(guileswigdir)"
+am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(guilermandir)"
 libLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(lib_LTLIBRARIES)
+libguile_rman_ri2rib_la_LIBADD =
+am_libguile_rman_ri2rib_la_OBJECTS =  \
+	libguile_rman_ri2rib_la-ri2rib_wrap.lo
+libguile_rman_ri2rib_la_OBJECTS =  \
+	$(am_libguile_rman_ri2rib_la_OBJECTS)
+libguile_rman_ri2rib_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) \
+	$(libguile_rman_ri2rib_la_CFLAGS) $(CFLAGS) \
+	$(libguile_rman_ri2rib_la_LDFLAGS) $(LDFLAGS) -o $@
 libguile_rman_rispec_la_LIBADD =
 am_libguile_rman_rispec_la_OBJECTS =  \
 	libguile_rman_rispec_la-rispec_wrap.lo
@@ -74,11 +82,12 @@ CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-SOURCES = $(libguile_rman_rispec_la_SOURCES)
-DIST_SOURCES = $(libguile_rman_rispec_la_SOURCES)
+SOURCES = $(libguile_rman_ri2rib_la_SOURCES) \
+	$(libguile_rman_rispec_la_SOURCES)
+DIST_SOURCES = $(libguile_rman_ri2rib_la_SOURCES) \
+	$(libguile_rman_rispec_la_SOURCES)
 guilermanDATA_INSTALL = $(INSTALL_DATA)
-guileswigDATA_INSTALL = $(INSTALL_DATA)
-DATA = $(guilerman_DATA) $(guileswig_DATA)
+DATA = $(guilerman_DATA)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -93,7 +102,7 @@ CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
 CPP = gcc -E
-CPPFLAGS = 
+CPPFLAGS = -I/usr/local/include/aqsis
 CXX = g++
 CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
@@ -126,7 +135,7 @@ INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LDFLAGS = 
 LIBOBJS = 
-LIBS = -laqsis 
+LIBS = -laqsis -L/usr/local/lib
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LN_S = ln -s
 LTLIBOBJS = 
@@ -137,9 +146,9 @@ OBJEXT = o
 PACKAGE = guile-rman
 PACKAGE_BUGREPORT = tcolgate@gmail.com
 PACKAGE_NAME = guile-rman
-PACKAGE_STRING = guile-rman 0.1.1
+PACKAGE_STRING = guile-rman 0.1
 PACKAGE_TARNAME = guile-rman
-PACKAGE_VERSION = 0.1.1
+PACKAGE_VERSION = 0.1
 PATH_SEPARATOR = :
 PKG_CONFIG = /usr/bin/pkg-config
 RANLIB = ranlib
@@ -149,7 +158,7 @@ SHELL = /bin/sh
 STRIP = strip
 SWIG = /usr/bin/swig
 SWIG_LIB = 
-VERSION = 0.1.1
+VERSION = 0.1
 abs_builddir = /home/tristan/src/guile-rman/src
 abs_srcdir = /home/tristan/src/guile-rman/src
 abs_top_builddir = /home/tristan/src/guile-rman
@@ -202,16 +211,17 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-lib_LTLIBRARIES = libguile_rman_rispec.la 
-SWIG_FLAGS = -guile -Linkage module -package rman -scm -proxy -emit-setters -I/usr/local/include/aqsis 
-libguile_rman_rispec_la_CFLAGS = -I/usr/local/include/aqsis -I/usr/lib/libffi-3.0.5/include  
+lib_LTLIBRARIES = libguile_rman_rispec.la  libguile_rman_ri2rib.la
+SWIG_FLAGS = -guile -Linkage module -package rman -scm -proxy -emit-setters -I/usr/include/aqsis
+libguile_rman_rispec_la_CFLAGS = -I/usr/include/aqsis -I/usr/lib/libffi-3.0.5/include  
 libguile_rman_rispec_la_SOURCES = rispec_wrap.c
-libguile_rman_rispec_la_LDFLAGS = -module -L/usr/local/lib -laqsis -lffi  
-EXTRA_DIST = rman rman/rispec.scm rman/utilities.scm Swig Swig/common.scm rispec.i ignores.i help.i
+libguile_rman_rispec_la_LDFLAGS = -module -laqsis -lffi  
+libguile_rman_ri2rib_la_CFLAGS = -I/usr/include/aqsis -I/usr/lib/libffi-3.0.5/include  
+libguile_rman_ri2rib_la_SOURCES = ri2rib_wrap.c
+libguile_rman_ri2rib_la_LDFLAGS = -module -lri2rib -lffi  
+EXTRA_DIST = rman rman/rispec.scm rman/ri2rib.scm rman/utilities.scm
 guilermandir = /usr/share/guile/site/rman
-guilerman_DATA = rman/rispec.scm rman/utilities.scm 
-guileswigdir = /usr/share/guile/site/Swig
-guileswig_DATA = Swig/common.scm
+guilerman_DATA = rman/rispec.scm rman/ri2rib.scm rman/utilities.scm
 all: all-am
 
 .SUFFIXES:
@@ -272,6 +282,8 @@ clean-libLTLIBRARIES:
 	  echo "rm -f \"$${dir}/so_locations\""; \
 	  rm -f "$${dir}/so_locations"; \
 	done
+libguile_rman_ri2rib.la: $(libguile_rman_ri2rib_la_OBJECTS) $(libguile_rman_ri2rib_la_DEPENDENCIES) 
+	$(libguile_rman_ri2rib_la_LINK) -rpath $(libdir) $(libguile_rman_ri2rib_la_OBJECTS) $(libguile_rman_ri2rib_la_LIBADD) $(LIBS)
 libguile_rman_rispec.la: $(libguile_rman_rispec_la_OBJECTS) $(libguile_rman_rispec_la_DEPENDENCIES) 
 	$(libguile_rman_rispec_la_LINK) -rpath $(libdir) $(libguile_rman_rispec_la_OBJECTS) $(libguile_rman_rispec_la_LIBADD) $(LIBS)
 
@@ -281,6 +293,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/libguile_rman_ri2rib_la-ri2rib_wrap.Plo
 include ./$(DEPDIR)/libguile_rman_rispec_la-rispec_wrap.Plo
 
 .c.o:
@@ -303,6 +316,13 @@ include ./$(DEPDIR)/libguile_rman_rispec_la-rispec_wrap.Plo
 #	source='$<' object='$@' libtool=yes \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(LTCOMPILE) -c -o $@ $<
+
+libguile_rman_ri2rib_la-ri2rib_wrap.lo: ri2rib_wrap.c
+	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libguile_rman_ri2rib_la_CFLAGS) $(CFLAGS) -MT libguile_rman_ri2rib_la-ri2rib_wrap.lo -MD -MP -MF $(DEPDIR)/libguile_rman_ri2rib_la-ri2rib_wrap.Tpo -c -o libguile_rman_ri2rib_la-ri2rib_wrap.lo `test -f 'ri2rib_wrap.c' || echo '$(srcdir)/'`ri2rib_wrap.c
+	mv -f $(DEPDIR)/libguile_rman_ri2rib_la-ri2rib_wrap.Tpo $(DEPDIR)/libguile_rman_ri2rib_la-ri2rib_wrap.Plo
+#	source='ri2rib_wrap.c' object='libguile_rman_ri2rib_la-ri2rib_wrap.lo' libtool=yes \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libguile_rman_ri2rib_la_CFLAGS) $(CFLAGS) -c -o libguile_rman_ri2rib_la-ri2rib_wrap.lo `test -f 'ri2rib_wrap.c' || echo '$(srcdir)/'`ri2rib_wrap.c
 
 libguile_rman_rispec_la-rispec_wrap.lo: rispec_wrap.c
 	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libguile_rman_rispec_la_CFLAGS) $(CFLAGS) -MT libguile_rman_rispec_la-rispec_wrap.lo -MD -MP -MF $(DEPDIR)/libguile_rman_rispec_la-rispec_wrap.Tpo -c -o libguile_rman_rispec_la-rispec_wrap.lo `test -f 'rispec_wrap.c' || echo '$(srcdir)/'`rispec_wrap.c
@@ -332,23 +352,6 @@ uninstall-guilermanDATA:
 	  f=$(am__strip_dir) \
 	  echo " rm -f '$(DESTDIR)$(guilermandir)/$$f'"; \
 	  rm -f "$(DESTDIR)$(guilermandir)/$$f"; \
-	done
-install-guileswigDATA: $(guileswig_DATA)
-	@$(NORMAL_INSTALL)
-	test -z "$(guileswigdir)" || $(MKDIR_P) "$(DESTDIR)$(guileswigdir)"
-	@list='$(guileswig_DATA)'; for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  f=$(am__strip_dir) \
-	  echo " $(guileswigDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(guileswigdir)/$$f'"; \
-	  $(guileswigDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(guileswigdir)/$$f"; \
-	done
-
-uninstall-guileswigDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(guileswig_DATA)'; for p in $$list; do \
-	  f=$(am__strip_dir) \
-	  echo " rm -f '$(DESTDIR)$(guileswigdir)/$$f'"; \
-	  rm -f "$(DESTDIR)$(guileswigdir)/$$f"; \
 	done
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
@@ -428,7 +431,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(LTLIBRARIES) $(DATA)
 installdirs:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(guilermandir)" "$(DESTDIR)$(guileswigdir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(guilermandir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -476,7 +479,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-guilermanDATA install-guileswigDATA
+install-data-am: install-guilermanDATA
 
 install-dvi: install-dvi-am
 
@@ -512,8 +515,7 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-guilermanDATA uninstall-guileswigDATA \
-	uninstall-libLTLIBRARIES
+uninstall-am: uninstall-guilermanDATA uninstall-libLTLIBRARIES
 
 .MAKE: install-am install-strip
 
@@ -523,19 +525,21 @@ uninstall-am: uninstall-guilermanDATA uninstall-guileswigDATA \
 	distclean-tags distdir dvi dvi-am html html-am info info-am \
 	install install-am install-data install-data-am install-dvi \
 	install-dvi-am install-exec install-exec-am \
-	install-guilermanDATA install-guileswigDATA install-html \
-	install-html-am install-info install-info-am \
-	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip installcheck \
-	installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags uninstall uninstall-am uninstall-guilermanDATA \
-	uninstall-guileswigDATA uninstall-libLTLIBRARIES
+	install-guilermanDATA install-html install-html-am \
+	install-info install-info-am install-libLTLIBRARIES \
+	install-man install-pdf install-pdf-am install-ps \
+	install-ps-am install-strip installcheck installcheck-am \
+	installdirs maintainer-clean maintainer-clean-generic \
+	mostlyclean mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool pdf pdf-am ps ps-am tags uninstall \
+	uninstall-am uninstall-guilermanDATA uninstall-libLTLIBRARIES
 
 
 rispec_wrap.c: rispec.i ignores.i help.i
-	$(SWIG) $(SWIG_FLAGS) -module rispec -o $@ $<
+	$(SWIG) $(SWIG_FLAGS) -I/usr/local/include/aqsis -module rispec -o $@ $<
+
+ri2rib_wrap.c: rispec.i ignores.i help.i
+	$(SWIG) -DRI2RIB $(SWIG_FLAGS) -I/usr/local/include/aqsis -module ri2rib -o $@ $<
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

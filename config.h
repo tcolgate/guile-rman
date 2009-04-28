@@ -13,9 +13,6 @@
 /* Define to 1 if you have the <memory.h> header file. */
 #define HAVE_MEMORY_H 1
 
-/* Define to 1 if you have the <ri.h> header file. */
-/* #undef HAVE_RI_H */
-
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
 
@@ -47,16 +44,16 @@
 #define PACKAGE_NAME "guile-rman"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "guile-rman 0.1.1"
+#define PACKAGE_STRING "guile-rman 0.1"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "guile-rman"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "0.1.1"
+#define PACKAGE_VERSION "0.1"
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
 
 /* Version number of package */
-#define VERSION "0.1.1"
+#define VERSION "0.1"

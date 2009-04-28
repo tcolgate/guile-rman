@@ -9,9 +9,6 @@
 /* Define to 1 if you have the `aqsis' library (-laqsis). */
 #undef HAVE_LIBAQSIS
 
-/* Define if GNU lightning can be used */
-#undef HAVE_LIGHTNING
-
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
 

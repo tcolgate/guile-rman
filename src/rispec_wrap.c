@@ -1254,7 +1254,7 @@ convert_int_array(SCM input, int size) {
   };
   result = (RtInt*) calloc(size,sizeof(RtInt));
   for (i = 0; i < size; i++) {
-      /* Since it's a uniform int vector, we know they are all ints  */
+      /* Since it's a uniform float vector, we know they are all floats */
       result[i] = (RtInt) scm_to_int(scm_u32vector_ref(input,scm_from_unsigned_integer(i)));
   };
   return result;
@@ -1296,24 +1296,6 @@ convert_float_matrix(SCM input, int i, int j) {
   return result;
 }
 
-static RtToken*
-convert_token_array(SCM input, int size) {
-  int i;
-  RtToken *result;
-  if (scm_is_false(scm_list_p(input))) {
-    return NULL; /* DO SOMETHING USEFUL */
-  };
-  if (scm_to_int(scm_length(input)) != size) {
-    return NULL; /* DO SOMETHING USEFUL */
-  };
-  result = (RtToken*) calloc(size,sizeof(RtToken));
-  for (i = 0; i < size; i++) {
-      /* This is just a list, need to check the types */
-      result[i] = (RtToken) scm_to_locale_string(scm_list_ref(input,scm_from_unsigned_integer(i)));
-  };
-  return result;
-}
-
 
 static int
 convert_param_list(SCM input, RtInt* count, RtToken *tokens[], RtPointer *values[]) {
@@ -1350,10 +1332,6 @@ convert_param_list(SCM input, RtInt* count, RtToken *tokens[], RtPointer *values
       RtFloat *val = (RtFloat*)malloc(sizeof (RtFloat));
       *val = (RtFloat)scm_to_double(value); 
       (*values)[i/2] = (RtPointer) val;
-    } else if(scm_is_string(value)){
-      RtToken *val = (RtToken*)malloc(sizeof (RtToken));
-      *val = (RtToken)scm_to_locale_string(value); 
-      (*values)[i/2] = (RtPointer) val;
     } else if(scm_is_true(scm_f32vector_p(value))){
       int size = scm_to_int(scm_f32vector_length(value));
       RtFloat* val = convert_float_array(value, size);
@@ -1361,10 +1339,6 @@ convert_param_list(SCM input, RtInt* count, RtToken *tokens[], RtPointer *values
     } else if(scm_is_true(scm_u32vector_p(value))){
       int size = scm_to_int(scm_u32vector_length(value));
       RtInt* val = convert_int_array(value, size);
-      (*values)[i/2] = (RtPointer) val;
-    } else if(scm_is_true(scm_list_p(value))){
-      int size = scm_to_int(scm_length(value));
-      RtToken* val = convert_token_array(value, size);
       (*values)[i/2] = (RtPointer) val;
     } else {
       scm_display(scm_from_locale_string ("Unkown value type in param list"),scm_current_error_port ());
@@ -1459,15 +1433,21 @@ TrampolineRtProcSubdivFunc (ffi_cif *CIF, void *RET, void **args, void *SCM_HAND
 {
   void* parg1 = args[0];
   void* parg2 = args[1];
-  void* arg1 = *(void**)parg1;
-  int arg2 = *(int*)parg2;
+  void* arg1 = (void*) *(void**)parg1;
+  float arg2 = *(float*)parg2;
+  SCM datalist;
+  int datacount;
+  SCM dataptrscm = SWIG_NewPointerObj (arg1, SWIGTYPE_p_void, 0);
+  SCM dictionaryvar = scm_c_lookup("procedural-assoc");
+  SCM dictionary = scm_variable_ref(dictionaryvar);
+  SCM dataentry = scm_assoc(dataptrscm, dictionary);
 
   if (!scm_is_eq (scm_procedure_p (SCM_HANDLER), SCM_BOOL_T)){
     printf ("Wont call, not a Void (RtPointer,,RtFloat) procedure %p\n",SCM_HANDLER);
     return;
-  }
-
-  scm_call_2((SCM) SCM_HANDLER,(SCM) arg1, scm_double2num((double)arg2));
+  };
+  
+  scm_call_2((SCM) SCM_HANDLER,scm_cdr(dataentry), scm_double2num((double)arg2));
   return;
 };
 
@@ -1498,15 +1478,20 @@ void
 TrampolineRtProcFreeFunc (ffi_cif *CIF, void *RET, void **args, void *SCM_HANDLER)
 {
   void* parg1 = args[0];
-  void* arg1 = *(void**)parg1;
+  char** arg1 = (char**) *(void**)parg1;
+  SCM datalist;
+  int datacount;
+  SCM dataptrscm = SWIG_NewPointerObj (arg1, SWIGTYPE_p_void, 0);
+  SCM dictionaryvar = scm_c_lookup("procedural-assoc");
+  SCM dictionary = scm_variable_ref(dictionaryvar);
+  SCM dataentry = scm_assoc(dataptrscm, dictionary);
 
   if (!scm_is_eq (scm_procedure_p (SCM_HANDLER), SCM_BOOL_T)){
-    printf ("Wont call, not a Void (RtPointer) procedure %p\n",SCM_HANDLER);
+    printf ("Wont call, not a Void (RtPointer,,RtFloat) procedure %p\n",SCM_HANDLER);
     return;
-  }
+  };
 
-/*  scm_call_1(P,SWIG_NewPointerObj (arg1, SWIGTYPE_p_void, 0)); */
-  scm_call_1(SCM_HANDLER,(SCM) arg1);
+  scm_call_1(SCM_HANDLER,scm_cdr(dataentry));
   return;
 };
 
@@ -7421,17 +7406,41 @@ _wrap_RiProcedural (SCM s_0, SCM s_1, SCM s_2, SCM s_3)
   SWIGUNUSED int gswig_list_p = 0;
   
   {
-    arg1 = (void *) s_0;
+    int l = scm_to_int(scm_length(s_0));
+    int i;
+    char ** data = (char**) malloc (sizeof (char*) * (l+1));
+    for (i=0; i<l;i++){
+      data[i] = (char*) scm_to_locale_string(scm_list_ref(s_0,scm_from_int(i)));
+    };
+    data[i] = (char*) NULL;
+    arg1 = (void*) data;
+    /* store an association that we can look up from scheme procedurals */
+    SCM dataptrscm = SWIG_NewPointerObj (data, SWIGTYPE_p_void, 0);
+    SCM dictionaryvar = scm_c_lookup("procedural-assoc");
+    SCM dictionary = scm_variable_ref(dictionaryvar);
+    scm_c_define("procedural-assoc", scm_acons( dataptrscm, s_0 ,dictionary));
   }
   {
     arg2 = convert_float_array(s_1, 6);
     if (!arg2) return NULL;
   }
   {
-    arg3 = MakeSCMCallbackRtProcSubdivFunc(s_2);
+    if (scm_is_true (scm_equal_p(scm_procedure_name(s_2),(scm_string_to_symbol(scm_from_locale_string("RiProcDelayedReadArchive")))))){
+      arg3 = RiProcDelayedReadArchive;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_2),(scm_string_to_symbol(scm_from_locale_string("RiProcRunProgram")))))){
+      arg3 = RiProcRunProgram;
+    } else if (scm_is_true (scm_equal_p(scm_procedure_name(s_2),(scm_string_to_symbol(scm_from_locale_string("RiProcDynamicLoad")))))){
+      arg3 = RiProcDynamicLoad;
+    } else {
+      arg3 = MakeSCMCallbackRtProcSubdivFunc(s_2);
+    };
   }
   {
-    arg4 = MakeSCMCallbackRtProcFreeFunc(s_3);
+    if (scm_is_true (scm_equal_p(scm_procedure_name(s_3),(scm_string_to_symbol(scm_from_locale_string("RiProcFree")))))){
+      arg4 = RiProcFree;
+    } else {
+      arg4 = MakeSCMCallbackRtProcFreeFunc(s_3);
+    };
   }
   RiProcedural(arg1,arg2,arg3,arg4);
   gswig_result = SCM_UNSPECIFIED;
@@ -7456,7 +7465,19 @@ _wrap_RiProcFree (SCM s_0)
   SWIGUNUSED int gswig_list_p = 0;
   
   {
-    arg1 = (void *) s_0;
+    int l = scm_to_int(scm_length(s_0));
+    int i;
+    char ** data = (char**) malloc (sizeof (char*) * (l+1));
+    for (i=0; i<l;i++){
+      data[i] = (char*) scm_to_locale_string(scm_list_ref(s_0,scm_from_int(i)));
+    };
+    data[i] = (char*) NULL;
+    arg1 = (void*) data;
+    /* store an association that we can look up from scheme procedurals */
+    SCM dataptrscm = SWIG_NewPointerObj (data, SWIGTYPE_p_void, 0);
+    SCM dictionaryvar = scm_c_lookup("procedural-assoc");
+    SCM dictionary = scm_variable_ref(dictionaryvar);
+    scm_c_define("procedural-assoc", scm_acons( dataptrscm, s_0 ,dictionary));
   }
   RiProcFree(arg1);
   gswig_result = SCM_UNSPECIFIED;
@@ -7477,7 +7498,19 @@ _wrap_RiProcDelayedReadArchive (SCM s_0, SCM s_1)
   SWIGUNUSED int gswig_list_p = 0;
   
   {
-    arg1 = (void *) s_0;
+    int l = scm_to_int(scm_length(s_0));
+    int i;
+    char ** data = (char**) malloc (sizeof (char*) * (l+1));
+    for (i=0; i<l;i++){
+      data[i] = (char*) scm_to_locale_string(scm_list_ref(s_0,scm_from_int(i)));
+    };
+    data[i] = (char*) NULL;
+    arg1 = (void*) data;
+    /* store an association that we can look up from scheme procedurals */
+    SCM dataptrscm = SWIG_NewPointerObj (data, SWIGTYPE_p_void, 0);
+    SCM dictionaryvar = scm_c_lookup("procedural-assoc");
+    SCM dictionary = scm_variable_ref(dictionaryvar);
+    scm_c_define("procedural-assoc", scm_acons( dataptrscm, s_0 ,dictionary));
   }
   {
     arg2 = (RtFloat) scm_num2dbl(s_1, FUNC_NAME);
@@ -7501,7 +7534,19 @@ _wrap_RiProcRunProgram (SCM s_0, SCM s_1)
   SWIGUNUSED int gswig_list_p = 0;
   
   {
-    arg1 = (void *) s_0;
+    int l = scm_to_int(scm_length(s_0));
+    int i;
+    char ** data = (char**) malloc (sizeof (char*) * (l+1));
+    for (i=0; i<l;i++){
+      data[i] = (char*) scm_to_locale_string(scm_list_ref(s_0,scm_from_int(i)));
+    };
+    data[i] = (char*) NULL;
+    arg1 = (void*) data;
+    /* store an association that we can look up from scheme procedurals */
+    SCM dataptrscm = SWIG_NewPointerObj (data, SWIGTYPE_p_void, 0);
+    SCM dictionaryvar = scm_c_lookup("procedural-assoc");
+    SCM dictionary = scm_variable_ref(dictionaryvar);
+    scm_c_define("procedural-assoc", scm_acons( dataptrscm, s_0 ,dictionary));
   }
   {
     arg2 = (RtFloat) scm_num2dbl(s_1, FUNC_NAME);
@@ -7525,7 +7570,19 @@ _wrap_RiProcDynamicLoad (SCM s_0, SCM s_1)
   SWIGUNUSED int gswig_list_p = 0;
   
   {
-    arg1 = (void *) s_0;
+    int l = scm_to_int(scm_length(s_0));
+    int i;
+    char ** data = (char**) malloc (sizeof (char*) * (l+1));
+    for (i=0; i<l;i++){
+      data[i] = (char*) scm_to_locale_string(scm_list_ref(s_0,scm_from_int(i)));
+    };
+    data[i] = (char*) NULL;
+    arg1 = (void*) data;
+    /* store an association that we can look up from scheme procedurals */
+    SCM dataptrscm = SWIG_NewPointerObj (data, SWIGTYPE_p_void, 0);
+    SCM dictionaryvar = scm_c_lookup("procedural-assoc");
+    SCM dictionary = scm_variable_ref(dictionaryvar);
+    scm_c_define("procedural-assoc", scm_acons( dataptrscm, s_0 ,dictionary));
   }
   {
     arg2 = (RtFloat) scm_num2dbl(s_1, FUNC_NAME);

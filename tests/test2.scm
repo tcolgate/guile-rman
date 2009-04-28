@@ -33,7 +33,7 @@
 
 (define bound #f32(0.0 0.0 0.0 10.0 10.0 10.0))
 
-(define data '(some data))
+(define data '("some" "data"))
 
 (define count 1)
 (define myfilter

@@ -1,3 +1,4 @@
+
 %{
 #include <ffi.h>
 #include "libguile.h"
@@ -86,6 +87,11 @@ RtProgressFunc MakeSCMCallbackRtProgressFunc(SCM p)
   $1 = MakeSCMCallbackRtProgressFunc($input);
 }
 
+%goops %{
+; We will use an assoc to track data for scheme procedurals
+(define procedural-assoc (list))
+(export procedural-assoc)
+%}
 %{
 /* typedef RtVoid  ( *RtProcSubdivFunc ) ( RtPointer, RtFloat ); */
 void
@@ -93,15 +99,21 @@ TrampolineRtProcSubdivFunc (ffi_cif *CIF, void *RET, void **args, void *SCM_HAND
 {
   void* parg1 = args[0];
   void* parg2 = args[1];
-  void* arg1 = *(void**)parg1;
-  int arg2 = *(int*)parg2;
+  void* arg1 = (void*) *(void**)parg1;
+  float arg2 = *(float*)parg2;
+  SCM datalist;
+  int datacount;
+  SCM dataptrscm = SWIG_NewPointerObj (arg1, SWIGTYPE_p_void, 0);
+  SCM dictionaryvar = scm_c_lookup("procedural-assoc");
+  SCM dictionary = scm_variable_ref(dictionaryvar);
+  SCM dataentry = scm_assoc(dataptrscm, dictionary);
 
   if (!scm_is_eq (scm_procedure_p (SCM_HANDLER), SCM_BOOL_T)){
     printf ("Wont call, not a Void (RtPointer,,RtFloat) procedure %p\n",SCM_HANDLER);
     return;
-  }
-
-  scm_call_2((SCM) SCM_HANDLER,(SCM) arg1, scm_double2num((double)arg2));
+  };
+  
+  scm_call_2((SCM) SCM_HANDLER,scm_cdr(dataentry), scm_double2num((double)arg2));
   return;
 };
 
@@ -128,7 +140,15 @@ RtProcSubdivFunc MakeSCMCallbackRtProcSubdivFunc(SCM p)
 %}
 
 %typemap(in)(RtProcSubdivFunc) {
-  $1 = MakeSCMCallbackRtProcSubdivFunc($input);
+  if (scm_is_true (scm_equal_p(scm_procedure_name($input),(scm_string_to_symbol(scm_from_locale_string("RiProcDelayedReadArchive")))))){
+    $1 = RiProcDelayedReadArchive;
+  } else if (scm_is_true (scm_equal_p(scm_procedure_name($input),(scm_string_to_symbol(scm_from_locale_string("RiProcRunProgram")))))){
+    $1 = RiProcRunProgram;
+  } else if (scm_is_true (scm_equal_p(scm_procedure_name($input),(scm_string_to_symbol(scm_from_locale_string("RiProcDynamicLoad")))))){
+    $1 = RiProcDynamicLoad;
+  } else {
+    $1 = MakeSCMCallbackRtProcSubdivFunc($input);
+  };
 }
 
 %{
@@ -137,15 +157,20 @@ void
 TrampolineRtProcFreeFunc (ffi_cif *CIF, void *RET, void **args, void *SCM_HANDLER)
 {
   void* parg1 = args[0];
-  void* arg1 = *(void**)parg1;
+  char** arg1 = (char**) *(void**)parg1;
+  SCM datalist;
+  int datacount;
+  SCM dataptrscm = SWIG_NewPointerObj (arg1, SWIGTYPE_p_void, 0);
+  SCM dictionaryvar = scm_c_lookup("procedural-assoc");
+  SCM dictionary = scm_variable_ref(dictionaryvar);
+  SCM dataentry = scm_assoc(dataptrscm, dictionary);
 
   if (!scm_is_eq (scm_procedure_p (SCM_HANDLER), SCM_BOOL_T)){
-    printf ("Wont call, not a Void (RtPointer) procedure %p\n",SCM_HANDLER);
+    printf ("Wont call, not a Void (RtPointer,,RtFloat) procedure %p\n",SCM_HANDLER);
     return;
-  }
+  };
 
-/*  scm_call_1(P,SWIG_NewPointerObj (arg1, SWIGTYPE_p_void, 0)); */
-  scm_call_1(SCM_HANDLER,(SCM) arg1);
+  scm_call_1(SCM_HANDLER,scm_cdr(dataentry));
   return;
 };
 
@@ -171,11 +196,27 @@ RtProcFreeFunc MakeSCMCallbackRtProcFreeFunc(SCM p)
 %}
 
 %typemap(in)(RtProcFreeFunc) {
-  $1 = MakeSCMCallbackRtProcFreeFunc($input);
+  if (scm_is_true (scm_equal_p(scm_procedure_name($input),(scm_string_to_symbol(scm_from_locale_string("RiProcFree")))))){
+    $1 = RiProcFree;
+  } else {
+    $1 = MakeSCMCallbackRtProcFreeFunc($input);
+  };
 }
 
 %typemap(in)(RtPointer data) {
-  $1 = (void *) $input;
+  int l = scm_to_int(scm_length($input));
+  int i;
+  char ** data = (char**) malloc (sizeof (char*) * (l+1));
+  for (i=0; i<l;i++){
+    data[i] = (char*) scm_to_locale_string(scm_list_ref($input,scm_from_int(i)));
+  };
+  data[i] = (char*) NULL;
+  $1 = (void*) data;
+  /* store an association that we can look up from scheme procedurals */
+  SCM dataptrscm = SWIG_NewPointerObj (data, SWIGTYPE_p_void, 0);
+  SCM dictionaryvar = scm_c_lookup("procedural-assoc");
+  SCM dictionary = scm_variable_ref(dictionaryvar);
+  scm_c_define("procedural-assoc", scm_acons( dataptrscm, $input ,dictionary));
 }
 
 %{
@@ -230,7 +271,6 @@ RtFilterFunc MakeSCMCallbackRtFilterFunc(SCM p)
 };
 
 %}
-
 %typemap(in)(RtFilterFunc) {
   if (scm_is_true (scm_equal_p(scm_procedure_name($input),(scm_string_to_symbol(scm_from_locale_string("RiGaussianFilter")))))){
     $1 = RiGaussianFilter;
@@ -252,3 +292,4 @@ RtFilterFunc MakeSCMCallbackRtFilterFunc(SCM p)
     $1 = MakeSCMCallbackRtFilterFunc($input);
   };
 }
+
