@@ -7410,7 +7410,12 @@ _wrap_RiProcedural (SCM s_0, SCM s_1, SCM s_2, SCM s_3)
     int i;
     char ** data = (char**) malloc (sizeof (char*) * (l+1));
     for (i=0; i<l;i++){
-      data[i] = (char*) scm_to_locale_string(scm_list_ref(s_0,scm_from_int(i)));
+      SCM arg = scm_list_ref(s_0,scm_from_int(i));
+      if(scm_is_string(arg)){
+        data[i] = (char*) scm_to_locale_string(arg);
+      } else {
+        data[i] = "Could not conert, use strings only";
+      };
     };
     data[i] = (char*) NULL;
     arg1 = (void*) data;
@@ -7469,7 +7474,12 @@ _wrap_RiProcFree (SCM s_0)
     int i;
     char ** data = (char**) malloc (sizeof (char*) * (l+1));
     for (i=0; i<l;i++){
-      data[i] = (char*) scm_to_locale_string(scm_list_ref(s_0,scm_from_int(i)));
+      SCM arg = scm_list_ref(s_0,scm_from_int(i));
+      if(scm_is_string(arg)){
+        data[i] = (char*) scm_to_locale_string(arg);
+      } else {
+        data[i] = "Could not conert, use strings only";
+      };
     };
     data[i] = (char*) NULL;
     arg1 = (void*) data;
@@ -7502,7 +7512,12 @@ _wrap_RiProcDelayedReadArchive (SCM s_0, SCM s_1)
     int i;
     char ** data = (char**) malloc (sizeof (char*) * (l+1));
     for (i=0; i<l;i++){
-      data[i] = (char*) scm_to_locale_string(scm_list_ref(s_0,scm_from_int(i)));
+      SCM arg = scm_list_ref(s_0,scm_from_int(i));
+      if(scm_is_string(arg)){
+        data[i] = (char*) scm_to_locale_string(arg);
+      } else {
+        data[i] = "Could not conert, use strings only";
+      };
     };
     data[i] = (char*) NULL;
     arg1 = (void*) data;
@@ -7538,7 +7553,12 @@ _wrap_RiProcRunProgram (SCM s_0, SCM s_1)
     int i;
     char ** data = (char**) malloc (sizeof (char*) * (l+1));
     for (i=0; i<l;i++){
-      data[i] = (char*) scm_to_locale_string(scm_list_ref(s_0,scm_from_int(i)));
+      SCM arg = scm_list_ref(s_0,scm_from_int(i));
+      if(scm_is_string(arg)){
+        data[i] = (char*) scm_to_locale_string(arg);
+      } else {
+        data[i] = "Could not conert, use strings only";
+      };
     };
     data[i] = (char*) NULL;
     arg1 = (void*) data;
@@ -7574,7 +7594,12 @@ _wrap_RiProcDynamicLoad (SCM s_0, SCM s_1)
     int i;
     char ** data = (char**) malloc (sizeof (char*) * (l+1));
     for (i=0; i<l;i++){
-      data[i] = (char*) scm_to_locale_string(scm_list_ref(s_0,scm_from_int(i)));
+      SCM arg = scm_list_ref(s_0,scm_from_int(i));
+      if(scm_is_string(arg)){
+        data[i] = (char*) scm_to_locale_string(arg);
+      } else {
+        data[i] = "Could not conert, use strings only";
+      };
     };
     data[i] = (char*) NULL;
     arg1 = (void*) data;

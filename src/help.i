@@ -208,7 +208,12 @@ RtProcFreeFunc MakeSCMCallbackRtProcFreeFunc(SCM p)
   int i;
   char ** data = (char**) malloc (sizeof (char*) * (l+1));
   for (i=0; i<l;i++){
-    data[i] = (char*) scm_to_locale_string(scm_list_ref($input,scm_from_int(i)));
+    SCM arg = scm_list_ref($input,scm_from_int(i));
+    if(scm_is_string(arg)){
+      data[i] = (char*) scm_to_locale_string(arg);
+    } else {
+      data[i] = "Could not conert, use strings only";
+    };
   };
   data[i] = (char*) NULL;
   $1 = (void*) data;
