@@ -10,6 +10,7 @@
  
 (load-extension "libguile_rman_rispec.so" "scm_init_rman_rispec_module")
 (use-modules (rman aqsisnv))
+(define token-dict (make <CqTokenDictionary> #:args '(#t)))
 
 
 (use-modules (oop goops) (Swig common))

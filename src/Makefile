@@ -49,7 +49,8 @@ am__vpath_adj = case $$p in \
     *) f=$$p;; \
   esac;
 am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
-am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(guilermandir)"
+am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(guilermandir)" \
+	"$(DESTDIR)$(swigdir)"
 libLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libguile_rman_aqsisnv_la_LIBADD =
@@ -106,7 +107,8 @@ DIST_SOURCES = $(libguile_rman_aqsisnv_la_SOURCES) \
 	$(libguile_rman_ri2rib_la_SOURCES) \
 	$(libguile_rman_rispec_la_SOURCES)
 guilermanDATA_INSTALL = $(INSTALL_DATA)
-DATA = $(guilerman_DATA)
+swigDATA_INSTALL = $(INSTALL_DATA)
+DATA = $(guilerman_DATA) $(swig_DATA)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -241,9 +243,11 @@ libguile_rman_ri2rib_la_LDFLAGS = -module -lri2rib -lffi
 libguile_rman_aqsisnv_la_CFLAGS = -I/usr/include/aqsis
 libguile_rman_aqsisnv_la_SOURCES = aqsisnv_wrap.cpp
 libguile_rman_aqsisnv_la_LDFLAGS = -module -laqsis_types 
-EXTRA_DIST = rman rman/rispec.scm rman/ri2rib.scm rman/utilities.scm
+EXTRA_DIST = rman rman/rispec.scm rman/ri2rib.scm rman/utilities.scm Swig/common.scm
 guilermandir = /usr/share/guile/site/rman
-guilerman_DATA = rman/rispec.scm rman/ri2rib.scm rman/utilities.scm
+guilerman_DATA = rman/rispec.scm rman/ri2rib.scm rman/aqsisnv.scm rman/utilities.scm
+swigdir = /usr/share/guile/site/Swig
+swig_DATA = Swig/common.scm
 all: all-am
 
 .SUFFIXES:
@@ -399,6 +403,23 @@ uninstall-guilermanDATA:
 	  echo " rm -f '$(DESTDIR)$(guilermandir)/$$f'"; \
 	  rm -f "$(DESTDIR)$(guilermandir)/$$f"; \
 	done
+install-swigDATA: $(swig_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(swigdir)" || $(MKDIR_P) "$(DESTDIR)$(swigdir)"
+	@list='$(swig_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f=$(am__strip_dir) \
+	  echo " $(swigDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(swigdir)/$$f'"; \
+	  $(swigDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(swigdir)/$$f"; \
+	done
+
+uninstall-swigDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(swig_DATA)'; for p in $$list; do \
+	  f=$(am__strip_dir) \
+	  echo " rm -f '$(DESTDIR)$(swigdir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(swigdir)/$$f"; \
+	done
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
@@ -477,7 +498,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(LTLIBRARIES) $(DATA)
 installdirs:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(guilermandir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(guilermandir)" "$(DESTDIR)$(swigdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -525,7 +546,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-guilermanDATA
+install-data-am: install-guilermanDATA install-swigDATA
 
 install-dvi: install-dvi-am
 
@@ -561,7 +582,8 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-guilermanDATA uninstall-libLTLIBRARIES
+uninstall-am: uninstall-guilermanDATA uninstall-libLTLIBRARIES \
+	uninstall-swigDATA
 
 .MAKE: install-am install-strip
 
@@ -574,11 +596,12 @@ uninstall-am: uninstall-guilermanDATA uninstall-libLTLIBRARIES
 	install-guilermanDATA install-html install-html-am \
 	install-info install-info-am install-libLTLIBRARIES \
 	install-man install-pdf install-pdf-am install-ps \
-	install-ps-am install-strip installcheck installcheck-am \
-	installdirs maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-compile mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am tags uninstall \
-	uninstall-am uninstall-guilermanDATA uninstall-libLTLIBRARIES
+	install-ps-am install-strip install-swigDATA installcheck \
+	installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags uninstall uninstall-am uninstall-guilermanDATA \
+	uninstall-libLTLIBRARIES uninstall-swigDATA
 
 
 rispec_wrap.c: rispec.i ignores.i help.i

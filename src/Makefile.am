@@ -26,7 +26,9 @@ libguile_rman_aqsisnv_la_CFLAGS=-I/usr/include/aqsis
 libguile_rman_aqsisnv_la_SOURCES=aqsisnv_wrap.cpp
 libguile_rman_aqsisnv_la_LDFLAGS=-module -laqsis_types 
 
-EXTRA_DIST = rman rman/rispec.scm rman/ri2rib.scm rman/utilities.scm
+EXTRA_DIST = rman rman/rispec.scm rman/ri2rib.scm rman/utilities.scm Swig/common.scm
 guilermandir =  @GUILE_SITE@/rman
 guilerman_DATA = rman/rispec.scm rman/ri2rib.scm rman/aqsisnv.scm rman/utilities.scm
+swigdir = @GUILE_SITE@/Swig
+swig_DATA = Swig/common.scm
 
