@@ -52,6 +52,14 @@ am__strip_dir = `echo $$p | sed -e 's|^.*/||'`;
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(guilermandir)"
 libLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(lib_LTLIBRARIES)
+libguile_rman_aqsisnv_la_LIBADD =
+am_libguile_rman_aqsisnv_la_OBJECTS = aqsisnv_wrap.lo
+libguile_rman_aqsisnv_la_OBJECTS =  \
+	$(am_libguile_rman_aqsisnv_la_OBJECTS)
+libguile_rman_aqsisnv_la_LINK = $(LIBTOOL) --tag=CXX \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
+	$(AM_CXXFLAGS) $(CXXFLAGS) $(libguile_rman_aqsisnv_la_LDFLAGS) \
+	$(LDFLAGS) -o $@
 libguile_rman_ri2rib_la_LIBADD =
 am_libguile_rman_ri2rib_la_OBJECTS =  \
 	libguile_rman_ri2rib_la-ri2rib_wrap.lo
@@ -82,9 +90,20 @@ CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-SOURCES = $(libguile_rman_ri2rib_la_SOURCES) \
+CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+LTCXXCOMPILE = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+CXXLD = $(CXX)
+CXXLINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=link $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
+	$(LDFLAGS) -o $@
+SOURCES = $(libguile_rman_aqsisnv_la_SOURCES) \
+	$(libguile_rman_ri2rib_la_SOURCES) \
 	$(libguile_rman_rispec_la_SOURCES)
-DIST_SOURCES = $(libguile_rman_ri2rib_la_SOURCES) \
+DIST_SOURCES = $(libguile_rman_aqsisnv_la_SOURCES) \
+	$(libguile_rman_ri2rib_la_SOURCES) \
 	$(libguile_rman_rispec_la_SOURCES)
 guilermanDATA_INSTALL = $(INSTALL_DATA)
 DATA = $(guilerman_DATA)
@@ -211,7 +230,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-lib_LTLIBRARIES = libguile_rman_rispec.la  libguile_rman_ri2rib.la
+lib_LTLIBRARIES = libguile_rman_rispec.la  libguile_rman_ri2rib.la libguile_rman_aqsisnv.la
 SWIG_FLAGS = -guile -Linkage module -package rman -scm -proxy -emit-setters -I/usr/include/aqsis
 libguile_rman_rispec_la_CFLAGS = -I/usr/include/aqsis @FFI_CFLAGS@
 libguile_rman_rispec_la_SOURCES = rispec_wrap.c
@@ -219,13 +238,16 @@ libguile_rman_rispec_la_LDFLAGS = -module -laqsis @FFI_LIBS@
 libguile_rman_ri2rib_la_CFLAGS = -I/usr/include/aqsis @FFI_CFLAGS@
 libguile_rman_ri2rib_la_SOURCES = ri2rib_wrap.c
 libguile_rman_ri2rib_la_LDFLAGS = -module -lri2rib @FFI_LIBS@
+libguile_rman_aqsisnv_la_CFLAGS = -I/usr/include/aqsis
+libguile_rman_aqsisnv_la_SOURCES = aqsisnv_wrap.cpp
+libguile_rman_aqsisnv_la_LDFLAGS = -module -laqsis_types 
 EXTRA_DIST = rman rman/rispec.scm rman/ri2rib.scm rman/utilities.scm
 guilermandir = @GUILE_SITE@/rman
 guilerman_DATA = rman/rispec.scm rman/ri2rib.scm rman/utilities.scm
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .c .lo .o .obj
+.SUFFIXES: .c .cpp .lo .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -282,6 +304,8 @@ clean-libLTLIBRARIES:
 	  echo "rm -f \"$${dir}/so_locations\""; \
 	  rm -f "$${dir}/so_locations"; \
 	done
+libguile_rman_aqsisnv.la: $(libguile_rman_aqsisnv_la_OBJECTS) $(libguile_rman_aqsisnv_la_DEPENDENCIES) 
+	$(libguile_rman_aqsisnv_la_LINK) -rpath $(libdir) $(libguile_rman_aqsisnv_la_OBJECTS) $(libguile_rman_aqsisnv_la_LIBADD) $(LIBS)
 libguile_rman_ri2rib.la: $(libguile_rman_ri2rib_la_OBJECTS) $(libguile_rman_ri2rib_la_DEPENDENCIES) 
 	$(libguile_rman_ri2rib_la_LINK) -rpath $(libdir) $(libguile_rman_ri2rib_la_OBJECTS) $(libguile_rman_ri2rib_la_LIBADD) $(LIBS)
 libguile_rman_rispec.la: $(libguile_rman_rispec_la_OBJECTS) $(libguile_rman_rispec_la_DEPENDENCIES) 
@@ -293,6 +317,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/aqsisnv_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libguile_rman_ri2rib_la-ri2rib_wrap.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libguile_rman_rispec_la-rispec_wrap.Plo@am__quote@
 
@@ -330,6 +355,27 @@ libguile_rman_rispec_la-rispec_wrap.lo: rispec_wrap.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='rispec_wrap.c' object='libguile_rman_rispec_la-rispec_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libguile_rman_rispec_la_CFLAGS) $(CFLAGS) -c -o libguile_rman_rispec_la-rispec_wrap.lo `test -f 'rispec_wrap.c' || echo '$(srcdir)/'`rispec_wrap.c
+
+.cpp.o:
+@am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXXCOMPILE) -c -o $@ $<
+
+.cpp.obj:
+@am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
+@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+.cpp.lo:
+@am__fastdepCXX_TRUE@	$(LTCXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCXX_TRUE@	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(LTCXXCOMPILE) -c -o $@ $<
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -540,6 +586,9 @@ rispec_wrap.c: rispec.i ignores.i help.i
 
 ri2rib_wrap.c: rispec.i ignores.i help.i
 	$(SWIG) -DRI2RIB $(SWIG_FLAGS) -I/usr/local/include/aqsis -module ri2rib -o $@ $<
+
+aqsisnv_wrap.cpp: aqsisnv.i
+	$(SWIG) $(SWIG_FLAGS) -c++ -I/usr/local/include/aqsis -module aqsisnv -o $@ $<
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
