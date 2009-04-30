@@ -21,6 +21,7 @@ src/*.so
 src/*.o
 src/*.la
 src/*.lo
+src/*.loT
 src/*_wrap.c
 src/*_wrap.cpp
 src/rman/aqsisnv.scm
@@ -28,3 +29,5 @@ src/rman/ri2rib.scm
 src/.deps
 src/.libs
 src/rman/rispec.scm
+src/Makefile
+
