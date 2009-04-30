@@ -187,12 +187,14 @@ convert_param_list(SCM input, RtInt* count, RtToken *tokens[], RtPointer *values
 #ifdef RI2RIB
 %goops %{ 
 (load-extension "libguile_rman_ri2rib.so" "scm_init_rman_ri2rib_module")
+(use-modules (oop goops))
 (use-modules (rman aqsisnv))
 (define token-dict (make <CqTokenDictionary> #:args '(#t)))
 %}
 #else
 %goops %{ 
 (load-extension "libguile_rman_rispec.so" "scm_init_rman_rispec_module")
+(use-modules (oop goops))
 (use-modules (rman aqsisnv))
 (define token-dict (make <CqTokenDictionary> #:args '(#t)))
 %}
