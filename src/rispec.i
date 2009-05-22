@@ -177,9 +177,37 @@ convert_param_list(SCM input, RtInt* count, RtToken *tokens[], RtPointer *values
   (RtInt count, RtToken tokens[], RtPointer values[] )
 }
 
+%typemap(in,numinputs=0)(RifTokenType* , RifTokenDetail*, RtInt*){
+  // allocate space for return details
+  $1 = (RifTokenType*)malloc(sizeof(RifTokenType));
+  $2 = (RifTokenDetail*)malloc(sizeof(RifTokenDetail));
+  $3 = (RtInt*)malloc(sizeof(RtInt));
+}
+
+%typemap(argout)(RifTokenType* , RifTokenDetail*, RtInt*){
+  int i = 0;
+  SCM retval = SCM_UNSPECIFIED;
+
+  if(result){
+    retval = SCM_UNSPECIFIED;
+  };
+
+  gswig_result = retval;
+  free($1);
+  free($2);
+  free($3);
+}
+
+%apply( RifTokenType* , RifTokenDetail*, RtInt* ){
+   (RifTokenType *tokType, RifTokenDetail *tokDetail, RtInt *arrayLen)
+}
+
+
+
 %include "help.i"
-%include <aqsis_compiler.h>
+%include <aqsis_config.h>
 %include <ri.h>
+%include <rif.h>
 
 %include "ignores.i"
 %include <ri.inl>

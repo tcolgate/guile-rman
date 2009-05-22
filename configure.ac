@@ -19,7 +19,7 @@ GUILE_SITE_DIR
 
 # Checks for libraries.
 # FIXME: Replace `main' with a function in `-lGL':
-AC_CHECK_LIB([aqsis], [RiBegin])
+AC_CHECK_LIB([aqsis_core], [RiBegin])
 
 # Checks for header files.
 

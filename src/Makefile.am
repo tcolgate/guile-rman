@@ -14,21 +14,21 @@ ri2rib_wrap.c: rispec.i ignores.i help.i
 aqsisnv_wrap.cpp: aqsisnv.i
 	$(SWIG) $(SWIG_FLAGS) -c++ -I/usr/local/include/aqsis -module aqsisnv -o $@ $<
 
-libguile_rman_rispec_la_CFLAGS=-I/usr/include/aqsis @FFI_CFLAGS@
+libguile_rman_rispec_la_CFLAGS=-I/usr/local/include/aqsis @FFI_CFLAGS@
 libguile_rman_rispec_la_SOURCES=rispec_wrap.c
-libguile_rman_rispec_la_LDFLAGS=-module -laqsis @FFI_LIBS@
+libguile_rman_rispec_la_LDFLAGS=-module -laqsis_core @FFI_LIBS@
 
-libguile_rman_ri2rib_la_CFLAGS=-I/usr/include/aqsis @FFI_CFLAGS@
+libguile_rman_ri2rib_la_CFLAGS=-I/usr/local/include/aqsis @FFI_CFLAGS@
 libguile_rman_ri2rib_la_SOURCES=ri2rib_wrap.c
-libguile_rman_ri2rib_la_LDFLAGS=-module -lri2rib @FFI_LIBS@
+libguile_rman_ri2rib_la_LDFLAGS=-module -laqsis_ri2rib @FFI_LIBS@
 
-libguile_rman_aqsisnv_la_CFLAGS=-I/usr/include/aqsis
+libguile_rman_aqsisnv_la_CFLAGS=-I/usr/local/include/aqsis
 libguile_rman_aqsisnv_la_SOURCES=aqsisnv_wrap.cpp
 libguile_rman_aqsisnv_la_LDFLAGS=-module -laqsis_types 
 
 EXTRA_DIST = rman rman/rispec.scm rman/ri2rib.scm rman/utilities.scm Swig/common.scm
-guilermandir =  @GUILE_SITE@/rman
+guilermandir =  /usr/local/share/guile/site/rman
 guilerman_DATA = rman/rispec.scm rman/ri2rib.scm rman/aqsisnv.scm rman/utilities.scm
-swigdir = @GUILE_SITE@/Swig
+swigdir = /usr/local/share/guile/site/Swig
 swig_DATA = Swig/common.scm
 

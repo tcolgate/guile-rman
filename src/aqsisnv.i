@@ -1,7 +1,7 @@
 %module aqsisnv
 
 %{
-#include <aqsis_compiler.h>
+#include <aqsis_config.h>
 #include <exception.h>
 #include <interpclasscounts.h>
 #include <enum.h>
@@ -14,7 +14,7 @@
 %include <std_vector.i>
 %include <std_string.i>
 %include <std_except.i>
-%include <aqsis_compiler.h>
+%include <aqsis_config.h>
 %include <exception.h>
 %include <interpclasscounts.h>
 %include <enum.h>
