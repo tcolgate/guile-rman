@@ -1,6 +1,7 @@
 autom4te.cache
 aclocal.m4
 config.h
+config.h.in
 config.h.in~
 config.log
 configure
@@ -30,4 +31,6 @@ src/.deps
 src/.libs
 src/rman/rispec.scm
 src/Makefile
+src/Makefile.in
+*.Plo
 
