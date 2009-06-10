@@ -28,9 +28,9 @@ src/*_wrap.cpp
 src/rman/aqsisnv.scm
 src/rman/ri2rib.scm
 src/.deps
+src/.deps/libguile_rman_rispec_la-rispec_wrap.Plo
 src/.libs
 src/rman/rispec.scm
 src/Makefile
 src/Makefile.in
 *.Plo
-
