@@ -9,7 +9,8 @@
 ;;
 ;;-------------------------------------------------------------------
 
-(use-modules (rman ri2rib))
+(use-modules (rman rispec))
+;(use-modules (rman ri2rib))
 (use-modules (rman utilities))
 
 (define (progress percent frame)
@@ -47,16 +48,16 @@
 (RIB "test3.rib"
   (RiDisplay "sphere1.tif" "file" "rgb")
   (RiFormat 320 240 1)
-  (RiProjection "perspective" '("fov" 45.0))
+  (RiProjection "perspective" '("uniform float fov" 45.0))
   (RiTranslate 0 0 6)
   ;(RiProgressHandler progress)
   (RiPixelFilter RiBoxFilter 1 1)
   (World
     (let ((o1 (Object (RiSphere 1 -1 1 360))))
-      (RiLightSource "ambientlight" '("intensity" 0.2))
-      (RiLightSource "distantlight" '("intensity" 1.2
-                                      "from" #f32(0 0 -6)
-                                      "to" #f32(0 0 0)))
+      (RiLightSource "ambientlight" '("uniform float intensity" 0.2))
+      (RiLightSource "distantlight" '("uniform float intensity" 1.2
+                                      "uniform point from" #f32(0 0 -6)
+                                      "uniform point to" #f32(0 0 0)))
       (RiColor #f32(1.0 0.0 0.0))
       (RiSurface "plastic")
       (RiTranslate -2.0 0 0)

@@ -104,7 +104,7 @@ convert_float_matrix(SCM input, int i, int j) {
 }
 
 
-%include <ri_types.h>
+%include <ritypes.h>
 
 
 %{
@@ -155,7 +155,7 @@ RtPointer convert_param_item_array(SCM token,
                                    RifTokenDetail tok_detail, 
                                    RtInt tok_arraysize,
                                    SCM value){
-  RtPointer result;
+  RtPointer result = (RtPointer) NULL;
 
   if(tok_arraysize > 1){
     if(!scm_is_true(scm_list_p(value)) || (scm_to_uint(scm_length(value)) != tok_arraysize)){
@@ -233,9 +233,9 @@ convert_param_list(SCM input, RtInt* count, RtToken *tokens[], RtPointer *values
     };
 
     (*values)[i/2] = convert_param_item_array(token,
-                                              tok_decl_arraysize,
                                               tok_decl_type,
                                               tok_decl_detail,
+                                              tok_decl_arraysize,
                                               value);
   };
 
@@ -287,7 +287,7 @@ convert_param_list(SCM input, RtInt* count, RtToken *tokens[], RtPointer *values
 
 
 %include "help.i"
-%include <aqsis_config.h>
+%include <aqsis/config.h>
 %include <ri.h>
 %include <rif.h>
 

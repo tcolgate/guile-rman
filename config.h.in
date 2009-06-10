@@ -6,8 +6,8 @@
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
-/* Define to 1 if you have the `aqsis' library (-laqsis). */
-#undef HAVE_LIBAQSIS
+/* Define to 1 if you have the `aqsis_core' library (-laqsis_core). */
+#undef HAVE_LIBAQSIS_CORE
 
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
