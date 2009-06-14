@@ -11,6 +11,7 @@
 
 (use-modules (rman rispec))
 ;(use-modules (rman ri2rib))
+;(use-modules (rman ri2rib))
 (use-modules (rman utilities))
 
 (define (progress percent frame)
@@ -55,9 +56,10 @@
   (World
     (let ((o1 (Object (RiSphere 1 -1 1 360))))
       (RiLightSource "ambientlight" '("uniform float intensity" 0.2))
-      (RiLightSource "distantlight" '("uniform float intensity" 1.2
+      (RiLightSource "distantlight" '("uniform float intensity2" 1.2 
                                       "uniform point from" #f32(0 0 -6)
-                                      "uniform point to" #f32(0 0 0)))
+                                      "uniform point to" #f32(0 0 0)
+                                      "uniform float[3] test" (1 1.0 1.0)))
       (RiColor #f32(1.0 0.0 0.0))
       (RiSurface "plastic")
       (RiTranslate -2.0 0 0)

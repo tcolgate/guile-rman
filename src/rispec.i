@@ -109,25 +109,34 @@ convert_float_matrix(SCM input, int i, int j) {
 
 %{
 
-RtPointer convert_param_item_float() {
-};
-
 RtPointer convert_param_item_element(RifTokenType tok_type,
                                      RifTokenDetail tok_detail,
                                      SCM value){
   switch(tok_type){
     case k_RifFloat: {
-      RtFloat *val = (RtFloat*)malloc(sizeof (RtFloat));
+      RtFloat *val;
+      if(scm_is_false(scm_number_p(value))){
+        scm_misc_error (NULL, "Expected a number", SCM_UNSPECIFIED);
+      };
+      val = (RtFloat*)malloc(sizeof (RtFloat));
       *val = (RtFloat)scm_to_double(value);
       return (RtPointer) val;
     }; break;
     case k_RifInteger: {
-      RtInt *val = (RtInt*)malloc(sizeof (RtInt));
+      RtInt *val;
+      if(scm_is_false(scm_integer_p(value))){
+        scm_misc_error (NULL, "Expected an integer", SCM_UNSPECIFIED);
+      };
+      val = (RtInt*)malloc(sizeof (RtInt));
       *val = scm_to_int(value) ;
       return (RtPointer) val;
     }; break;
     case k_RifString: {
-      RtToken *val = (RtToken*)malloc(sizeof (RtToken));
+      RtToken *val;
+      if(scm_is_false(scm_string_p(value))){
+        scm_misc_error (NULL, "Expected a string", SCM_UNSPECIFIED);
+      };
+      val = (RtToken*)malloc(sizeof (RtToken));
       *val = scm_to_locale_string(value) ;
       return (RtPointer) val;
     }; break;
@@ -135,18 +144,27 @@ RtPointer convert_param_item_element(RifTokenType tok_type,
     case k_RifColor:
     case k_RifVector:
     case k_RifNormal: {
-      int size = scm_to_int(scm_f32vector_length(value));
-      RtFloat* val = convert_float_array(value, size);
+      int size;
+      RtFloat *val;
+      if(scm_is_false(scm_f32vector_p(value))){
+        scm_misc_error (NULL, "Expected a vector of floats", SCM_UNSPECIFIED);
+      };
+      size = scm_to_int(scm_f32vector_length(value));
+      val = convert_float_array(value, size);
       return (RtPointer) val;
     }; break;
+    case k_RifMatrix: {
+      RtMatrix *val = convert_float_matrix(value, 4,4);
+      return (RtPointer) val;
+    };  break;
     case k_RifHPoint:
-    case k_RifMatrix:
-    case k_RifMPoint:
-    default:
-      break;
+    case k_RifMPoint: 
+    default: {
+      scm_misc_error (NULL, "Parameter list item type currently unsupported", SCM_UNSPECIFIED);
+    }; break;
   };
 
-  scm_display(scm_from_locale_string ("Unkown value type in param list"),scm_current_error_port ());
+  scm_misc_error (NULL, "Unknown value type in parameter list", SCM_UNSPECIFIED);
   return (RtPointer) NULL;
 }
 
@@ -158,12 +176,13 @@ RtPointer convert_param_item_array(SCM token,
   RtPointer result = (RtPointer) NULL;
 
   if(tok_arraysize > 1){
-    if(!scm_is_true(scm_list_p(value)) || (scm_to_uint(scm_length(value)) != tok_arraysize)){
+    if(!scm_is_true(scm_list_p(value)) || (scm_to_int(scm_length(value)) != tok_arraysize)){
         scm_display(scm_from_locale_string("Token "), scm_current_error_port ());
         scm_display(token, scm_current_error_port ());
         scm_display(scm_from_locale_string(" expects array of length "), scm_current_error_port ());
         scm_display(scm_from_signed_integer(tok_arraysize), scm_current_error_port());
         scm_newline(scm_current_error_port ());
+        scm_misc_error (NULL, "Incorrect  argument to token", SCM_UNSPECIFIED);
         return (RtPointer) NULL; /* DO SOMETHING USEFUL */
     }
   } else {
@@ -172,6 +191,7 @@ RtPointer convert_param_item_array(SCM token,
         scm_display(token, scm_current_error_port ());
         scm_display(scm_from_locale_string(" expects a single value."), scm_current_error_port ());
         scm_newline(scm_current_error_port ());
+        scm_misc_error (NULL, "Incorrect  argument to token", SCM_UNSPECIFIED);
         return (RtPointer) NULL; /* DO SOMETHING USEFUL */
     }
   }
@@ -195,12 +215,12 @@ convert_param_list(SCM input, RtInt* count, RtToken *tokens[], RtPointer *values
   int length;
   int i;
   if (scm_is_false((scm_list_p(input)))) {
-    scm_display(scm_from_locale_string ("Parameter list required"),scm_current_error_port ());
+    scm_misc_error (NULL, "Parameter list required", SCM_UNSPECIFIED);
     return 0; /* DO SOMETHING USEFUL */
   };
   length = scm_to_int(scm_length(input));
   if (scm_is_false(scm_even_p(scm_from_int(length)))) {
-    scm_display(scm_from_locale_string ("Parameter list requires an even number of tokens and values"),scm_current_error_port ());
+    scm_misc_error (NULL, "Parameter list does not have an even number of values", SCM_UNSPECIFIED);
     return 0; /* DO SOMETHING USEFUL */
   };
   *count = (RtInt) length/2;
@@ -216,7 +236,7 @@ convert_param_list(SCM input, RtInt* count, RtToken *tokens[], RtPointer *values
     RtInt tok_decl_arraysize;
 
     if (scm_is_false(scm_string_p(token))) {
-      scm_display(scm_from_locale_string ("Tokens must be strings in param list"),scm_current_error_port ());
+      scm_misc_error (NULL, "Token must be strings in parameter lists", SCM_UNSPECIFIED);
       return 0; /* DO SOMETHING USEFUL */
     };
     (*tokens)[i/2] = (RtToken) scm_to_locale_string(token);
@@ -226,9 +246,7 @@ convert_param_list(SCM input, RtInt* count, RtToken *tokens[], RtPointer *values
                            &tok_decl_type,
                            &tok_decl_detail,
                            &tok_decl_arraysize)){
-      scm_display(scm_from_locale_string ("Uknown token variable: "),scm_current_error_port ());
-      scm_display(token,scm_current_error_port ());
-      scm_newline(scm_current_error_port ());
+      scm_misc_error (NULL, "Unknown token in named parameter list", SCM_UNSPECIFIED);
       return 0; /* DO SOMETHING USEFUL */
     };
 
@@ -245,7 +263,7 @@ convert_param_list(SCM input, RtInt* count, RtToken *tokens[], RtPointer *values
 
 %typemap(in)(RtInt , RtToken* , RtPointer* ){
   if(!convert_param_list($input,&$1,&$2,&$3))
-      scm_misc_error (NULL, "unknown value type", SCM_UNSPECIFIED);
+      scm_misc_error (NULL, "Error in named parameter list", SCM_UNSPECIFIED);
 }
 
 %typemap(default)( RtInt , RtToken* , RtPointer* ){
