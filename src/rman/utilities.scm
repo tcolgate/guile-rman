@@ -1,6 +1,4 @@
 (define-module (rman utilities)
-  #:use-syntax (oop goops)
-  #:use-syntax (ice-9 syncase)
   #:use-module (rman rispec))
 
 (define-syntax RIB
