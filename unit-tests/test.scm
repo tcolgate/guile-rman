@@ -8,13 +8,13 @@
 ;;
 ;;-------------------------------------------------------------------
 ;;
-(use-modules (rman rispec))
+(use-modules (rman ri2rib))
 (use-modules (rman utilities))
 
 (RIB "test"
   (World 
     (Attribute
-      (let(( a #f32(0.1 0.2 0.3))
+      (let(( a (Color 0.1 0.2 0.3))
            (o1 (Object (RiSphere 1.0 0.0 1.0 1.0))))
         (RiColor a)
         (RiTransform #2f32((0.1 1.0 1.0 1.0)

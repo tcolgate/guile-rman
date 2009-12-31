@@ -13,25 +13,15 @@
 (use-modules (rman utilities))
 
 (define (progress percent frame)
-  (display "Percent: ")
-  (display percent)
-  (display " Frame: ")
-  (display frame)
-  (newline))
+  (format #t "Percent: ~a Frame: ~a~%" percent frame))
 
-(define (subdiv ptr lod)
-  (display "Ptr: ")
-  (display ptr)
-  (display " Lod: ")
-  (display lod)
-  (newline))
+(define (subdiv ptr LoD)
+  (format #t "Ptr: ~a LoD ~a~%" ptr LoD))
 
 (define (free ptr)
-  (display "Ptr: ")
-  (display ptr)
-  (newline))
+  (format #t "Ptr: ~a~%" ptr))
 
-(define bound #f32(0.0 0.0 0.0 10.0 10.0 10.0))
+(define mybound (Bound 0.0 0.0 0.0 10.0 10.0 10.0))
 
 (define data '("some" "data"))
 
@@ -40,18 +30,12 @@
   (lambda(a b c d)
     (let ((val (RiBoxFilter a b c d)))
       (set! count (+ count 1))
-      (display "calling filter ")
-      (display a)(display " ")
-      (display b)(display " ")
-      (display c)(display " ")
-      (display d)(display " ")
-      (display "equaled ")
-      (display val)(newline)
+      (format #t "calling filter ~a ~a ~a ~a equaled ~a~%" a b c d val)
       val)))
 
 (define myfilter2
   (lambda(a b c d)
-    (display "pixel filter called")
+    (format #t "pixel filter called")
     1))
 
 (RIB "test"
@@ -65,20 +49,20 @@
  
  (World
     (let ((o1 (Object (RiSphere 1 -1 1 360))))
-      (RiLightSource "ambientlight" '("intensity" 0.2))
-      (RiLightSource "distantlight" '("intensity" 1.2
-                                      "from" #f32(0 0 -6)
-                                      "to" #f32(0 0 0)))
-      (RiColor #f32(1.0 0.0 0.0))
+      (RiLightSource "ambientlight" (list "intensity" 0.2))
+      (RiLightSource "distantlight" (list "intensity" 1.2
+                                          "from" (Point 0 0 -6)
+                                          "to" (Point 0 0 0)))
+      (RiColor (Color 1.0 0.0 0.0))
       (RiSurface "plastic")
       (RiTranslate -2.0 0 0)
       (RiSphere 1 -1 1 360)
-      (RiColor #f32(0.0 1.0 0.0))
+      (RiColor (Color 0.0 1.0 0.0))
       (RiSurface "plastic" )
       (RiTranslate 4.0 0 0)
       (RiSphere 1 -1 1 360)
-      (RiProcedural data bound subdiv free)
-)))
-(display count)
+      (RiProcedural data mybound subdiv free))))
+
+(format #t "count: ~a~%"  count)
 
 
