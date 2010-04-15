@@ -30,5 +30,5 @@ AC_CHECK_LIB([aqsis_core], [RiBegin])
 # Checks for library functions.
 
 AC_CONFIG_FILES([Makefile])
-AC_OUTPUT(src/Makefile)
+AC_OUTPUT(src/Makefile unit-tests/Makefile)
 

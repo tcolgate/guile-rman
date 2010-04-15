@@ -2,15 +2,36 @@
 !#
 
 ;;-------------------------------------------------------------------
-;; Copyright (C) 2009 Tristan Colgate 
+;; Copyright (C) 2009,2010 Tristan Colgate 
 ;;
-;; test2.scm - An exaple excersizing some of the RiSpec callback
-;; functions
+;; test-utilities.scm - tests for the utilties fucntion wrappers
 ;;
 ;;-------------------------------------------------------------------
+;;
+(use-modules (unit-test)
+             (oop goops)
+             (rman ri2rib)
+             (rman utilities))
 
-(use-modules (rman rispec))
-(use-modules (rman utilities))
+(define-class <test-utilities> (<test-case>))
+
+(define-method (test-rispec-basic (self <test-utilities>))
+  (RiBegin "test")
+  (RiWorldBegin)
+  (RiAttributeBegin)
+  (let(( a (Color 0.1 0.2 0.3))
+       (o1 (Object (RiSphere 1.0 0.0 1.0 1.0))))
+    (RiColor a)
+    (RiTransform #2f32((0.1 1.0 1.0 1.0)
+                       (1.0 1.0 1.0 1.0)
+                       (1.0 1.0 1.0 1.0)
+                       (1.0 1.0 1.0 1.0)))
+    (RiObjectInstance o1)
+    (RiSurface "shinymetal" '("uniform string texturename" "test.tif" )))
+  (RiAttributeEnd)
+  (RiWorldEnd)
+  (RiEnd))
+
 
 (define (progress percent frame)
   (format #t "Percent: ~a Frame: ~a~%" percent frame))
@@ -65,4 +86,4 @@
 
 (format #t "count: ~a~%"  count)
 
-
+(exit-with-summary (run-all-defined-test-cases))

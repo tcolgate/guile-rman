@@ -104,7 +104,7 @@ convert_float_matrix(SCM input, int i, int j) {
 }
 
 
-%include <ritypes.h>
+%include <ri_types.h>
 
 
 %{

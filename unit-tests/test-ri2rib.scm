@@ -4,12 +4,12 @@
 ;;-------------------------------------------------------------------
 ;; Copyright (C) 2009 Tristan Colgate 
 ;;
-;; testrrrrm - An exaple excersizing some of the RiSpec callback
-;; functions
+;; test-ri2rib - test ri2rib functionaility
 ;;
 ;;-------------------------------------------------------------------
 
-;(use-modules (rman rispec))
+(use-modules (unit-test))
+(use-modules (oop goops))
 (use-modules (rman ri2rib))
 (use-modules (rman utilities))
 
@@ -30,15 +30,14 @@
 
 (define data '("some data"))
 
-
-(RIB "test3.rib"
+(RiBegin "test3.rib")
   (RiDisplay "sphere1.tif" "file" "rgb")
   (RiFormat 320 240 1)
   (RiProjection "perspective" '("uniform float fov" 45.0))
   (RiTranslate 0 0 6)
-  (RiProgressHandler progress)
+;  (RiProgressHandler progress)
   (RiPixelFilter RiBoxFilter 1 1)
-  (World
+  (RiWorldBegin)
     (let ((o1 (Object (RiSphere 1 -1 1 360))))
       (RiLightSource "ambientlight" (list "uniform float intensity" 0.2))
       (RiLightSource "distantlight" (list "uniform float intensity2" 1.2 
@@ -55,6 +54,8 @@
       (RiObjectInstance o1)
       (RiProcedural data bound subdiv free)
       (RiProcedural '("some data" "tester")  bound  RiProcDelayedReadArchive RiProcFree)
-      (RiProcedural '("some data" "things" "more things")  bound  RiProcRunProgram RiProcFree))))
+      (RiProcedural '("some data" "things" "more things")  bound  RiProcRunProgram RiProcFree))
+  (RiWorldEnd)
+(RiEnd)
 
 

@@ -1,6 +1,5 @@
-TESTS=test-oids.scm
+TESTS=test-ri2rib.scm  test-rispec.scm  test-utilities.scm
 
-# This wont current set LD_LIBRARY_PATH
 TESTS_ENVIRONMENT=\
 	GUILE_AUTO_COMPILE=0	\
 	$(top_srcdir)/dev-environ guile -L $(top_srcdir)/src -s

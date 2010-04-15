@@ -1,0 +1,920 @@
+execve("/usr/local/bin/guile", ["guile", "test1.scm"], [/* 50 vars */]) = 0
+brk(0)                                  = 0x96b2000
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb78ff000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/tls/i686/sse2/libguile.so.18", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/tls/i686/sse2", 0xbf87b1a0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/tls/i686/libguile.so.18", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/tls/i686", 0xbf87b1a0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/tls/sse2/libguile.so.18", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/tls/sse2", 0xbf87b1a0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/tls/libguile.so.18", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/tls", 0xbf87b1a0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/i686/sse2/libguile.so.18", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/i686/sse2", 0xbf87b1a0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/i686/libguile.so.18", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/i686", 0xbf87b1a0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/sse2/libguile.so.18", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/sse2", 0xbf87b1a0) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libguile.so.18", O_RDONLY) = 3
+read(3, "\177ELF\1\1\1\3\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\340\237\2\0004\0\0\0"..., 512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=3758184, ...}) = 0
+mmap2(NULL, 1107168, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x811000
+mmap2(0x8fd000, 90112, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xec) = 0x8fd000
+mmap2(0x913000, 50400, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x913000
+close(3)                                = 0
+open("/usr/local/lib/libgmp.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libgmp.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/etc/ld.so.cache", O_RDONLY)      = 3
+fstat64(3, {st_mode=S_IFREG|0644, st_size=115445, ...}) = 0
+mmap2(NULL, 115445, PROT_READ, MAP_PRIVATE, 3, 0) = 0xb78e2000
+close(3)                                = 0
+open("/usr/lib/sse2/libgmp.so.3", O_RDONLY) = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\300~\202\0004\0\0\0"..., 512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=272760, ...}) = 0
+mmap2(0x821000, 274160, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x110000
+mmap2(0x152000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x41) = 0x152000
+close(3)                                = 0
+open("/usr/local/lib/libgc.so.1", O_RDONLY) = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0P\216\0\0004\0\0\0"..., 512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=424277, ...}) = 0
+mmap2(NULL, 306996, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x9c8000
+mmap2(0x9ea000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x22) = 0x9ea000
+mmap2(0x9eb000, 163636, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x9eb000
+close(3)                                = 0
+open("/usr/local/lib/libunistring.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libunistring.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/libunistring.so.0", O_RDONLY) = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\240\237\0\0004\0\0\0"..., 512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=2125818, ...}) = 0
+mmap2(NULL, 1089316, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0xebc000
+mmap2(0xfc4000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x108) = 0xfc4000
+close(3)                                = 0
+open("/usr/local/lib/libcrypt.so.1", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libcrypt.so.1", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib/libcrypt.so.1", O_RDONLY)    = 3
+read(3, "\177ELF\1\1\1\3\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\260\10\0\0004\0\0\0"..., 512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=40752, ...}) = 0
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb78e1000
+mmap2(NULL, 192860, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x415000
+mmap2(0x41c000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x7) = 0x41c000
+mmap2(0x41e000, 155996, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x41e000
+close(3)                                = 0
+open("/usr/local/lib/libm.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libm.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib/libm.so.6", O_RDONLY)        = 3
+read(3, "\177ELF\1\1\1\3\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0 Ty\0004\0\0\0"..., 512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=233056, ...}) = 0
+mmap2(0x792000, 168048, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x792000
+mmap2(0x7ba000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x27) = 0x7ba000
+close(3)                                = 0
+open("/usr/local/lib/libltdl.so.7", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libltdl.so.7", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/libltdl.so.7", O_RDONLY) = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0000jf\0054\0\0\0"..., 512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=36756, ...}) = 0
+mmap2(0x5665000, 38008, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x5665000
+mmap2(0x566e000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x8) = 0x566e000
+close(3)                                = 0
+open("/usr/local/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libc.so.6", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib/libc.so.6", O_RDONLY)        = 3
+read(3, "\177ELF\1\1\1\3\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\20\35c\0004\0\0\0"..., 512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=2402248, ...}) = 0
+mmap2(0x61b000, 1526120, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x61b000
+mprotect(0x789000, 4096, PROT_NONE)     = 0
+mmap2(0x78a000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x16e) = 0x78a000
+mmap2(0x78d000, 10600, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x78d000
+close(3)                                = 0
+open("/usr/local/lib/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libpthread.so.0", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib/libpthread.so.0", O_RDONLY)  = 3
+read(3, "\177ELF\1\1\1\3\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\240\231|\0004\0\0\0"..., 512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=192880, ...}) = 0
+mmap2(0x7c5000, 102880, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7c5000
+mmap2(0x7db000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x15) = 0x7db000
+mmap2(0x7dd000, 4576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7dd000
+close(3)                                = 0
+open("/usr/local/lib/libdl.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libdl.so.2", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib/libdl.so.2", O_RDONLY)       = 3
+read(3, "\177ELF\1\1\1\3\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0`\352{\0004\0\0\0"..., 512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=28364, ...}) = 0
+mmap2(0x7be000, 16500, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7be000
+mmap2(0x7c1000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2) = 0x7c1000
+close(3)                                = 0
+open("/usr/local/lib/libgcc_s.so.1", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libgcc_s.so.1", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib/libgcc_s.so.1", O_RDONLY)    = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0@\257.\0004\0\0\0"..., 512) = 512
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb78e0000
+fstat64(3, {st_mode=S_IFREG|0755, st_size=121288, ...}) = 0
+mmap2(0x2e9000, 122760, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x2e9000
+mmap2(0x306000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1c) = 0x306000
+close(3)                                = 0
+open("/usr/local/lib/libfreebl3.so", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libfreebl3.so", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/libfreebl3.so", O_RDONLY) = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0 \31\0\0004\0\0\0"..., 512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=281976, ...}) = 0
+mmap2(NULL, 302156, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x153000
+mmap2(0x198000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x44) = 0x198000
+mmap2(0x199000, 15436, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x199000
+close(3)                                = 0
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb78df000
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb78de000
+set_thread_area({entry_number:-1 -> 6, base_addr:0xb78de6d0, limit:1048575, seg_32bit:1, contents:0, read_exec_only:0, limit_in_pages:1, seg_not_present:0, useable:1}) = 0
+mprotect(0x7c1000, 4096, PROT_READ)     = 0
+mprotect(0x7db000, 4096, PROT_READ)     = 0
+mprotect(0x78a000, 8192, PROT_READ)     = 0
+mprotect(0x7ba000, 4096, PROT_READ)     = 0
+mprotect(0x41c000, 4096, PROT_READ)     = 0
+mprotect(0x8fd000, 45056, PROT_READ)    = 0
+mprotect(0x617000, 4096, PROT_READ)     = 0
+munmap(0xb78e2000, 115445)              = 0
+set_tid_address(0xb78de738)             = 17122
+set_robust_list(0xb78de740, 0xc)        = 0
+futex(0xbf87b760, FUTEX_WAKE_PRIVATE, 1) = 0
+futex(0xbf87b760, FUTEX_WAIT_BITSET_PRIVATE|FUTEX_CLOCK_REALTIME, 1, NULL, bf87b770) = -1 EAGAIN (Resource temporarily unavailable)
+rt_sigaction(SIGRTMIN, {0x7c93e0, [], SA_SIGINFO}, NULL, 8) = 0
+rt_sigaction(SIGRT_1, {0x7c9870, [], SA_RESTART|SA_SIGINFO}, NULL, 8) = 0
+rt_sigprocmask(SIG_UNBLOCK, [RTMIN RT_1], NULL, 8) = 0
+getrlimit(RLIMIT_STACK, {rlim_cur=10240*1024, rlim_max=RLIM_INFINITY}) = 0
+uname({sys="Linux", node="pinot", ...}) = 0
+open("/proc/self/stat", O_RDONLY)       = 3
+read(3, "17122 (guile) R 17121 17121 1775"..., 4096) = 191
+close(3)                                = 0
+brk(0)                                  = 0x96b2000
+brk(0x96c2000)                          = 0x96c2000
+brk(0x96d2000)                          = 0x96d2000
+brk(0x96e2000)                          = 0x96e2000
+brk(0x96f2000)                          = 0x96f2000
+brk(0x9702000)                          = 0x9702000
+rt_sigaction(SIGPWR, {0x9e3980, ~[INT QUIT ABRT BUS SEGV TERM RTMIN RT_1], SA_RESTART|SA_SIGINFO}, NULL, 8) = 0
+rt_sigaction(SIGXCPU, {0x9e3160, ~[INT QUIT ABRT BUS SEGV TERM RTMIN RT_1], SA_RESTART}, NULL, 8) = 0
+open("/proc/stat", O_RDONLY)            = 3
+read(3, "cpu  36037 942 154875 6913568 30"..., 4096) = 2843
+close(3)                                = 0
+sigprocmask(SIG_BLOCK, NULL, [])        = 0
+brk(0x9712000)                          = 0x9712000
+pipe([3, 4])                            = 0
+brk(0x9733000)                          = 0x9733000
+brk(0x9743000)                          = 0x9743000
+open("/usr/lib/gconv/gconv-modules.cache", O_RDONLY) = 5
+fstat64(5, {st_mode=S_IFREG|0644, st_size=26048, ...}) = 0
+mmap2(NULL, 26048, PROT_READ, MAP_SHARED, 5, 0) = 0xb78f8000
+close(5)                                = 0
+futex(0x78ca6c, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+brk(0x9757000)                          = 0x9757000
+gettimeofday({1260955743, 547000}, {0, 0}) = 0
+times({tms_utime=1, tms_stime=10, tms_cutime=0, tms_cstime=0}) = 436611913
+ioctl(0, SNDCTL_TMR_TIMEBASE or TCGETS, {B38400 opost isig icanon echo ...}) = 0
+sigprocmask(SIG_BLOCK, NULL, [])        = 0
+brk(0x97ad000)                          = 0x97ad000
+fcntl64(0, F_GETFL)                     = 0x2 (flags O_RDWR)
+lseek(0, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)
+ioctl(1, SNDCTL_TMR_TIMEBASE or TCGETS, {B38400 opost isig icanon echo ...}) = 0
+fcntl64(1, F_GETFL)                     = 0x2 (flags O_RDWR)
+lseek(1, 0, SEEK_CUR)                   = -1 ESPIPE (Illegal seek)
+ioctl(2, SNDCTL_TMR_TIMEBASE or TCGETS, 0xbf87b5b8) = -1 ENOTTY (Inappropriate ioctl for device)
+fcntl64(2, F_GETFL)                     = 0x8001 (flags O_WRONLY|O_LARGEFILE)
+lseek(2, 0, SEEK_CUR)                   = 12975
+fstat64(2, {st_mode=S_IFREG|0664, st_size=13014, ...}) = 0
+stat64("/usr/local/share/guile/site/ice-9/eval.scm", 0xbf87b4dc) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/ice-9/eval.scm", {st_mode=S_IFREG|0644, st_size=10763, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/eval.go", {st_mode=S_IFREG|0644, st_size=7049, ...}) = 0
+stat64("/usr/local/share/guile/1.9/ice-9/eval.scm", {st_mode=S_IFREG|0644, st_size=10763, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/eval.go", {st_mode=S_IFREG|0644, st_size=7049, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/ice-9/eval.go", O_RDONLY) = 5
+fstat64(5, {st_mode=S_IFREG|0644, st_size=7049, ...}) = 0
+mmap2(NULL, 7049, PROT_READ, MAP_SHARED, 5, 0) = 0xb78f6000
+getrlimit(RLIMIT_STACK, {rlim_cur=10240*1024, rlim_max=RLIM_INFINITY}) = 0
+stat64("/usr/local/share/guile/site/init.scm", 0xbf87b4ac) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/init.scm", 0xbf87b4ac) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/init.scm", 0xbf87b4ac) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/ice-9/boot-9.scm", 0xbf87b43c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/ice-9/boot-9", 0xbf87b43c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/ice-9/boot-9.scm", {st_mode=S_IFREG|0644, st_size=108667, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/boot-9.go", {st_mode=S_IFREG|0644, st_size=196407, ...}) = 0
+stat64("/usr/local/share/guile/1.9/ice-9/boot-9.scm", {st_mode=S_IFREG|0644, st_size=108667, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/boot-9.go", {st_mode=S_IFREG|0644, st_size=196407, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/ice-9/boot-9.go", O_RDONLY) = 6
+fstat64(6, {st_mode=S_IFREG|0644, st_size=196407, ...}) = 0
+mmap2(NULL, 196407, PROT_READ, MAP_SHARED, 6, 0) = 0xb78ae000
+stat64("/usr/local/share/guile/site/ice-9/r4rs.scm", 0xbf87b23c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/ice-9/r4rs", 0xbf87b23c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/ice-9/r4rs.scm", {st_mode=S_IFREG|0644, st_size=8130, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/r4rs.go", {st_mode=S_IFREG|0644, st_size=9981, ...}) = 0
+stat64("/usr/local/share/guile/1.9/ice-9/r4rs.scm", {st_mode=S_IFREG|0644, st_size=8130, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/r4rs.go", {st_mode=S_IFREG|0644, st_size=9981, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/ice-9/r4rs.go", O_RDONLY) = 7
+fstat64(7, {st_mode=S_IFREG|0644, st_size=9981, ...}) = 0
+mmap2(NULL, 9981, PROT_READ, MAP_SHARED, 7, 0) = 0xb78f3000
+stat64("/usr/local/share/guile/site/ice-9/psyntax-pp.scm", 0xbf87b23c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/ice-9/psyntax-pp", 0xbf87b23c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/ice-9/psyntax-pp.scm", {st_mode=S_IFREG|0644, st_size=1015478, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/psyntax-pp.go", {st_mode=S_IFREG|0644, st_size=256098, ...}) = 0
+stat64("/usr/local/share/guile/1.9/ice-9/psyntax-pp.scm", {st_mode=S_IFREG|0644, st_size=1015478, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/psyntax-pp.go", {st_mode=S_IFREG|0644, st_size=256098, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/ice-9/psyntax-pp.go", O_RDONLY) = 8
+fstat64(8, {st_mode=S_IFREG|0644, st_size=256098, ...}) = 0
+mmap2(NULL, 256098, PROT_READ, MAP_SHARED, 8, 0) = 0xb786f000
+sigprocmask(SIG_BLOCK, NULL, [])        = 0
+brk(0x97e1000)                          = 0x97e1000
+brk(0x9826000)                          = 0x9826000
+sigprocmask(SIG_BLOCK, NULL, [])        = 0
+stat64("/usr/local/share/guile/site/ice-9/posix.scm", 0xbf87b23c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/ice-9/posix", 0xbf87b23c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/ice-9/posix.scm", {st_mode=S_IFREG|0644, st_size=2655, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/posix.go", {st_mode=S_IFREG|0644, st_size=6948, ...}) = 0
+stat64("/usr/local/share/guile/1.9/ice-9/posix.scm", {st_mode=S_IFREG|0644, st_size=2655, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/posix.go", {st_mode=S_IFREG|0644, st_size=6948, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/ice-9/posix.go", O_RDONLY) = 9
+fstat64(9, {st_mode=S_IFREG|0644, st_size=6948, ...}) = 0
+mmap2(NULL, 6948, PROT_READ, MAP_SHARED, 9, 0) = 0xb786d000
+stat64("/usr/local/share/guile/site/ice-9/networking.scm", 0xbf87b23c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/ice-9/networking", 0xbf87b23c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/ice-9/networking.scm", {st_mode=S_IFREG|0644, st_size=3099, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/networking.go", {st_mode=S_IFREG|0644, st_size=7905, ...}) = 0
+stat64("/usr/local/share/guile/1.9/ice-9/networking.scm", {st_mode=S_IFREG|0644, st_size=3099, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/networking.go", {st_mode=S_IFREG|0644, st_size=7905, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/ice-9/networking.go", O_RDONLY) = 10
+fstat64(10, {st_mode=S_IFREG|0644, st_size=7905, ...}) = 0
+mmap2(NULL, 7905, PROT_READ, MAP_SHARED, 10, 0) = 0xb786b000
+brk(0x9885000)                          = 0x9885000
+stat64("/usr/local/share/guile/site/ice-9/deprecated.scm", 0xbf87b23c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/ice-9/deprecated", 0xbf87b23c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/ice-9/deprecated.scm", {st_mode=S_IFREG|0644, st_size=7639, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/deprecated.go", {st_mode=S_IFREG|0644, st_size=12985, ...}) = 0
+stat64("/usr/local/share/guile/1.9/ice-9/deprecated.scm", {st_mode=S_IFREG|0644, st_size=7639, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/deprecated.go", {st_mode=S_IFREG|0644, st_size=12985, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/ice-9/deprecated.go", O_RDONLY) = 11
+fstat64(11, {st_mode=S_IFREG|0644, st_size=12985, ...}) = 0
+mmap2(NULL, 12985, PROT_READ, MAP_SHARED, 11, 0) = 0xb7867000
+stat64("/usr/local/share/guile/site/system/base/compile.scm", 0xbf87a26c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/system/base/compile", 0xbf87a26c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/system/base/compile.scm", {st_mode=S_IFREG|0644, st_size=9308, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/base/compile.go", {st_mode=S_IFREG|0644, st_size=14218, ...}) = 0
+stat64("/usr/local/share/guile/1.9/system/base/compile.scm", {st_mode=S_IFREG|0644, st_size=9308, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/base/compile.go", {st_mode=S_IFREG|0644, st_size=14218, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/system/base/compile.go", O_RDONLY) = 12
+fstat64(12, {st_mode=S_IFREG|0644, st_size=14218, ...}) = 0
+mmap2(NULL, 14218, PROT_READ, MAP_SHARED, 12, 0) = 0xb7863000
+stat64("/usr/local/share/guile/site/system/base/syntax.scm", 0xbf879a7c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/system/base/syntax", 0xbf879a7c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/system/base/syntax.scm", {st_mode=S_IFREG|0644, st_size=14305, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/base/syntax.go", {st_mode=S_IFREG|0644, st_size=29205, ...}) = 0
+stat64("/usr/local/share/guile/1.9/system/base/syntax.scm", {st_mode=S_IFREG|0644, st_size=14305, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/base/syntax.go", {st_mode=S_IFREG|0644, st_size=29205, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/system/base/syntax.go", O_RDONLY) = 13
+fstat64(13, {st_mode=S_IFREG|0644, st_size=29205, ...}) = 0
+mmap2(NULL, 29205, PROT_READ, MAP_SHARED, 13, 0) = 0xb785b000
+stat64("/usr/local/share/guile/site/system/base/language.scm", 0xbf879a7c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/system/base/language", 0xbf879a7c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/system/base/language.scm", {st_mode=S_IFREG|0644, st_size=3548, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/base/language.go", {st_mode=S_IFREG|0644, st_size=7065, ...}) = 0
+stat64("/usr/local/share/guile/1.9/system/base/language.scm", {st_mode=S_IFREG|0644, st_size=3548, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/base/language.go", {st_mode=S_IFREG|0644, st_size=7065, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/system/base/language.go", O_RDONLY) = 14
+fstat64(14, {st_mode=S_IFREG|0644, st_size=7065, ...}) = 0
+mmap2(NULL, 7065, PROT_READ, MAP_SHARED, 14, 0) = 0xb7859000
+stat64("/usr/local/share/guile/site/system/base/message.scm", 0xbf879a7c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/system/base/message", 0xbf879a7c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/system/base/message.scm", {st_mode=S_IFREG|0644, st_size=3857, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/base/message.go", {st_mode=S_IFREG|0644, st_size=41117, ...}) = 0
+stat64("/usr/local/share/guile/1.9/system/base/message.scm", {st_mode=S_IFREG|0644, st_size=3857, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/base/message.go", {st_mode=S_IFREG|0644, st_size=41117, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/system/base/message.go", O_RDONLY) = 15
+fstat64(15, {st_mode=S_IFREG|0644, st_size=41117, ...}) = 0
+mmap2(NULL, 41117, PROT_READ, MAP_SHARED, 15, 0) = 0xb784e000
+stat64("/usr/local/share/guile/site/srfi/srfi-1.scm", 0xbf87928c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/srfi/srfi-1", 0xbf87928c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/srfi/srfi-1.scm", {st_mode=S_IFREG|0644, st_size=13435, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/srfi/srfi-1.go", {st_mode=S_IFREG|0644, st_size=20550, ...}) = 0
+stat64("/usr/local/share/guile/1.9/srfi/srfi-1.scm", {st_mode=S_IFREG|0644, st_size=13435, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/srfi/srfi-1.go", {st_mode=S_IFREG|0644, st_size=20550, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/srfi/srfi-1.go", O_RDONLY) = 16
+fstat64(16, {st_mode=S_IFREG|0644, st_size=20550, ...}) = 0
+mmap2(NULL, 20550, PROT_READ, MAP_SHARED, 16, 0) = 0xb7848000
+open("/usr/local/lib/libguile-srfi-srfi-1-v-4.la", O_RDONLY) = 17
+fstat64(17, {st_mode=S_IFREG|0755, st_size=1120, ...}) = 0
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0xb78f2000
+read(17, "# libguile-srfi-srfi-1-v-4.la - "..., 4096) = 1120
+read(17, "", 4096)                      = 0
+close(17)                               = 0
+munmap(0xb78f2000, 4096)                = 0
+futex(0x7c2068, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+open("/usr/local/lib/libguile-srfi-srfi-1-v-4.a", O_RDONLY) = 17
+read(17, "!<arch>\n/               12607831"..., 512) = 512
+close(17)                               = 0
+open("/usr/local/lib/libguile-srfi-srfi-1-v-4.so.4", O_RDONLY) = 17
+read(17, "\177ELF\1\1\1\3\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\20\"\0\0004\0\0\0"..., 512) = 512
+fstat64(17, {st_mode=S_IFREG|0755, st_size=234640, ...}) = 0
+mmap2(NULL, 65380, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 17, 0) = 0x19d000
+mmap2(0x1ac000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 17, 0xf) = 0x1ac000
+close(17)                               = 0
+stat64("/usr/local/share/guile/site/srfi/srfi-9.scm", 0xbf87928c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/srfi/srfi-9", 0xbf87928c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/srfi/srfi-9.scm", {st_mode=S_IFREG|0644, st_size=7351, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/srfi/srfi-9.go", {st_mode=S_IFREG|0644, st_size=63910, ...}) = 0
+stat64("/usr/local/share/guile/1.9/srfi/srfi-9.scm", {st_mode=S_IFREG|0644, st_size=7351, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/srfi/srfi-9.go", {st_mode=S_IFREG|0644, st_size=63910, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/srfi/srfi-9.go", O_RDONLY) = 17
+fstat64(17, {st_mode=S_IFREG|0644, st_size=63910, ...}) = 0
+mmap2(NULL, 63910, PROT_READ, MAP_SHARED, 17, 0) = 0xb78e3000
+brk(0x9895000)                          = 0x9895000
+sigprocmask(SIG_BLOCK, NULL, [])        = 0
+brk(0x9911000)                          = 0x9911000
+stat64("/usr/local/share/guile/site/system/vm/vm.scm", 0xbf879a7c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/system/vm/vm", 0xbf879a7c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/system/vm/vm.scm", {st_mode=S_IFREG|0644, st_size=1473, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/vm/vm.go", {st_mode=S_IFREG|0644, st_size=1255, ...}) = 0
+stat64("/usr/local/share/guile/1.9/system/vm/vm.scm", {st_mode=S_IFREG|0644, st_size=1473, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/vm/vm.go", {st_mode=S_IFREG|0644, st_size=1255, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/system/vm/vm.go", O_RDONLY) = 18
+fstat64(18, {st_mode=S_IFREG|0644, st_size=1255, ...}) = 0
+mmap2(NULL, 1255, PROT_READ, MAP_SHARED, 18, 0) = 0xb78e2000
+stat64("/usr/local/share/guile/site/system/vm/frame.scm", 0xbf87928c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/system/vm/frame", 0xbf87928c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/system/vm/frame.scm", {st_mode=S_IFREG|0644, st_size=8463, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/vm/frame.go", {st_mode=S_IFREG|0644, st_size=11994, ...}) = 0
+stat64("/usr/local/share/guile/1.9/system/vm/frame.scm", {st_mode=S_IFREG|0644, st_size=8463, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/vm/frame.go", {st_mode=S_IFREG|0644, st_size=11994, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/system/vm/frame.go", O_RDONLY) = 19
+fstat64(19, {st_mode=S_IFREG|0644, st_size=11994, ...}) = 0
+mmap2(NULL, 11994, PROT_READ, MAP_SHARED, 19, 0) = 0xb7845000
+stat64("/usr/local/share/guile/site/system/base/pmatch.scm", 0xbf878a9c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/system/base/pmatch", 0xbf878a9c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/system/base/pmatch.scm", {st_mode=S_IFREG|0644, st_size=1404, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/base/pmatch.go", {st_mode=S_IFREG|0644, st_size=15499, ...}) = 0
+stat64("/usr/local/share/guile/1.9/system/base/pmatch.scm", {st_mode=S_IFREG|0644, st_size=1404, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/base/pmatch.go", {st_mode=S_IFREG|0644, st_size=15499, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/system/base/pmatch.go", O_RDONLY) = 20
+fstat64(20, {st_mode=S_IFREG|0644, st_size=15499, ...}) = 0
+mmap2(NULL, 15499, PROT_READ, MAP_SHARED, 20, 0) = 0xb7841000
+stat64("/usr/local/share/guile/site/system/vm/program.scm", 0xbf878a9c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/system/vm/program", 0xbf878a9c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/system/vm/program.scm", {st_mode=S_IFREG|0644, st_size=7669, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/vm/program.go", {st_mode=S_IFREG|0644, st_size=13618, ...}) = 0
+stat64("/usr/local/share/guile/1.9/system/vm/program.scm", {st_mode=S_IFREG|0644, st_size=7669, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/vm/program.go", {st_mode=S_IFREG|0644, st_size=13618, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/system/vm/program.go", O_RDONLY) = 21
+fstat64(21, {st_mode=S_IFREG|0644, st_size=13618, ...}) = 0
+mmap2(NULL, 13618, PROT_READ, MAP_SHARED, 21, 0) = 0xb783d000
+stat64("/usr/local/share/guile/site/ice-9/optargs.scm", 0xbf8782ac) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/ice-9/optargs", 0xbf8782ac) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/ice-9/optargs.scm", {st_mode=S_IFREG|0644, st_size=15743, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/optargs.go", {st_mode=S_IFREG|0644, st_size=44740, ...}) = 0
+stat64("/usr/local/share/guile/1.9/ice-9/optargs.scm", {st_mode=S_IFREG|0644, st_size=15743, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/optargs.go", {st_mode=S_IFREG|0644, st_size=44740, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/ice-9/optargs.go", O_RDONLY) = 22
+fstat64(22, {st_mode=S_IFREG|0644, st_size=44740, ...}) = 0
+mmap2(NULL, 44740, PROT_READ, MAP_SHARED, 22, 0) = 0xb7832000
+stat64("/usr/local/share/guile/site/system/vm/instruction.scm", 0xbf878a9c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/system/vm/instruction", 0xbf878a9c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/system/vm/instruction.scm", {st_mode=S_IFREG|0644, st_size=1107, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/vm/instruction.go", {st_mode=S_IFREG|0644, st_size=456, ...}) = 0
+stat64("/usr/local/share/guile/1.9/system/vm/instruction.scm", {st_mode=S_IFREG|0644, st_size=1107, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/vm/instruction.go", {st_mode=S_IFREG|0644, st_size=456, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/system/vm/instruction.go", O_RDONLY) = 23
+fstat64(23, {st_mode=S_IFREG|0644, st_size=456, ...}) = 0
+mmap2(NULL, 456, PROT_READ, MAP_SHARED, 23, 0) = 0xb7831000
+stat64("/usr/local/share/guile/site/system/vm/objcode.scm", 0xbf878a9c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/system/vm/objcode", 0xbf878a9c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/system/vm/objcode.scm", {st_mode=S_IFREG|0644, st_size=1082, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/vm/objcode.go", {st_mode=S_IFREG|0644, st_size=428, ...}) = 0
+stat64("/usr/local/share/guile/1.9/system/vm/objcode.scm", {st_mode=S_IFREG|0644, st_size=1082, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/system/vm/objcode.go", {st_mode=S_IFREG|0644, st_size=428, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/system/vm/objcode.go", O_RDONLY) = 24
+fstat64(24, {st_mode=S_IFREG|0644, st_size=428, ...}) = 0
+mmap2(NULL, 428, PROT_READ, MAP_SHARED, 24, 0) = 0xb7830000
+stat64("/usr/local/share/guile/site/ice-9/regex.scm", 0xbf879a7c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/ice-9/regex", 0xbf879a7c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/ice-9/regex.scm", {st_mode=S_IFREG|0644, st_size=8315, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/regex.go", {st_mode=S_IFREG|0644, st_size=7772, ...}) = 0
+stat64("/usr/local/share/guile/1.9/ice-9/regex.scm", {st_mode=S_IFREG|0644, st_size=8315, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/regex.go", {st_mode=S_IFREG|0644, st_size=7772, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/ice-9/regex.go", O_RDONLY) = 25
+fstat64(25, {st_mode=S_IFREG|0644, st_size=7772, ...}) = 0
+mmap2(NULL, 7772, PROT_READ, MAP_SHARED, 25, 0) = 0xb782e000
+stat64("/usr/local/share/guile/site/ice-9/receive.scm", 0xbf879a7c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/ice-9/receive", 0xbf879a7c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/ice-9/receive.scm", {st_mode=S_IFREG|0644, st_size=1086, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/receive.go", {st_mode=S_IFREG|0644, st_size=1113, ...}) = 0
+stat64("/usr/local/share/guile/1.9/ice-9/receive.scm", {st_mode=S_IFREG|0644, st_size=1086, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/ice-9/receive.go", {st_mode=S_IFREG|0644, st_size=1113, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/ice-9/receive.go", O_RDONLY) = 26
+fstat64(26, {st_mode=S_IFREG|0644, st_size=1113, ...}) = 0
+mmap2(NULL, 1113, PROT_READ, MAP_SHARED, 26, 0) = 0xb782d000
+getcwd("/home/w107255/src/guile-rman/tests", 4096) = 35
+lstat64("/home/w107255/src/guile-rman/tests/test1.scm", {st_mode=S_IFREG|0775, st_size=766, ...}) = 0
+stat64("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/home/w107255/src/guile-rman/tests", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+access("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/home/w107255/src/guile-rman/tests", W_OK) = 0
+stat64("test1.scm", {st_mode=S_IFREG|0775, st_size=766, ...}) = 0
+stat64("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/home/w107255/src/guile-rman/tests/test1.scm.go", 0xbf87aaf0) = -1 ENOENT (No such file or directory)
+getcwd("/home/w107255/src/guile-rman/tests", 4096) = 35
+lstat64("/home/w107255/src/guile-rman/tests/test1.scm", {st_mode=S_IFREG|0775, st_size=766, ...}) = 0
+stat64("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/home/w107255/src/guile-rman/tests", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+access("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/home/w107255/src/guile-rman/tests", W_OK) = 0
+open("test1.scm", O_RDONLY|O_LARGEFILE) = 27
+fcntl64(27, F_GETFL)                    = 0x8000 (flags O_RDONLY|O_LARGEFILE)
+lseek(27, 0, SEEK_CUR)                  = 0
+fstat64(27, {st_mode=S_IFREG|0775, st_size=766, ...}) = 0
+lseek(27, 0, SEEK_CUR)                  = 0
+select(1024, [27], [], [], {0, 0})      = 1 (in [27], left {0, 0})
+read(27, "#!/usr/bin/guile -s\n!#\n\n;;------"..., 4096) = 766
+lseek(27, -266, SEEK_CUR)               = 500
+_llseek(27, 0, [0], SEEK_SET)           = 0
+stat64("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/home/w107255/src/guile-rman/tests", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+access("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/home/w107255/src/guile-rman/tests", W_OK) = 0
+gettimeofday({1260955744, 6000}, NULL)  = 0
+open("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/home/w107255/src/guile-rman/tests/test1.scm.go.Ij75O3", O_RDWR|O_CREAT|O_EXCL, 0600) = 28
+fcntl64(28, F_GETFL)                    = 0x2 (flags O_RDWR)
+lseek(28, 0, SEEK_CUR)                  = 0
+fstat64(28, {st_mode=S_IFREG|0600, st_size=0, ...}) = 0
+stat64("/usr/local/share/guile/site/language/objcode/spec.scm", 0xbf879f4c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/objcode/spec", 0xbf879f4c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/objcode/spec.scm", {st_mode=S_IFREG|0644, st_size=2980, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/objcode/spec.go", {st_mode=S_IFREG|0644, st_size=2946, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/objcode/spec.scm", {st_mode=S_IFREG|0644, st_size=2980, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/objcode/spec.go", {st_mode=S_IFREG|0644, st_size=2946, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/objcode/spec.go", O_RDONLY) = 29
+fstat64(29, {st_mode=S_IFREG|0644, st_size=2946, ...}) = 0
+mmap2(NULL, 2946, PROT_READ, MAP_SHARED, 29, 0) = 0xb782c000
+stat64("/usr/local/share/guile/site/language/scheme/spec.scm", 0xbf879f4c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/scheme/spec", 0xbf879f4c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/scheme/spec.scm", {st_mode=S_IFREG|0644, st_size=2398, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/scheme/spec.go", {st_mode=S_IFREG|0644, st_size=1706, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/scheme/spec.scm", {st_mode=S_IFREG|0644, st_size=2398, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/scheme/spec.go", {st_mode=S_IFREG|0644, st_size=1706, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/scheme/spec.go", O_RDONLY) = 30
+fstat64(30, {st_mode=S_IFREG|0644, st_size=1706, ...}) = 0
+mmap2(NULL, 1706, PROT_READ, MAP_SHARED, 30, 0) = 0xb782b000
+stat64("/usr/local/share/guile/site/language/scheme/compile-tree-il.scm", 0xbf87975c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/scheme/compile-tree-il", 0xbf87975c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/scheme/compile-tree-il.scm", {st_mode=S_IFREG|0644, st_size=1259, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/scheme/compile-tree-il.go", {st_mode=S_IFREG|0644, st_size=938, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/scheme/compile-tree-il.scm", {st_mode=S_IFREG|0644, st_size=1259, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/scheme/compile-tree-il.go", {st_mode=S_IFREG|0644, st_size=938, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/scheme/compile-tree-il.go", O_RDONLY) = 31
+fstat64(31, {st_mode=S_IFREG|0644, st_size=938, ...}) = 0
+mmap2(NULL, 938, PROT_READ, MAP_SHARED, 31, 0) = 0xb782a000
+stat64("/usr/local/share/guile/site/language/tree-il.scm", 0xbf878f6c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/tree-il", 0xbf878f6c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/tree-il.scm", {st_mode=S_IFREG|0644, st_size=18964, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/tree-il.go", {st_mode=S_IFREG|0644, st_size=64788, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/tree-il.scm", {st_mode=S_IFREG|0644, st_size=18964, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/tree-il.go", {st_mode=S_IFREG|0644, st_size=64788, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/tree-il.go", O_RDONLY) = 32
+fstat64(32, {st_mode=S_IFREG|0644, st_size=64788, ...}) = 0
+mmap2(NULL, 64788, PROT_READ, MAP_SHARED, 32, 0) = 0xb781a000
+stat64("/usr/local/share/guile/site/srfi/srfi-11.scm", 0xbf87877c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/srfi/srfi-11", 0xbf87877c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/srfi/srfi-11.scm", {st_mode=S_IFREG|0644, st_size=5511, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/srfi/srfi-11.go", {st_mode=S_IFREG|0644, st_size=10528, ...}) = 0
+stat64("/usr/local/share/guile/1.9/srfi/srfi-11.scm", {st_mode=S_IFREG|0644, st_size=5511, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/srfi/srfi-11.go", {st_mode=S_IFREG|0644, st_size=10528, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/srfi/srfi-11.go", O_RDONLY) = 33
+fstat64(33, {st_mode=S_IFREG|0644, st_size=10528, ...}) = 0
+mmap2(NULL, 10528, PROT_READ, MAP_SHARED, 33, 0) = 0xb7817000
+brk(0x99b6000)                          = 0x99b6000
+stat64("/usr/local/share/guile/site/language/scheme/decompile-tree-il.scm", 0xbf87975c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/scheme/decompile-tree-il", 0xbf87975c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/scheme/decompile-tree-il.scm", {st_mode=S_IFREG|0644, st_size=1059, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/scheme/decompile-tree-il.go", {st_mode=S_IFREG|0644, st_size=604, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/scheme/decompile-tree-il.scm", {st_mode=S_IFREG|0644, st_size=1059, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/scheme/decompile-tree-il.go", {st_mode=S_IFREG|0644, st_size=604, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/scheme/decompile-tree-il.go", O_RDONLY) = 34
+fstat64(34, {st_mode=S_IFREG|0644, st_size=604, ...}) = 0
+mmap2(NULL, 604, PROT_READ, MAP_SHARED, 34, 0) = 0xb7816000
+stat64("/usr/local/share/guile/site/language/tree-il/spec.scm", 0xbf879f4c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/tree-il/spec", 0xbf879f4c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/tree-il/spec.scm", {st_mode=S_IFREG|0644, st_size=1553, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/tree-il/spec.go", {st_mode=S_IFREG|0644, st_size=1553, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/tree-il/spec.scm", {st_mode=S_IFREG|0644, st_size=1553, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/tree-il/spec.go", {st_mode=S_IFREG|0644, st_size=1553, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/tree-il/spec.go", O_RDONLY) = 35
+fstat64(35, {st_mode=S_IFREG|0644, st_size=1553, ...}) = 0
+mmap2(NULL, 1553, PROT_READ, MAP_SHARED, 35, 0) = 0xb7815000
+stat64("/usr/local/share/guile/site/language/glil.scm", 0xbf87975c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/glil", 0xbf87975c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/glil.scm", {st_mode=S_IFREG|0644, st_size=6019, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/glil.go", {st_mode=S_IFREG|0644, st_size=24329, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/glil.scm", {st_mode=S_IFREG|0644, st_size=6019, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/glil.go", {st_mode=S_IFREG|0644, st_size=24329, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/glil.go", O_RDONLY) = 36
+fstat64(36, {st_mode=S_IFREG|0644, st_size=24329, ...}) = 0
+mmap2(NULL, 24329, PROT_READ, MAP_SHARED, 36, 0) = 0xb780f000
+stat64("/usr/local/share/guile/site/language/tree-il/compile-glil.scm", 0xbf87975c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/tree-il/compile-glil", 0xbf87975c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/tree-il/compile-glil.scm", {st_mode=S_IFREG|0644, st_size=36799, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/tree-il/compile-glil.go", {st_mode=S_IFREG|0644, st_size=41173, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/tree-il/compile-glil.scm", {st_mode=S_IFREG|0644, st_size=36799, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/tree-il/compile-glil.go", {st_mode=S_IFREG|0644, st_size=41173, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/tree-il/compile-glil.go", O_RDONLY) = 37
+fstat64(37, {st_mode=S_IFREG|0644, st_size=41173, ...}) = 0
+mmap2(NULL, 41173, PROT_READ, MAP_SHARED, 37, 0) = 0xb7804000
+stat64("/usr/local/share/guile/site/language/tree-il/optimize.scm", 0xbf878f6c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/tree-il/optimize", 0xbf878f6c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/tree-il/optimize.scm", {st_mode=S_IFREG|0644, st_size=1207, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/tree-il/optimize.go", {st_mode=S_IFREG|0644, st_size=820, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/tree-il/optimize.scm", {st_mode=S_IFREG|0644, st_size=1207, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/tree-il/optimize.go", {st_mode=S_IFREG|0644, st_size=820, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/tree-il/optimize.go", O_RDONLY) = 38
+fstat64(38, {st_mode=S_IFREG|0644, st_size=820, ...}) = 0
+mmap2(NULL, 820, PROT_READ, MAP_SHARED, 38, 0) = 0xb7803000
+stat64("/usr/local/share/guile/site/language/tree-il/primitives.scm", 0xbf87877c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/tree-il/primitives", 0xbf87877c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/tree-il/primitives.scm", {st_mode=S_IFREG|0644, st_size=10865, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/tree-il/primitives.go", {st_mode=S_IFREG|0644, st_size=24488, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/tree-il/primitives.scm", {st_mode=S_IFREG|0644, st_size=10865, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/tree-il/primitives.go", {st_mode=S_IFREG|0644, st_size=24488, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/tree-il/primitives.go", O_RDONLY) = 39
+fstat64(39, {st_mode=S_IFREG|0644, st_size=24488, ...}) = 0
+mmap2(NULL, 24488, PROT_READ, MAP_SHARED, 39, 0) = 0xb77fd000
+stat64("/usr/local/share/guile/site/rnrs/bytevector.scm", 0xbf877f8c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/rnrs/bytevector", 0xbf877f8c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/rnrs/bytevector.scm", {st_mode=S_IFREG|0644, st_size=3322, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/rnrs/bytevector.go", {st_mode=S_IFREG|0644, st_size=2706, ...}) = 0
+stat64("/usr/local/share/guile/1.9/rnrs/bytevector.scm", {st_mode=S_IFREG|0644, st_size=3322, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/rnrs/bytevector.go", {st_mode=S_IFREG|0644, st_size=2706, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/rnrs/bytevector.go", O_RDONLY) = 40
+fstat64(40, {st_mode=S_IFREG|0644, st_size=2706, ...}) = 0
+mmap2(NULL, 2706, PROT_READ, MAP_SHARED, 40, 0) = 0xb77fc000
+stat64("/usr/local/share/guile/site/srfi/srfi-16.scm", 0xbf877f8c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/srfi/srfi-16", 0xbf877f8c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/srfi/srfi-16.scm", {st_mode=S_IFREG|0644, st_size=1928, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/srfi/srfi-16.go", {st_mode=S_IFREG|0644, st_size=328, ...}) = 0
+stat64("/usr/local/share/guile/1.9/srfi/srfi-16.scm", {st_mode=S_IFREG|0644, st_size=1928, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/srfi/srfi-16.go", {st_mode=S_IFREG|0644, st_size=328, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/srfi/srfi-16.go", O_RDONLY) = 41
+fstat64(41, {st_mode=S_IFREG|0644, st_size=328, ...}) = 0
+mmap2(NULL, 328, PROT_READ, MAP_SHARED, 41, 0) = 0xb77fb000
+stat64("/usr/local/share/guile/site/language/tree-il/inline.scm", 0xbf87877c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/tree-il/inline", 0xbf87877c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/tree-il/inline.scm", {st_mode=S_IFREG|0644, st_size=4425, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/tree-il/inline.go", {st_mode=S_IFREG|0644, st_size=3930, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/tree-il/inline.scm", {st_mode=S_IFREG|0644, st_size=4425, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/tree-il/inline.go", {st_mode=S_IFREG|0644, st_size=3930, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/tree-il/inline.go", O_RDONLY) = 42
+fstat64(42, {st_mode=S_IFREG|0644, st_size=3930, ...}) = 0
+mmap2(NULL, 3930, PROT_READ, MAP_SHARED, 42, 0) = 0xb77fa000
+stat64("/usr/local/share/guile/site/language/tree-il/fix-letrec.scm", 0xbf87877c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/tree-il/fix-letrec", 0xbf87877c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/tree-il/fix-letrec.scm", {st_mode=S_IFREG|0644, st_size=10324, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/tree-il/fix-letrec.go", {st_mode=S_IFREG|0644, st_size=14023, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/tree-il/fix-letrec.scm", {st_mode=S_IFREG|0644, st_size=10324, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/tree-il/fix-letrec.go", {st_mode=S_IFREG|0644, st_size=14023, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/tree-il/fix-letrec.go", O_RDONLY) = 43
+fstat64(43, {st_mode=S_IFREG|0644, st_size=14023, ...}) = 0
+mmap2(NULL, 14023, PROT_READ, MAP_SHARED, 43, 0) = 0xb77f6000
+stat64("/usr/local/share/guile/site/language/tree-il/analyze.scm", 0xbf878f6c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/tree-il/analyze", 0xbf878f6c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/tree-il/analyze.scm", {st_mode=S_IFREG|0644, st_size=39950, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/tree-il/analyze.go", {st_mode=S_IFREG|0644, st_size=208309, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/tree-il/analyze.scm", {st_mode=S_IFREG|0644, st_size=39950, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/tree-il/analyze.go", {st_mode=S_IFREG|0644, st_size=208309, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/tree-il/analyze.go", O_RDONLY) = 44
+fstat64(44, {st_mode=S_IFREG|0644, st_size=208309, ...}) = 0
+mmap2(NULL, 208309, PROT_READ, MAP_SHARED, 44, 0) = 0xb77c3000
+sigprocmask(SIG_BLOCK, NULL, [])        = 0
+brk(0x9a92000)                          = 0x9a92000
+stat64("/usr/local/share/guile/site/language/glil/spec.scm", 0xbf879f4c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/glil/spec", 0xbf879f4c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/glil/spec.scm", {st_mode=S_IFREG|0644, st_size=1532, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/glil/spec.go", {st_mode=S_IFREG|0644, st_size=1463, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/glil/spec.scm", {st_mode=S_IFREG|0644, st_size=1532, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/glil/spec.go", {st_mode=S_IFREG|0644, st_size=1463, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/glil/spec.go", O_RDONLY) = 45
+fstat64(45, {st_mode=S_IFREG|0644, st_size=1463, ...}) = 0
+mmap2(NULL, 1463, PROT_READ, MAP_SHARED, 45, 0) = 0xb77c2000
+stat64("/usr/local/share/guile/site/language/glil/compile-assembly.scm", 0xbf87975c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/glil/compile-assembly", 0xbf87975c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/glil/compile-assembly.scm", {st_mode=S_IFREG|0644, st_size=22788, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/glil/compile-assembly.go", {st_mode=S_IFREG|0644, st_size=24704, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/glil/compile-assembly.scm", {st_mode=S_IFREG|0644, st_size=22788, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/glil/compile-assembly.go", {st_mode=S_IFREG|0644, st_size=24704, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/glil/compile-assembly.go", O_RDONLY) = 46
+fstat64(46, {st_mode=S_IFREG|0644, st_size=24704, ...}) = 0
+mmap2(NULL, 24704, PROT_READ, MAP_SHARED, 46, 0) = 0xb77bb000
+stat64("/usr/local/share/guile/site/language/assembly.scm", 0xbf878f6c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/assembly", 0xbf878f6c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/assembly.scm", {st_mode=S_IFREG|0644, st_size=5249, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/assembly.go", {st_mode=S_IFREG|0644, st_size=10032, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/assembly.scm", {st_mode=S_IFREG|0644, st_size=5249, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/assembly.go", {st_mode=S_IFREG|0644, st_size=10032, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/assembly.go", O_RDONLY) = 47
+fstat64(47, {st_mode=S_IFREG|0644, st_size=10032, ...}) = 0
+mmap2(NULL, 10032, PROT_READ, MAP_SHARED, 47, 0) = 0xb77b8000
+stat64("/usr/local/share/guile/site/language/glil/decompile-assembly.scm", 0xbf87975c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/glil/decompile-assembly", 0xbf87975c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/glil/decompile-assembly.scm", {st_mode=S_IFREG|0644, st_size=7781, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/glil/decompile-assembly.go", {st_mode=S_IFREG|0644, st_size=11573, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/glil/decompile-assembly.scm", {st_mode=S_IFREG|0644, st_size=7781, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/glil/decompile-assembly.go", {st_mode=S_IFREG|0644, st_size=11573, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/glil/decompile-assembly.go", O_RDONLY) = 48
+fstat64(48, {st_mode=S_IFREG|0644, st_size=11573, ...}) = 0
+mmap2(NULL, 11573, PROT_READ, MAP_SHARED, 48, 0) = 0xb77b5000
+stat64("/usr/local/share/guile/site/language/assembly/spec.scm", 0xbf879f4c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/assembly/spec", 0xbf879f4c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/assembly/spec.scm", {st_mode=S_IFREG|0644, st_size=1392, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/assembly/spec.go", {st_mode=S_IFREG|0644, st_size=963, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/assembly/spec.scm", {st_mode=S_IFREG|0644, st_size=1392, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/assembly/spec.go", {st_mode=S_IFREG|0644, st_size=963, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/assembly/spec.go", O_RDONLY) = 49
+fstat64(49, {st_mode=S_IFREG|0644, st_size=963, ...}) = 0
+mmap2(NULL, 963, PROT_READ, MAP_SHARED, 49, 0) = 0xb77b4000
+stat64("/usr/local/share/guile/site/language/assembly/compile-bytecode.scm", 0xbf87975c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/assembly/compile-bytecode", 0xbf87975c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/assembly/compile-bytecode.scm", {st_mode=S_IFREG|0644, st_size=6369, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/assembly/compile-bytecode.go", {st_mode=S_IFREG|0644, st_size=11725, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/assembly/compile-bytecode.scm", {st_mode=S_IFREG|0644, st_size=6369, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/assembly/compile-bytecode.go", {st_mode=S_IFREG|0644, st_size=11725, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/assembly/compile-bytecode.go", O_RDONLY) = 50
+fstat64(50, {st_mode=S_IFREG|0644, st_size=11725, ...}) = 0
+mmap2(NULL, 11725, PROT_READ, MAP_SHARED, 50, 0) = 0xb77b1000
+stat64("/usr/local/share/guile/site/srfi/srfi-4.scm", 0xbf878f6c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/srfi/srfi-4", 0xbf878f6c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/srfi/srfi-4.scm", {st_mode=S_IFREG|0644, st_size=2601, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/srfi/srfi-4.go", {st_mode=S_IFREG|0644, st_size=1724, ...}) = 0
+stat64("/usr/local/share/guile/1.9/srfi/srfi-4.scm", {st_mode=S_IFREG|0644, st_size=2601, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/srfi/srfi-4.go", {st_mode=S_IFREG|0644, st_size=1724, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/srfi/srfi-4.go", O_RDONLY) = 51
+fstat64(51, {st_mode=S_IFREG|0644, st_size=1724, ...}) = 0
+mmap2(NULL, 1724, PROT_READ, MAP_SHARED, 51, 0) = 0xb77b0000
+stat64("/usr/local/share/guile/site/language/assembly/decompile-bytecode.scm", 0xbf87975c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/assembly/decompile-bytecode", 0xbf87975c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/assembly/decompile-bytecode.scm", {st_mode=S_IFREG|0644, st_size=5518, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/assembly/decompile-bytecode.go", {st_mode=S_IFREG|0644, st_size=7839, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/assembly/decompile-bytecode.scm", {st_mode=S_IFREG|0644, st_size=5518, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/assembly/decompile-bytecode.go", {st_mode=S_IFREG|0644, st_size=7839, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/assembly/decompile-bytecode.go", O_RDONLY) = 52
+fstat64(52, {st_mode=S_IFREG|0644, st_size=7839, ...}) = 0
+mmap2(NULL, 7839, PROT_READ, MAP_SHARED, 52, 0) = 0xb77ae000
+stat64("/usr/local/share/guile/site/language/bytecode/spec.scm", 0xbf879f4c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/bytecode/spec", 0xbf879f4c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/bytecode/spec.scm", {st_mode=S_IFREG|0644, st_size=1406, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/bytecode/spec.go", {st_mode=S_IFREG|0644, st_size=1363, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/bytecode/spec.scm", {st_mode=S_IFREG|0644, st_size=1406, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/bytecode/spec.go", {st_mode=S_IFREG|0644, st_size=1363, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/bytecode/spec.go", O_RDONLY) = 53
+fstat64(53, {st_mode=S_IFREG|0644, st_size=1363, ...}) = 0
+mmap2(NULL, 1363, PROT_READ, MAP_SHARED, 53, 0) = 0xb77ad000
+select(1024, [27], [], [], {0, 0})      = 1 (in [27], left {0, 0})
+read(27, "#!/usr/bin/guile -s\n!#\n\n;;------"..., 4096) = 766
+open("/usr/lib/gconv/ISO8859-1.so", O_RDONLY) = 54
+read(54, "\177ELF\1\1\1\3\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0P\3\0\0004\0\0\0"..., 512) = 512
+fstat64(54, {st_mode=S_IFREG|0755, st_size=7644, ...}) = 0
+mmap2(NULL, 8212, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 54, 0) = 0xbd1000
+mmap2(0xbd2000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 54, 0) = 0xbd2000
+close(54)                               = 0
+mprotect(0xbd2000, 4096, PROT_READ)     = 0
+stat64("/usr/local/share/guile/site/rman/rispec.scm", {st_mode=S_IFREG|0644, st_size=15180, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/rman/rispec.go", 0xbf87976c) = -1 ENOENT (No such file or directory)
+stat64("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/usr/local/share/guile/site/rman/rispec.scm.go", 0xbf879820) = -1 ENOENT (No such file or directory)
+stat64("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/usr/local/share/guile/site/rman/rispec.scm.go", 0xbf879820) = -1 ENOENT (No such file or directory)
+lstat64("/usr", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+lstat64("/usr/local", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+lstat64("/usr/local/share", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+lstat64("/usr/local/share/guile", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+lstat64("/usr/local/share/guile/site", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+lstat64("/usr/local/share/guile/site/rman", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+lstat64("/usr/local/share/guile/site/rman/rispec.scm", {st_mode=S_IFREG|0644, st_size=15180, ...}) = 0
+stat64("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/usr/local/share/guile/site/rman", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+access("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/usr/local/share/guile/site/rman", W_OK) = 0
+open("/usr/local/share/guile/site/rman/rispec.scm", O_RDONLY|O_LARGEFILE) = 54
+fcntl64(54, F_GETFL)                    = 0x8000 (flags O_RDONLY|O_LARGEFILE)
+lseek(54, 0, SEEK_CUR)                  = 0
+fstat64(54, {st_mode=S_IFREG|0644, st_size=15180, ...}) = 0
+lseek(54, 0, SEEK_CUR)                  = 0
+select(1024, [54], [], [], {0, 0})      = 1 (in [54], left {0, 0})
+read(54, ";;; This file was automatically "..., 4096) = 4096
+lseek(54, -3596, SEEK_CUR)              = 500
+_llseek(54, 0, [0], SEEK_SET)           = 0
+stat64("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/usr/local/share/guile/site/rman", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+access("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/usr/local/share/guile/site/rman", W_OK) = 0
+open("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/usr/local/share/guile/site/rman/rispec.scm.go.WiK2dX", O_RDWR|O_CREAT|O_EXCL, 0600) = 55
+fcntl64(55, F_GETFL)                    = 0x2 (flags O_RDWR)
+lseek(55, 0, SEEK_CUR)                  = 0
+fstat64(55, {st_mode=S_IFREG|0600, st_size=0, ...}) = 0
+select(1024, [54], [], [], {0, 0})      = 1 (in [54], left {0, 0})
+read(54, ";;; This file was automatically "..., 4096) = 4096
+stat64("/usr/local/share/guile/site/oop/goops.scm", 0xbf87813c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/oop/goops", 0xbf87813c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/oop/goops.scm", {st_mode=S_IFREG|0644, st_size=53671, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/oop/goops.go", {st_mode=S_IFREG|0644, st_size=169123, ...}) = 0
+stat64("/usr/local/share/guile/1.9/oop/goops.scm", {st_mode=S_IFREG|0644, st_size=53671, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/oop/goops.go", {st_mode=S_IFREG|0644, st_size=169123, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/oop/goops.go", O_RDONLY) = 56
+fstat64(56, {st_mode=S_IFREG|0644, st_size=169123, ...}) = 0
+mmap2(NULL, 169123, PROT_READ, MAP_SHARED, 56, 0) = 0xb7783000
+stat64("/usr/local/share/guile/site/oop/goops/dispatch.scm", 0xbf8775ac) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/oop/goops/dispatch", 0xbf8775ac) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/oop/goops/dispatch.scm", {st_mode=S_IFREG|0644, st_size=10340, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/oop/goops/dispatch.go", {st_mode=S_IFREG|0644, st_size=9455, ...}) = 0
+stat64("/usr/local/share/guile/1.9/oop/goops/dispatch.scm", {st_mode=S_IFREG|0644, st_size=10340, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/oop/goops/dispatch.go", {st_mode=S_IFREG|0644, st_size=9455, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/oop/goops/dispatch.go", O_RDONLY) = 57
+fstat64(57, {st_mode=S_IFREG|0644, st_size=9455, ...}) = 0
+mmap2(NULL, 9455, PROT_READ, MAP_SHARED, 57, 0) = 0xb7780000
+stat64("/usr/local/share/guile/site/oop/goops/util.scm", 0xbf876dbc) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/oop/goops/util", 0xbf876dbc) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/oop/goops/util.scm", {st_mode=S_IFREG|0644, st_size=2221, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/oop/goops/util.go", {st_mode=S_IFREG|0644, st_size=2465, ...}) = 0
+stat64("/usr/local/share/guile/1.9/oop/goops/util.scm", {st_mode=S_IFREG|0644, st_size=2221, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/oop/goops/util.go", {st_mode=S_IFREG|0644, st_size=2465, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/oop/goops/util.go", O_RDONLY) = 58
+fstat64(58, {st_mode=S_IFREG|0644, st_size=2465, ...}) = 0
+mmap2(NULL, 2465, PROT_READ, MAP_SHARED, 58, 0) = 0xb777f000
+stat64("/usr/local/share/guile/site/oop/goops/compile.scm", 0xbf876dbc) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/oop/goops/compile", 0xbf876dbc) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/oop/goops/compile.scm", {st_mode=S_IFREG|0644, st_size=2157, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/oop/goops/compile.go", {st_mode=S_IFREG|0644, st_size=1012, ...}) = 0
+stat64("/usr/local/share/guile/1.9/oop/goops/compile.scm", {st_mode=S_IFREG|0644, st_size=2157, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/oop/goops/compile.go", {st_mode=S_IFREG|0644, st_size=1012, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/oop/goops/compile.go", O_RDONLY) = 59
+fstat64(59, {st_mode=S_IFREG|0644, st_size=1012, ...}) = 0
+mmap2(NULL, 1012, PROT_READ, MAP_SHARED, 59, 0) = 0xb777e000
+stat64("/usr/local/share/guile/site/language/value/spec.scm", 0xbf87794c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/language/value/spec", 0xbf87794c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/language/value/spec.scm", {st_mode=S_IFREG|0644, st_size=1071, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/value/spec.go", {st_mode=S_IFREG|0644, st_size=436, ...}) = 0
+stat64("/usr/local/share/guile/1.9/language/value/spec.scm", {st_mode=S_IFREG|0644, st_size=1071, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/language/value/spec.go", {st_mode=S_IFREG|0644, st_size=436, ...}) = 0
+open("/usr/local/lib/guile/1.9/ccache/language/value/spec.go", O_RDONLY) = 60
+fstat64(60, {st_mode=S_IFREG|0644, st_size=436, ...}) = 0
+mmap2(NULL, 436, PROT_READ, MAP_SHARED, 60, 0) = 0xb777d000
+sigprocmask(SIG_BLOCK, NULL, [])        = 0
+stat64("/usr/local/share/guile/site/Swig/common.scm", {st_mode=S_IFREG|0644, st_size=2642, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/Swig/common.go", 0xbf87817c) = -1 ENOENT (No such file or directory)
+stat64("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/usr/local/share/guile/site/Swig/common.scm.go", {st_mode=S_IFREG|0664, st_size=7688, ...}) = 0
+stat64("/usr/local/share/guile/site/Swig/common.scm", {st_mode=S_IFREG|0644, st_size=2642, ...}) = 0
+stat64("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/usr/local/share/guile/site/Swig/common.scm.go", {st_mode=S_IFREG|0664, st_size=7688, ...}) = 0
+open("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/usr/local/share/guile/site/Swig/common.scm.go", O_RDONLY) = 61
+fstat64(61, {st_mode=S_IFREG|0664, st_size=7688, ...}) = 0
+mmap2(NULL, 7688, PROT_READ, MAP_SHARED, 61, 0) = 0xb777b000
+stat64("/usr/local/share/guile/site/rman/rispec-primitive.scm", 0xbf87813c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/site/rman/rispec-primitive", 0xbf87813c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/rman/rispec-primitive.scm", 0xbf87813c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/1.9/rman/rispec-primitive", 0xbf87813c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/rman/rispec-primitive.scm", 0xbf87813c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/share/guile/rman/rispec-primitive", 0xbf87813c) = -1 ENOENT (No such file or directory)
+stat64("/usr/local/lib/guile/1.9/ccache/rman/rispec-primitive.go", 0xbf87817c) = -1 ENOENT (No such file or directory)
+unlink("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/usr/local/share/guile/site/rman/rispec.scm.go.WiK2dX") = 0
+open("/usr/local/share/guile/site/rman/rispec.scm", O_RDONLY|O_LARGEFILE) = 62
+fcntl64(62, F_GETFL)                    = 0x8000 (flags O_RDONLY|O_LARGEFILE)
+lseek(62, 0, SEEK_CUR)                  = 0
+fstat64(62, {st_mode=S_IFREG|0644, st_size=15180, ...}) = 0
+lseek(62, 0, SEEK_CUR)                  = 0
+select(1024, [62], [], [], {0, 0})      = 1 (in [62], left {0, 0})
+read(62, ";;; This file was automatically "..., 4096) = 4096
+lseek(62, -3596, SEEK_CUR)              = 500
+_llseek(62, 0, [0], SEEK_SET)           = 0
+select(1024, [62], [], [], {0, 0})      = 1 (in [62], left {0, 0})
+read(62, ";;; This file was automatically "..., 4096) = 4096
+access("/usr/local/lib/libguile_rman_rispec.so", R_OK) = 0
+open("/usr/local/lib/libguile_rman_rispec.so", O_RDONLY) = 63
+read(63, "\177ELF\1\1\1\3\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\0K\0\0004\0\0\0"..., 512) = 512
+fstat64(63, {st_mode=S_IFREG|0755, st_size=249993, ...}) = 0
+mmap2(NULL, 98168, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 63, 0) = 0x1ad000
+mmap2(0x1c4000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 63, 0x16) = 0x1c4000
+close(63)                               = 0
+open("/usr/local/lib/libffi.so.5", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libffi.so.5", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/etc/ld.so.cache", O_RDONLY)      = 63
+fstat64(63, {st_mode=S_IFREG|0644, st_size=115445, ...}) = 0
+mmap2(NULL, 115445, PROT_READ, MAP_PRIVATE, 63, 0) = 0xb775e000
+close(63)                               = 0
+open("/usr/lib/libffi.so.5", O_RDONLY)  = 63
+read(63, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\0p\335\0004\0\0\0"..., 512) = 512
+fstat64(63, {st_mode=S_IFREG|0755, st_size=25344, ...}) = 0
+mmap2(0xdd6000, 23104, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 63, 0) = 0xdd6000
+mmap2(0xddb000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 63, 0x5) = 0xddb000
+close(63)                               = 0
+open("/usr/local/lib/libaqsis_core.so.1", O_RDONLY) = 63
+read(63, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\240U\v\0004\0\0\0"..., 512) = 512
+fstat64(63, {st_mode=S_IFREG|0755, st_size=4114401, ...}) = 0
+mmap2(NULL, 3577492, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 63, 0) = 0xfc6000
+mmap2(0x12f5000, 192512, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 63, 0x32e) = 0x12f5000
+mmap2(0x1324000, 46740, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x1324000
+close(63)                               = 0
+open("/usr/local/lib/libaqsis_ribparse.so.1", O_RDONLY) = 63
+read(63, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\240\343\0\0004\0\0\0"..., 512) = 512
+fstat64(63, {st_mode=S_IFREG|0755, st_size=194478, ...}) = 0
+mmap2(NULL, 148700, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 63, 0) = 0x1c5000
+mmap2(0x1e8000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 63, 0x22) = 0x1e8000
+close(63)                               = 0
+open("/usr/local/lib/libaqsis_tex.so.1", O_RDONLY) = 63
+read(63, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\320d\3\0004\0\0\0"..., 512) = 512
+fstat64(63, {st_mode=S_IFREG|0755, st_size=1127496, ...}) = 0
+mmap2(NULL, 951480, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 63, 0) = 0x1ea000
+mmap2(0x2cd000, 16384, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 63, 0xe2) = 0x2cd000
+mmap2(0x2d1000, 5304, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x2d1000
+close(63)                               = 0
+open("/usr/local/lib/libaqsis_shadervm.so.1", O_RDONLY) = 63
+read(63, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\300\320\3\0004\0\0\0"..., 512) = 512
+fstat64(63, {st_mode=S_IFREG|0755, st_size=1140572, ...}) = 0
+mmap2(NULL, 937344, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 63, 0) = 0x307000
+mmap2(0x3e3000, 36864, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 63, 0xdc) = 0x3e3000
+close(63)                               = 0
+open("/usr/local/lib/libaqsis_types.so.1", O_RDONLY) = 63
+read(63, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0@\257\0\0004\0\0\0"..., 512) = 512
+fstat64(63, {st_mode=S_IFREG|0755, st_size=273078, ...}) = 0
+mmap2(NULL, 237108, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 63, 0) = 0x445000
+mmap2(0x477000, 28672, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 63, 0x32) = 0x477000
+mmap2(0x47e000, 3636, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x47e000
+close(63)                               = 0
+open("/usr/local/lib/libtiff.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libtiff.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libtiff.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/libtiff.so.3", O_RDONLY) = 63
+read(63, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\220kz\0054\0\0\0"..., 512) = 512
+fstat64(63, {st_mode=S_IFREG|0755, st_size=366352, ...}) = 0
+mmap2(0x57a2000, 368608, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 63, 0) = 0x57a2000
+mmap2(0x57fa000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 63, 0x57) = 0x57fa000
+close(63)                               = 0
+open("/usr/local/lib/libz.so.1", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libz.so.1", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libz.so.1", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib/libz.so.1", O_RDONLY)        = 63
+read(63, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0 \326~\0004\0\0\0"..., 512) = 512
+fstat64(63, {st_mode=S_IFREG|0755, st_size=76368, ...}) = 0
+mmap2(0x7ec000, 77616, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 63, 0) = 0x7ec000
+mmap2(0x7fe000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 63, 0x11) = 0x7fe000
+close(63)                               = 0
+open("/usr/local/lib/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/local/lib/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib/tls/i686/sse2/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/lib/tls/i686/sse2", 0xbf8789b8) = -1 ENOENT (No such file or directory)
+open("/lib/tls/i686/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/lib/tls/i686", 0xbf8789b8)     = -1 ENOENT (No such file or directory)
+open("/lib/tls/sse2/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/lib/tls/sse2", 0xbf8789b8)     = -1 ENOENT (No such file or directory)
+open("/lib/tls/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/lib/tls", {st_mode=S_IFDIR|0555, st_size=4096, ...}) = 0
+open("/lib/i686/sse2/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/lib/i686/sse2", 0xbf8789b8)    = -1 ENOENT (No such file or directory)
+open("/lib/i686/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/lib/i686", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open("/lib/sse2/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/lib/sse2", 0xbf8789b8)         = -1 ENOENT (No such file or directory)
+open("/lib/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/lib", {st_mode=S_IFDIR|0555, st_size=12288, ...}) = 0
+open("/usr/lib/tls/i686/sse2/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/tls/i686/sse2", 0xbf8789b8) = -1 ENOENT (No such file or directory)
+open("/usr/lib/tls/i686/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/tls/i686", 0xbf8789b8) = -1 ENOENT (No such file or directory)
+open("/usr/lib/tls/sse2/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/tls/sse2", 0xbf8789b8) = -1 ENOENT (No such file or directory)
+open("/usr/lib/tls/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/tls", {st_mode=S_IFDIR|0555, st_size=4096, ...}) = 0
+open("/usr/lib/i686/sse2/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/i686/sse2", 0xbf8789b8) = -1 ENOENT (No such file or directory)
+open("/usr/lib/i686/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/i686", 0xbf8789b8)     = -1 ENOENT (No such file or directory)
+open("/usr/lib/sse2/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib/sse2", {st_mode=S_IFDIR|0555, st_size=4096, ...}) = 0
+open("/usr/lib/libboost_thread-mt.so.3", O_RDONLY) = -1 ENOENT (No such file or directory)
+stat64("/usr/lib", {st_mode=S_IFDIR|0555, st_size=118784, ...}) = 0
+munmap(0xb775e000, 115445)              = 0
+munmap(0x1ad000, 98168)                 = 0
+munmap(0xdd6000, 23104)                 = 0
+munmap(0xfc6000, 3577492)               = 0
+munmap(0x1c5000, 148700)                = 0
+munmap(0x1ea000, 951480)                = 0
+munmap(0x307000, 937344)                = 0
+munmap(0x445000, 237108)                = 0
+munmap(0x57a2000, 368608)               = 0
+munmap(0x7ec000, 77616)                 = 0
+unlink("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/home/w107255/src/guile-rman/tests/test1.scm.go.Ij75O3") = 0
+open("test1.scm", O_RDONLY|O_LARGEFILE) = 63
+fcntl64(63, F_GETFL)                    = 0x8000 (flags O_RDONLY|O_LARGEFILE)
+lseek(63, 0, SEEK_CUR)                  = 0
+fstat64(63, {st_mode=S_IFREG|0775, st_size=766, ...}) = 0
+lseek(63, 0, SEEK_CUR)                  = 0
+select(1024, [63], [], [], {0, 0})      = 1 (in [63], left {0, 0})
+read(63, "#!/usr/bin/guile -s\n!#\n\n;;------"..., 4096) = 766
+lseek(63, -266, SEEK_CUR)               = 500
+_llseek(63, 0, [0], SEEK_SET)           = 0
+select(1024, [63], [], [], {0, 0})      = 1 (in [63], left {0, 0})
+read(63, "#!/usr/bin/guile -s\n!#\n\n;;------"..., 4096) = 766
+stat64("/usr/local/share/guile/site/rman/utilities.scm", {st_mode=S_IFREG|0644, st_size=1377, ...}) = 0
+stat64("/usr/local/lib/guile/1.9/ccache/rman/utilities.go", 0xbf87a16c) = -1 ENOENT (No such file or directory)
+stat64("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/usr/local/share/guile/site/rman/utilities.scm.go", {st_mode=S_IFREG|0664, st_size=14364, ...}) = 0
+stat64("/usr/local/share/guile/site/rman/utilities.scm", {st_mode=S_IFREG|0644, st_size=1377, ...}) = 0
+stat64("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/usr/local/share/guile/site/rman/utilities.scm.go", {st_mode=S_IFREG|0664, st_size=14364, ...}) = 0
+open("/home/w107255/.cache/guile/ccache/1.9-0.M-LE-4/usr/local/share/guile/site/rman/utilities.scm.go", O_RDONLY) = 64
+fstat64(64, {st_mode=S_IFREG|0664, st_size=14364, ...}) = 0
+mmap2(NULL, 14364, PROT_READ, MAP_SHARED, 64, 0) = 0xb7777000
+write(2, ";;; note: autocompilation is ena"..., 578;;; note: autocompilation is enabled, set GUILE_AUTO_COMPILE=0
+;;;       or pass the --no-autocompile argument to disable.
+;;; compiling test1.scm
+;;; compiling /usr/local/share/guile/site/rman/rispec.scm
+;;; WARNING: compilation of /usr/local/share/guile/site/rman/rispec.scm failed:
+;;; key misc-error, throw args (#f "~A ~S" ("no code for module" (rman rispec-primitive)) #f)
+;;; WARNING: compilation of test1.scm failed:
+;;; key misc-error, throw_args ("dynamic-link" "file: ~S, message: ~S" ("libguile_rman_rispec.so" "file not found") #f)
+ERROR: Unbound variable: RiBegin
+) = 578
+exit_group(1)                           = ?
